@@ -1,0 +1,77 @@
+{
+  "blocks": [
+    {
+      "id": "089608bc-3d7f-4f44-b7ad-6df18bf73fef",
+      "type": "bulletListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "day 1",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "30efac99-4b0c-450b-bf45-10ba5ab2c776",
+      "type": "bulletListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "day 2",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bfc0f670-b2b2-4802-8a9d-dd4bd20e2b8b",
+      "type": "bulletListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "day 3",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "5876c517-18d4-4af6-8097-a1184be9b9d6",
+      "type": "bulletListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "f84ee287-3017-4fad-bc4b-6efad638bf0c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    }
+  ]
+}
