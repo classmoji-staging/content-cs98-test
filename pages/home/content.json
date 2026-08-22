@@ -10,7 +10,13 @@
         "level": 1,
         "isToggleable": false
       },
-      "content": [],
+      "content": [
+        {
+          "type": "text",
+          "text": "/",
+          "styles": {}
+        }
+      ],
       "children": []
     },
     {
