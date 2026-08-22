@@ -73,5 +73,9 @@
       "content": [],
       "children": []
     }
-  ]
+  ],
+  "coverImage": {
+    "url": "https://raw.githubusercontent.com/classmoji-staging/content-cs98-test/main/pages/logistics/assets/1787395099789-low-poly-texture-26.png",
+    "position": 50
+  }
 }
