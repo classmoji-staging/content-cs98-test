@@ -1,8 +1,21 @@
 {
-  "repositories": {},
+  "repositories": {
+    "test": {
+      "pages": [],
+      "slides": [],
+      "assignments": {
+        "test": {
+          "pages": [],
+          "slides": []
+        }
+      }
+    }
+  },
   "general": {
     "pages": [
-      "home"
+      "home",
+      "logistics",
+      "resources"
     ],
     "slides": []
   }
