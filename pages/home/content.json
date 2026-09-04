@@ -53,13 +53,15 @@
     },
     {
       "id": "7c7f21e1-5d67-4bfb-8327-a31fe789b889",
-      "type": "paragraph",
+      "type": "image",
       "props": {
+        "textAlignment": "left",
         "backgroundColor": "default",
-        "textColor": "default",
-        "textAlignment": "left"
+        "name": "low-poly-texture-16.png",
+        "url": "pages/home/assets/1788492564313-low-poly-texture-16.png",
+        "caption": "",
+        "showPreview": true
       },
-      "content": [],
       "children": []
     },
     {
