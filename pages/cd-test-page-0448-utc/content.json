@@ -15,6 +15,19 @@
     },
     {
       "id": "5e47e5f2-2fb5-4d3f-a9fc-be7d7cfd6798",
+      "type": "image",
+      "props": {
+        "textAlignment": "left",
+        "backgroundColor": "default",
+        "name": "cd-srcset.png",
+        "url": "pages/cd-test-page-0448-utc/assets/1788560856963-cd-srcset.png",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "53740775-5f05-4f3d-aa21-a45ef2a1f779",
       "type": "paragraph",
       "props": {
         "backgroundColor": "default",
