@@ -1,0 +1,28 @@
+{
+  "blocks": [
+    {
+      "id": "c53a5b55-7521-42e5-bfa8-27dce70df142",
+      "type": "image",
+      "props": {
+        "textAlignment": "left",
+        "backgroundColor": "default",
+        "name": "cd-test-upload.png",
+        "url": "pages/cd-test-page-0448-utc/assets/1788497085541-cd-test-upload.png",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "5e47e5f2-2fb5-4d3f-a9fc-be7d7cfd6798",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    }
+  ]
+}
