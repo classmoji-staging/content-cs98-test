@@ -13,10 +13,13 @@
   },
   "general": {
     "pages": [
-      "home",
       "logistics",
-      "resources"
+      "resources",
+      "home",
+      "cd-test-page-0448-utc"
     ],
-    "slides": []
+    "slides": [
+      "cd-test-deck-0455-utc"
+    ]
   }
 }
