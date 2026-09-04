@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "theme": "white",
+  "codeTheme": "monokai",
+  "config": {
+    "center": false
+  },
+  "customCss": "\n    .reveal h1, .reveal h2, .reveal h3 { color: #333; }\n    .reveal .slides section { text-align: left; }\n    .reveal pre { width: 100%; }\n    .reveal code { background: #f5f5f5; padding: 2px 6px; border-radius: 4px; }\n  ",
+  "slides": [
+    {
+      "id": "de3f31af",
+      "html": "<h1>CD test deck 0455 UTC</h1>"
+    },
+    {
+      "id": "a8b385eb",
+      "html": "<h2>Slide 2</h2>\n<p>Add your content here...</p>"
+    },
+    {
+      "id": "403a9603",
+      "html": "<h2>Code Example</h2>\n<pre><code class=\"language-javascript\">// Your code here\nfunction example() {\n  return \"Hello, World!\";\n}</code></pre>"
+    },
+    {
+      "id": "9faccfb7",
+      "html": "<h2>Questions?</h2>"
+    }
+  ]
+}
