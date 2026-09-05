@@ -41,6 +41,19 @@
     },
     {
       "id": "a5e51896-d879-4690-b09e-5bc9b2d7da40",
+      "type": "image",
+      "props": {
+        "textAlignment": "left",
+        "backgroundColor": "default",
+        "name": "low-poly-texture-30.png",
+        "url": "pages/cd-test-page-0448-utc/assets/1788631651372-low-poly-texture-30.png",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "204fc130-85fa-42b6-a06d-d128e022040f",
       "type": "paragraph",
       "props": {
         "backgroundColor": "default",
