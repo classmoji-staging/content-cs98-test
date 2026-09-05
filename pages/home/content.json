@@ -77,6 +77,19 @@
     },
     {
       "id": "e7ec1407-7706-46a0-8fa0-7eb85e17653b",
+      "type": "image",
+      "props": {
+        "textAlignment": "left",
+        "backgroundColor": "default",
+        "name": "low-poly-texture-24.png",
+        "url": "pages/home/assets/1788605652075-low-poly-texture-24.png",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "77106896-9030-4438-9504-d1edd8061223",
       "type": "paragraph",
       "props": {
         "backgroundColor": "default",
