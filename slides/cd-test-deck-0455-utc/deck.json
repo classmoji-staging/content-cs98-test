@@ -28,9 +28,9 @@
     },
     {
       "id": "9faccfb7",
-      "html": "<h2>Questions? COMMENTS? CONCERNS?</h2>",
+      "html": "<h2>Questions? COMMENTS? CONCERNS?</h2><div class=\"sl-block\" data-block-type=\"image\" style=\"left: 84px; top: 197px; width: 400px; height: 300px;\"><div class=\"sl-block-content\"><img src=\"/content/classmoji-staging/content-cs98-test/slides/cd-test-deck-0455-utc/images/1788631530921-low-poly-texture-28.jpeg\" alt=\"Block image\" style=\"width: 100%; height: 100%; object-fit: contain;\"></div></div>",
       "attrs": {
-        "style": "top: 267px;",
+        "style": "top: 101px;",
         "spellcheck": "false"
       }
     }
