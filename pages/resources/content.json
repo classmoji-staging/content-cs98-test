@@ -1,8 +1,32 @@
 {
   "blocks": [
     {
+      "id": "b147555d-93b6-4fc7-8f11-374cce2c6f5a",
       "type": "paragraph",
-      "content": []
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "THis is a test of updating a page contents!",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "06663e51-8f39-4e8a-9707-a1bf7f130eb2",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
     }
   ],
   "coverImage": {
