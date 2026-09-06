@@ -5,9 +5,9 @@
   "slides": [
     {
       "id": "de3f31af",
-      "html": "<h1>CD test deck 0455 UTC</h1><div class=\"sl-block\" data-block-type=\"image\" style=\"left: 280px; top: 200px; width: 400px; height: 300px;\"><div class=\"sl-block-content\"><img src=\"/content/classmoji-staging/content-cs98-test/slides/cd-test-deck-0455-utc/images/1788497676616-cd-test-upload.jpeg\" alt=\"CD test alt\" style=\"width: 100%; height: 100%; object-fit: contain;\"></div></div>",
+      "html": "<h1>CD test deck 0455 UTC WARM</h1><div class=\"sl-block\" data-block-type=\"image\" style=\"left: 280px; top: 200px; width: 400px; height: 300px;\"><div class=\"sl-block-content\"><img src=\"/content/classmoji-staging/content-cs98-test/slides/cd-test-deck-0455-utc/images/1788497676616-cd-test-upload.jpeg\" alt=\"CD test alt\" style=\"width: 100%; height: 100%; object-fit: contain;\"></div></div>",
       "attrs": {
-        "style": "top: 350px;",
+        "style": "top: 100px;",
         "spellcheck": "false"
       }
     },
@@ -30,7 +30,7 @@
       "id": "9faccfb7",
       "html": "<h2>Questions? COMMENTS? CONCERNS?</h2><div class=\"sl-block\" data-block-type=\"image\" style=\"left: 84px; top: 197px; width: 400px; height: 300px;\"><div class=\"sl-block-content\"><img src=\"/content/classmoji-staging/content-cs98-test/slides/cd-test-deck-0455-utc/images/1788631530921-low-poly-texture-28.jpeg\" alt=\"Block image\" style=\"width: 100%; height: 100%; object-fit: contain;\"></div></div>",
       "attrs": {
-        "style": "top: 101px;",
+        "style": "top: 350px;",
         "spellcheck": "false"
       }
     }
