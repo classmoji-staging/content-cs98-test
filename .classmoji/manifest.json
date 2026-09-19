@@ -22,7 +22,8 @@
       "ai-quizzes",
       "cd-test-deck-0455-utc",
       "claude-size-test-30mb",
-      "claude-size-test-35mb"
+      "claude-size-test-35mb",
+      "claude-boundary-test-35mb"
     ]
   }
 }
