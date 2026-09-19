@@ -20,7 +20,8 @@
     ],
     "slides": [
       "ai-quizzes",
-      "cd-test-deck-0455-utc"
+      "cd-test-deck-0455-utc",
+      "claude-size-test-30mb"
     ]
   }
 }
