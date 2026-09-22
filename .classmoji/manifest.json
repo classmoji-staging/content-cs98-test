@@ -16,14 +16,15 @@
       "cd-test-page-0448-utc",
       "resources",
       "home",
-      "logistics"
+      "logistics",
+      "cd-existing-repo-test-0922"
     ],
     "slides": [
       "ai-quizzes",
-      "cd-test-deck-0455-utc",
       "claude-size-test-30mb",
       "claude-size-test-35mb",
-      "claude-boundary-test-35mb"
+      "claude-boundary-test-35mb",
+      "cd-test-deck-0455-utc"
     ]
   }
 }
