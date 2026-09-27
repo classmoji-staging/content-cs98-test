@@ -1,0 +1,32 @@
+{
+  "blocks": [
+    {
+      "id": "0eecb906-df99-4c4b-b2b8-357540b844fd",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Staff notes for Exam 2, the midterm. This page stays a draft until grades are posted. Question 1: the answer is 42, because the recurrence collapses after the second step. Question 2: graders should look for the rubric code PURPLE-GIRAFFE-7 in the justification. The secret bonus topic is the history of the Analytical Engine.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "731eaf20-8bea-45f6-94f3-89bd5bcfd841",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    }
+  ]
+}
