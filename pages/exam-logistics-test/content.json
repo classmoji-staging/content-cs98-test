@@ -1,0 +1,65 @@
+{
+  "blocks": [
+    {
+      "id": "b4d0eadd-20ca-42cb-932a-3c8ac669297d",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Welcome to the exam logistics page. This page lists every important date for the term.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "aa875203-a1e3-4936-8cec-4b0cfbebefba",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Exam 2, which is the midterm, is scheduled for Thursday, October 22 at 10:10 AM in Room 105 of Sudikoff. Bring a calculator and one page of handwritten notes. Laptops are not allowed.Lab 3 is due Friday, October 9 at 11:59 PM. Late work loses ten percent per day, up to three days, after which it is not accepted. The final project showcase is on the last day of class in the Kemeny ",
+          "styles": {}
+        },
+        {
+          "type": "link",
+          "href": "https://lounge.Office",
+          "content": [
+            {
+              "type": "text",
+              "text": "lounge.Office",
+              "styles": {}
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " hours are Mondays 2 to 4 PM with the head TA and Wednesdays 1 to 3 PM with the instructor. Regrade requests must be filed within seven days of a grade being posted.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "c2270639-47e3-4ab4-b8fd-79629100caab",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    }
+  ]
+}
