@@ -1,11 +1,20 @@
 {
   "blocks": [
     {
-      "id": "p1",
+      "id": "9c6ac39b-a000-41b4-9bf2-3b70c7f1c722",
+      "type": "video",
+      "props": {
+        "url": "media://8395e53d-0fcc-42c2-b0ce-54ead05df36c",
+        "caption": ""
+      },
+      "children": []
+    },
+    {
+      "id": "e2f2b2ec-f475-48df-bd96-7a43e5f5d0a4",
       "type": "paragraph",
       "props": {
-        "textColor": "default",
         "backgroundColor": "default",
+        "textColor": "default",
         "textAlignment": "left"
       },
       "content": [],
