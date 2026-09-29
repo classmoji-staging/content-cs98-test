@@ -1,9 +1,27 @@
 {
   "repositories": {
+    "basics": {
+      "pages": [],
+      "slides": [],
+      "assignments": {
+        "basics": {
+          "pages": [
+            "cd-existing-repo-test-0922"
+          ],
+          "slides": []
+        }
+      }
+    },
     "test": {
       "pages": [],
       "slides": [],
       "assignments": {
+        "this-is-test-3": {
+          "pages": [
+            "logistics"
+          ],
+          "slides": []
+        },
         "test": {
           "pages": [],
           "slides": []
@@ -16,15 +34,16 @@
       "cd-test-page-0448-utc",
       "resources",
       "home",
-      "logistics",
-      "cd-existing-repo-test-0922"
+      "secret-grading-key-draft",
+      "exam-logistics-test"
     ],
     "slides": [
       "ai-quizzes",
       "claude-size-test-30mb",
       "claude-size-test-35mb",
       "claude-boundary-test-35mb",
-      "cd-test-deck-0455-utc"
+      "cd-test-deck-0455-utc",
+      "staging-media-test-handout"
     ]
   }
 }
