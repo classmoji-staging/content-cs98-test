@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 85%;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      color: #333;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1rem 0;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      background: #f5f5f5;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<p>HTML</p>
+<p>CS52: HTML</p>
+<p>What is HyperText Markup Language and why should I care?</p>
+<p>html describes</p>
+<p>what a thing is</p>
+<p>not how they work or look</p>
+<p>HyperText Markup Language</p>
+<p>describes structure of document</p>
+<p>semantics rather than style or computation</p>
+<p>&lt;purple-text&gt;Hello&lt;/purple-text&gt; &lt;!--BAD--&gt;</p>
+<p>VS</p>
+<p>&lt;greeting&gt;Hello&lt;/greeting&gt; &lt;!--GOOD--&gt;</p>
+<p>document semantics</p>
+<p>HTML:</p>
+<p>is the skeleton/bones of a document</p>
+<p>is not the pretty clothing</p>
+<p>is not the muscles</p>
+<p>only underlying structure</p>
+<p>Structure is important</p>
+<p>html == skeleton</p>
+<p>&lt;div class=&quot;ball&quot;&gt;&lt;/div&gt;</p>
+<p>VS</p>
+<p># from cs1</p>
+<p>disable_stroke()</p>
+<p>enable_fill()</p>
+<p>set_fill_color(0, 0, 0)</p>
+<p>draw_circle(135, 110, 20)</p>
+<p>what vs how</p>
+<p>Declarative Vs Imperative</p>
+<p>built-in browser styles exist</p>
+<p>but html!= styles</p>
+<p>dressup is css</p>
+<p>Markup Not Dressup</p>
+<p>pick a page you like — say stripe.com</p>
+<p>drag this to your bookmarks bar, then click it</p>
+<p>javascript:(() =&gt; {</p>
+<p>for (const s of document.styleSheets) s.disabled = true;</p>
+<p>document.querySelectorAll(&#39;[style]&#39;).forEach(e =&gt; e.removeAttribute(&#39;style&#39;));</p>
+<p>})()</p>
+<p>all the clothes come off. what&#39;s left is the skeleton</p>
+<p>every site you love is this underneath</p>
+<p>for lab 1 you&#39;re copying the bones, not the paint</p>
+<p>let&#39;s undress a site</p>
+<p>syntactically identifiable annotations</p>
+<p>describe the content</p>
+<p>Semantic Structure</p>
+<p>i made this amazing tool. but then they used it for kittens... 😹 ~Sir Tim Berners-Lee</p>
+<p>brief history of html</p>
+<p>1990</p>
+<p>&quot;I just had to take the hypertext idea and connect it to the Transmission Control Protocol and domain name system ideas and—ta-da!—the World Wide Web&quot; —Sir Tim Berners-Lee</p>
+<p>brief history of html</p>
+<p>1968 - Douglas Engelbart</p>
+<p>HyperText</p>
+<p>because carrier pigeons! 🕊</p>
+<p>Microfilm/Microfiche aside</p>
+<p>Origins of HyperText</p>
+<p>WorldWideWeb 1990</p>
+<p>The First Browser</p>
+<p>varying compatibilities, 2000 first xhtml standard</p>
+<p>Browser Implementations</p>
+<p>in this class, we&#39;ll focus on Brave/Chrome</p>
+<p>safari</p>
+<p>Brave</p>
+<p>ROAR</p>
+<p>safari</p>
+<p>no ads</p>
+<p>privacy</p>
+<p>Browser Wars</p>
+<p>many new semantic elements such as: time, audio, video, nav, footer</p>
+<p>many new form controls such as: email and search</p>
+<p>standard is now updated more incrementally</p>
+<p>HTML5 circa 2014</p>
+<p>&lt;blink&gt; the sadness of changing standards &lt;/blink&gt;</p>
+<p>removed elements</p>
+<p>the old wars were about rendering engines — mostly settled</p>
+<p>comet, atlas, dia: new browsers, same engines underneath</p>
+<p>the fight now is over who&#39;s driving: you, or an agent</p>
+<p>so who is actually looking at your pages?</p>
+<p>~53% of web traffic is already not human</p>
+<p>ai crawlers + ai search bots ≈ a quarter of all verified bot traffic</p>
+<p>the new browser war</p>
+<p>basic premise is</p>
+<p>documents with links between them</p>
+<p>and tags that define structure</p>
+<p>Structural tags and links!</p>
+<p>hierarchical collection of elements, starting with &lt;html&gt;</p>
+<p>have a start tag, contents, and end tag</p>
+<p>contents can be text or other elements</p>
+<p>may be nested</p>
+<p>self-closing: &lt;foo /&gt; vs &lt;foo&gt;&lt;/foo&gt;</p>
+<p>HTML Syntax In a NutShell 🌰</p>
+<p>tags denote structural elements</p>
+<p>&lt; &gt; surrounding the tag</p>
+<p>start tag, &lt; tag &gt;</p>
+<p>and an ending tag &lt;/tag&gt;</p>
+<p>HTML Elements and Tags</p>
+<p>Start tags may have attributes</p>
+<p>​&lt;input type=&quot;text&quot;&gt;</p>
+<p>&lt;img src=&quot;image.jpg&quot; /&gt;</p>
+<p>&lt;div class=&quot;col-md-5&quot;&gt;</p>
+<p>Attributes</p>
+<p>your document structure — tags and classes should be self-evident first</p>
+<p>&lt;!--- this is a comment --&gt;</p>
+<p>comments</p>
+<p>Browser parses html into a tree structure — the DOM</p>
+<p>Underneath it all</p>
+<p>HTML Elements Galore</p>
+<p>Anchor to Hypertext REFerence:</p>
+<p>HyperLinks are what hypertext is all about</p>
+<p>need to have an href attribute which is a string URL to the target</p>
+<p>a link to &lt;a href=&quot;<a href="http://google.com%22&gt;google&lt;/a">http://google.com&quot;&gt;google&lt;/a</a>&gt;</p>
+<p>a link to google</p>
+<p>HyperLinks</p>
+<p>list item:</p>
+<p>indicates a list item</p>
+<p>inside of an unordered or ordered list</p>
+<p>&lt;ul&gt;</p>
+<p>&lt;li&gt;unordered list: wraps list items&lt;/li&gt;</p>
+<p>&lt;/ul&gt;</p>
+<p>&lt;ol&gt;</p>
+<p>&lt;li&gt;ordered list: wraps list items&lt;/li&gt;</p>
+<p>&lt;/ol&gt;</p>
+<p>&lt;ol&gt;</p>
+<p>&lt;li&gt;list item:&lt;/li&gt;</p>
+<p>&lt;ol&gt;</p>
+<p>&lt;li&gt;indicates a list item&lt;/li&gt;</p>
+<p>&lt;li&gt;inside of an unordered or ordered list&lt;/li&gt;</p>
+<p>&lt;/ol&gt;</p>
+<p>&lt;/ol&gt;</p>
+<p>unordered list: wraps list items</p>
+<p>ordered list: wraps list items</p>
+<p>lists</p>
+<p>image tag:</p>
+<p>defines an image to include</p>
+<p>is a self-closing tag: /&gt;</p>
+<p>must contain an attribute src with URL to image file</p>
+<p>inline by default but usually then set to block</p>
+<p>&lt;img src=&quot;<a href="https://gph.to/2GhMDt2%22/">https://gph.to/2GhMDt2&quot;/</a>&gt;</p>
+<p>images</p>
+<p>paragraph:</p>
+<p>defines a paragraph</p>
+<p>define structure</p>
+<p>starts a new line / block</p>
+<p>needed because HTML is white space collapsing</p>
+<p>this is a paragraph of text.</p>
+<p>And Another Paragraph</p>
+<p>&lt;p&gt;This is a paragraph of text.&lt;/p&gt;</p>
+<p>&lt;p&gt;And Another Paragraph&lt;/p&gt;</p>
+<p>paragraph</p>
+<p>Heading 2:</p>
+<p>surrounds a header of a particular level</p>
+<p>H1 is top-level</p>
+<p>H2 would be a subheading, and so on</p>
+<p>don&#39;t skip levels</p>
+<p>Heading 3</p>
+<p>&lt;h1&gt;Heading 1&lt;/h1&gt;</p>
+<p>&lt;h2&gt;Heading 2&lt;/h2&gt;</p>
+<p>&lt;h3&gt;Heading 3&lt;/h3&gt;</p>
+<p>headings</p>
+<p>&lt;footer&gt;</p>
+<p>&lt;!-- content at the bottom of the page --&gt;</p>
+<p>&lt;/footer&gt;</p>
+<p>footer:</p>
+<p>represents the footer of the page</p>
+<p>although it&#39;s a generic container, it usually has more specific content that only appears at the bottom of the page</p>
+<p>footers</p>
+<p>iframe:</p>
+<p>inline frames can embed other pages inside a pages</p>
+<p>the code sample above and often video embeds can be iframes</p>
+<p>sizing can be tricky</p>
+<p>iframe code can&#39;t affect parent</p>
+<p>can be prohibited by origin</p>
+<p>parent styles don&#39;t apply to child</p>
+<p>&lt;iframe src=&quot;<a href="http://cs52.me%22&gt;&lt;/iframe">http://cs52.me&quot;&gt;&lt;/iframe</a>&gt;</p>
+<p>iframes</p>
+<p>&lt;input /&gt;</p>
+<p>&lt;input type=&quot;checkbox&quot; /&gt;</p>
+<p>&lt;input type=&quot;radio&quot; /&gt;</p>
+<p>input:</p>
+<p>takes in user input</p>
+<p>different types of input (text, number, checkbox, radio, etc.)</p>
+<p>often used in form element to capture data for submission</p>
+<p>inputs and forms</p>
+<p>&lt;header&gt;</p>
+<p>&lt;nav&gt;</p>
+<p>&lt;main&gt;</p>
+<p>&lt;article&gt;</p>
+<p>&lt;section&gt;</p>
+<p>&lt;summary&gt;</p>
+<p>&lt;video&gt;</p>
+<p>&lt;audio&gt;</p>
+<p>&lt;input&gt;</p>
+<p>&lt;table&gt;</p>
+<p>&lt;object&gt;</p>
+<p>&lt;script&gt;</p>
+<p>&lt;footer&gt;</p>
+<p><a href="https://www.w3schools.com/tags/tag%5C_source.asp">https://www.w3schools.com/tags/tag\_source.asp</a></p>
+<p>the world of semantic html tags</p>
+<p>Absolute URLs consist of at least three parts:</p>
+<p>the protocol (http://, https://, etc)</p>
+<p>the name of the host (<a href="http://www.domainname.com">www.domainname.com</a>)</p>
+<p>the path to the given resource (/assets/image.jpg)</p>
+<p>Uniform Resource Locators</p>
+<p>protocol://host:port/path?query#fragment</p>
+<p>what is a URL?</p>
+<p>if same protocol and host:</p>
+<p>path can be relative to current page location</p>
+<p>&lt;img src=&quot;assets/image.jpg&quot; /&gt;</p>
+<p>occurring in</p>
+<p><a href="http://www.domainname.com/people/me.html">http://www.domainname.com/people/me.html</a></p>
+<p>=</p>
+<p><a href="http://www.domainname.com/people/assets/image.jpg">http://www.domainname.com/people/assets/image.jpg</a></p>
+<p>../ directory above</p>
+<p>/ base url</p>
+<p>protocol://host:port/path?query#fragment</p>
+<p>relative path vs absolute path?</p>
+<p>?query</p>
+<p>​is an optional set of arguments</p>
+<p>?key0=value0&amp;key1=value1</p>
+<p>can be processed by host</p>
+<p>only way to send data in GET request</p>
+<p>protocol://host:port/path?query#fragment</p>
+<p>query argument</p>
+<p>strong / em:</p>
+<p>for bolder or more emphatic coffee</p>
+<p>default is bolding but can redefine</p>
+<p>in a boring text this is &lt;strong&gt;strong&lt;/strong&gt; and &lt;br&gt;</p>
+<p>this text is &lt;em&gt;emphasized&lt;/em&gt;</p>
+<p>in a boring text this is strong and</p>
+<p>this text is emphasized</p>
+<p>strong (new semantic vs old stylistic)</p>
+<p>accessibility note: screen readers will emphasize &lt;strong&gt;/&lt;em&gt; but don&#39;t know what to do with &lt;bold&gt;</p>
+<p>What if I want a &lt;slide&gt; or a &lt;profile-image&gt; element?</p>
+<p>html5 spec has some support</p>
+<p>requires javascript / not widely used</p>
+<p>BUT</p>
+<p>you can use class and id attributes!</p>
+<p>and div and span elements!</p>
+<p>use these to create your own structure markers</p>
+<p>AND</p>
+<p>wait for when we get to frontend frameworks</p>
+<p>I want my own semantics!</p>
+<p>&lt;div class=&quot;slide&quot;&gt;the contents of this slide&lt;/div&gt;</p>
+<p>&lt;img class=&quot;profile&quot; src=&quot;&quot; /&gt;</p>
+<p>elements with class:</p>
+<p>belong to a set of elements with some meaning (and style)</p>
+<p>space-separated string attribute class=&quot;one-class another-class&quot;</p>
+<p>inherits from both</p>
+<p>generic elements - class</p>
+<p>Classes</p>
+<p>&lt;a id=&quot;username&quot; href=&quot;...&quot;&gt;A unique username link&lt;/a&gt;</p>
+<p>elements with id:</p>
+<p>uniquely identified on the page</p>
+<p>have special role</p>
+<p>primary_navbar or username_field</p>
+<p>single string no spaces</p>
+<p>an element can only have 1 id</p>
+<p>IDs</p>
+<p>&lt;p&gt;</p>
+<p>&lt;a&gt; a link &lt;/a&gt;</p>
+<p>&lt;em&gt;emphasized text&lt;/em&gt;</p>
+<p>&lt;span class=&quot;code&quot;&gt;inline span&lt;/span&gt;</p>
+<p>can all appear in a paragraph or block</p>
+<p>&lt;p&gt;</p>
+<p>inline elements:</p>
+<p>do not start a new line</p>
+<p>only takes up as much width as necessary</p>
+<p>a link emphasized text inline span can all appear in a paragraph or block</p>
+<p>Inline Elements</p>
+<p>&lt;h1&gt;headings&lt;/h1&gt;</p>
+<p>&lt;p&gt;paragraphs&lt;/p&gt;</p>
+<p>&lt;form&gt;forms&lt;/form&gt;</p>
+<p>&lt;ul&gt;lists&lt;/ul&gt;</p>
+<p>&lt;div&gt;and divisions&lt;/div&gt;</p>
+<p>block elements:</p>
+<p>start a new line</p>
+<p>take up the full width available</p>
+<p>stretches out to the left and right as far as it can (width of parent)</p>
+<p>Block Elements</p>
+<p>generic inline: span</p>
+<p>&lt;p&gt;and then they said, &lt;span class=&quot;redaction&quot;&gt;spans are for babies!&lt;/span&gt;.&lt;/p&gt;</p>
+<p>span elements:</p>
+<p>is a generic inline element</p>
+<p>don&#39;t take up space by default</p>
+<p>don&#39;t start a new line</p>
+<p>are by default: display: inline</p>
+<p>and then they said, spans are for babies!</p>
+<p>generic inline: span</p>
+<p>&lt;div&gt;on one line&lt;/div&gt;&lt;div&gt;on the line below&lt;/div&gt;</p>
+<p>div elements:</p>
+<p>is a generic block element</p>
+<p>takes up space by default</p>
+<p>start a new line</p>
+<p>are by default: display: block</p>
+<p>on one line</p>
+<p>on the line below</p>
+<p>generic block: div</p>
+<p>So far everything we&#39;ve looked at has been snippets. The full HTML document has just a few more default tags.</p>
+<p>Document</p>
+<p>&lt;p&gt; &lt;p&gt;stuff&lt;/p&gt;&lt;/p&gt; &lt;!-- no --&gt;</p>
+<p>&lt;span&gt;&lt;h1&gt;Hello&lt;/h1&gt;&lt;/span&gt; &lt;!-- no --&gt;</p>
+<p>&lt;div&gt;&lt;h1&gt;hello&lt;/div&gt;&lt;/h1&gt; &lt;!-- wtf no --&gt;</p>
+<p>many elements can be nested but with caveats</p>
+<p>block inside block ok, but not p or h*</p>
+<p>block not nested in inline</p>
+<p>strict nesting no overlaps</p>
+<p>Nesting Elements</p>
+<p>Let&#39;s code a little html together</p>
+<p>at each table:</p>
+<p>1 person go to <a href="https://fiddlesticks.zingweb.com/">https://fiddlesticks.zingweb.com/</a></p>
+<p>copy the URL and send to others</p>
+<p>talk to each other about your hopes and dreams</p>
+<p>hack some HTML, doesn&#39;t matter what</p>
+<p>try an image tag with a gif: <a href="https://tinyurl.com/testthisgif">https://tinyurl.com/testthisgif</a></p>
+<p>try including some music:</p>
+<p>hack some pages activity time!!</p>
+<p>html, the beauty of structure</p>
+<p>but STRUCTURE looks so boring</p>
+<p>How do I make it pretty with colors?!</p>
+<p>​</p>
+<p>amazon 1995</p>
+<p>google backrub 1996</p>
+<p>google after backrub 1997</p>
+<p>apple 1997</p>
+<p>ebay 1996</p>
+<p>youtube 2005</p>
+<p>facebook 2004</p>
+<p>twitter 2006</p>
+<p>evolution</p>
+<p><a href="http://fabianburghardt.de/webolution/">http://fabianburghardt.de/webolution/</a></p>
+<p>more webevolution</p>
+<p>Next: how the internet works and what are A and CNAME records exactly?</p>
+<p>Next: CSS, and how to &quot;steal&quot; from pages online</p>
+<p>Lab1 Landing Page out - start with part 1 HTML ONLY</p>
+<p>next</p>
+
+</body>
+</html>
