@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 85%;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      color: #333;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1rem 0;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      background: #f5f5f5;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<p>Lab 1 Part 2: Build a Landing Page CSS</p>
+<p>Build a Landing Page! ✈️</p>
+<p>We shall continue on with our Landing Page!  Now that you have a great skeleton of a page, let’s hang some styles! 🤟</p>
+<p>Goal Overview</p>
+<p>Become comfortable with Chrome DevTools</p>
+<p>Be able to mimic the structure and style of pages using html structure and css rules</p>
+<p>Focus on CSS foundations</p>
+<p>Internalize Flexboxes for mobile and desktop</p>
+<p>Build a beautiful static landing page</p>
+<p>Understand layout models and how to apply them</p>
+<p>Getting Started</p>
+<p>🚀 Use the same repository and code base you built in Part 1 — and re-read what you&#39;re making: a landing page with a certain set of components.</p>
+<p>Lab 1 Part 1: Build A Landing Page HTML</p>
+<p>What you have so far</p>
+<p>What you have now should look something like this: HTML with no CSS.</p>
+<p>PART 2: Styling!</p>
+<p>Adding in Fonts</p>
+<p>Right, in the above you may have noticed that yours was Times New Roman…</p>
+<p>🚀 You should get some better fonts quick from Google Fonts! 🐎</p>
+<p>🚀 And you might as well grab some nice icons while you are at it from FontAwesome. Quickest path is their free CDN link in your &lt;head&gt; — no download needed.</p>
+<p>Background</p>
+<p>🚀 Go ahead and add a background in!</p>
+<p>I recommend getting rid of margin and padding on body. Something like:</p>
+<p>body {</p>
+<p>margin: 0;</p>
+<p>padding: 0;</p>
+<p>}</p>
+<p>and then creating a top level div with a background that is set to size cover:</p>
+<p>.cover {</p>
+<p>background-image: url(img/yourimagename.jpg);</p>
+<p>background-size: cover;</p>
+<p>}</p>
+<p>Note: the above are just tips - you may need to expand / do something a little different in your particular case.</p>
+<p>Flex Boxes</p>
+<p>🚀 Pretty much all the layout you can do with flex boxes. In fact you should absolutely do as much of the layout of this page using flexbox layout. Some of you may prefer using CSS grids for some elements, but flexboxes are all you really need. 🙊</p>
+<p>There may be some tricky elements, in particular full page ones. In this example there was a fullscreen gradient element which needed to have absolute positioning to place.</p>
+<p>Here is a good guide to flex.</p>
+<p>Note: for now, only use pure CSS3 directives that are supported by the latest Chrome. Don’t worry about the various vendor prefixes like -webit -moz or any of those prefixes. Later on we’ll learn about using autoprefixers to make our code work better cross-platform, but for now use the latest the greatest that works in Chrome. That is the browser we’ll be testing your sites in and the only browser that matters for the time being. Do not use any other browser for your dev work.</p>
+<p>Now things should look like they are coming together.</p>
+<p>Things are not lining up and much of styling is missing, but most elements are in their proper places. Using only flexboxes and some very basic positioning. No bootstrap or css frameworks here!</p>
+<p>Styling</p>
+<p>Now get it looking good!</p>
+<p>🚀 Don’t forget the :hover CSS! There should be some nice little touches throughout.</p>
+<p>border, box-shadow, border-radius, margin, rgba, all will come in handy!</p>
+<p>I recommend working on the full width version, and don’t worry about how it resizes till you are moderately happy with it.</p>
+<p>Getting there!</p>
+<p>Media query</p>
+<p>Now for the tricky part! Shrink the width of your browser window all the way down! GASP! 💩</p>
+<p>Most likely it did not resize well. We’ll deal with this using a single media query.</p>
+<p>🚀Here’s how to start:</p>
+<p>@media only screen and (max-width: 640px) {</p>
+<p>}</p>
+<p>Anything in this media query will only apply if the screen is fairly narrow. Don’t worry about it working on every single device - rather focus on it working in a more general fashion in a “mobile” width vs “desktop”. Flex-boxes will take care of things being responsive in most widths but you want to make sure that there is a mobile version where a few bigger site wide changes happen: rows into columns, nav links into hamburger menu.</p>
+<p>⚠️⚠️⚠️ Add &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; to the head section of your html. This tells the mobile browser to not pretend to be a real browser and use actual device pixels for width and allows you to test on mobile / in the Chrome mobile device mode.</p>
+<p>Important Techniques</p>
+<p>flex-direction: column;</p>
+<p>🚀 Take some of your row flex boxes and simply convert them to columns. This works remarkably well for many cases. The input box and button,  the links at the bottom, the highlight selections in the middle.</p>
+<p>display: none;</p>
+<p>This method can be very powerful.   For your navbar the recommendation is to do this:</p>
+<p>create 2 separate nav elements.</p>
+<p>&lt;nav class=&quot;desktop&quot;&gt;</p>
+<p>&lt;nav class=&quot;mobile&quot;&gt;</p>
+<p>Then in your stylesheet you can do:</p>
+<p>by default nav.mobile { display: none;}</p>
+<p>and then in your @media query</p>
+<p>switch which is displayed and which is hidden!</p>
+<p>nav.mobile { display: flex;} &amp; nav.desktop { display: none;}</p>
+<p>This way you can toggle the display property on completely different sections of the site. You might have a completely different set of elements for the links section for instance. Toggle one off and the other on.</p>
+<p>At this point it might look something akin to:</p>
+<p>Note: I did not bother with making the bottom Link Heading sections expand. Extra credit if you do.</p>
+<p>Speaking of CSS responding to clicks…</p>
+<p>Notice that on most of these pages when you’re in the narrow responsive site if you click on the Hamburger Menu button an overlay menu comes up. This is done with javascript the world over. BUT it is possible to trick CSS into responding to clicks!</p>
+<p>This is called the CSS Checkbox Hack, very clever.</p>
+<p>You can implement this functionality in pure CSS. You can also play with CSS transitions for this to make the menu appear to slide or fade in. Caveat: CSS transitions don’t work if the element has display: none on it, but there are other ways to hide an element, opacity + height: 0px come to mind.</p>
+<p>Here’s what it could look like:</p>
+<p>And You Are Done! Don’t forget to host it.</p>
+<p>See hosting from:</p>
+<p>Lab 1 Part 1: Build A Landing Page HTML</p>
+<p>Automatic Testing (in beta)</p>
+<p>We&#39;ve provided a small test suite with this assignment. It doesn&#39;t grade you — it checks the structural things that are easy to forget: the viewport meta tag, semantic elements, a nav with links, flexbox layout, a mobile breakpoint, hover styles, and that you haven&#39;t snuck in any JavaScript. Run it from your project directory:</p>
+<p>cd tests</p>
+<p>npm install</p>
+<p>npm run setup   # one time only — downloads a browser to test with</p>
+<p>npm run test</p>
+<p>Terminal</p>
+<p>These tests are written with Playwright, which drives a real browser — it&#39;s what we&#39;ll use for testing all term, so this is your first look at it. Try npm run test:ui to watch it work through your page one check at a time. This is a trial and we won&#39;t use it in grading. Your page is supposed to be creative, so a passing test doesn&#39;t mean it&#39;s good and a failing one doesn&#39;t mean it&#39;s broken — if it flags something you think is fine, tell us. Feedback welcome!</p>
+<p>To Turn In:</p>
+<p>👉 The GitHub assignment Issue will be considered your submission! To officially turn it in, please comment on the Issue in the repository when you have completed the assignment and mark it Closed.</p>
+<p>🙏 In your comment please include:</p>
+<p>link to deployed hosted version of the page (render.com)</p>
+<p>brief summary of what worked and what didn’t</p>
+<p>cite your sources ⚠️ — if you used an AI agent, code from another site, or a tutorial, say so in your README and be ready to explain what that code does</p>
+<p>your page should:</p>
+<p>display as many elements from the original site as you can re-imagine</p>
+<p>use only pure CSS/HTML</p>
+<p>have clean CSS/HTML you can explain line by line (your html file should only be a few hundred lines).</p>
+<p>use lots of flexboxes for layout</p>
+<p>include menu checkbox hack</p>
+<p>be responsive with 1 narrow phone-friendly version per the original</p>
+<p>include details such as hover effects and border-radius</p>
+<p>have clear document structure with proper semantic naming</p>
+<p>look BEAUTIFUL 🤩</p>
+<p>your part 2 submission comment should include:</p>
+<p>a couple sentence description of what you did and what worked / didn’t work.</p>
+<p>screen caps with anything special you want to point out</p>
+<p>Extra Credit</p>
+<p>always mention your extra credit in the README.md file</p>
+<p>Fancy CSS transitions and animations!</p>
+<p>Resources:</p>
+<p><a href="https://css%5C-tricks.com">https://css\-tricks.com</a></p>
+<p><a href="http://www.w3schools.com">http://www.w3schools.com</a></p>
+<p><a href="https://philipwalton.github.io/solved%5C-by%5C-flexbox/">https://philipwalton.github.io/solved\-by\-flexbox/</a></p>
+<p><a href="https://unused%5C-css.com/blog/css%5C-only%5C-hamburger%5C-menu/">https://unused\-css.com/blog/css\-only\-hamburger\-menu/</a></p>
+
+</body>
+</html>
