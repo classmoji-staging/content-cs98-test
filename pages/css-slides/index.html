@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 85%;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      color: #333;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1rem 0;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      background: #f5f5f5;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<p>CSS</p>
+<p>CSS</p>
+<p>All about cascading style sheets.</p>
+<p>CS52 CSS</p>
+<p>where in the stack?</p>
+<p>&quot;It has been a constant source of delight for me over the past year to get to continually tell hordes (literally) of people who want to -- strap yourselves in, here it comes -- control what their documents look like in ways that would be trivial in TeX, Microsoft Word, and every other common text processing environment: &#39;Sorry, you&#39;re screwed.&quot; — Marc Andreessen, 1994</p>
+<p>CSS - cascading style sheets</p>
+<p>css v1 1996</p>
+<p>css v2 1998</p>
+<p>css v3 ~2014</p>
+<p>...then no css4</p>
+<p>modules ship on their own</p>
+<p>baseline says what&#39;s safe</p>
+<p>CSS - cascading style sheets</p>
+<p>So far: html for structure</p>
+<p>Now CSS for STYLE</p>
+<p>semantics vs style</p>
+<p>step 1) specify intended use of structure</p>
+<p>step 2) define the look and feel of those elements</p>
+<p>step 3) avoid FBI sting ops</p>
+<p>enter css</p>
+<p>vertical alignment</p>
+<p>css we will conquer</p>
+<p>CSS is:</p>
+<p>a list of rules specifying how elements should be displayed</p>
+<p>each rule starts with selector</p>
+<p>now your page structure comes in handy</p>
+<p>css rules</p>
+<p>css rule syntax</p>
+<p>A selector can target elements in different ways</p>
+<p>/* tag */</p>
+<p>p {</p>
+<p>color: green;</p>
+<p>}</p>
+<p>/* id */</p>
+<p>#elementid {</p>
+<p>color: blue;</p>
+<p>}</p>
+<p>/* class */</p>
+<p>.classname {</p>
+<p>color: pink;</p>
+<p>}</p>
+<p>&lt;p&gt; hello &lt;/p&gt;</p>
+<p>&lt;p class=&quot;classname&quot;&gt; hello &lt;/p&gt;</p>
+<p>&lt;p id=&quot;elementid&quot;&gt; hello &lt;/p&gt;</p>
+<p>what is a css selector?</p>
+<p>p.someclass {...} /* element with class */</p>
+<p>p.someclass a {...} /* element that is inside of element.class */</p>
+<p>p.classy {...} /* any descendent of p that is.classy */</p>
+<p>a, input,.classy {...} /* multiple selectors */</p>
+<p>&lt;p class=&quot;someclass&quot;&gt;</p>
+<p>stuff stuff &lt;a href=&quot;#&quot;&gt; lets go &lt;/a&gt; stuff stuff</p>
+<p>&lt;span class=&quot;classy&quot;&gt; more stuff &lt;/span&gt;</p>
+<p>&lt;/p&gt;</p>
+<p>&lt;input id=&quot;subscribe&quot;... /&gt;</p>
+<p>selector combos</p>
+<p>ul li {} /* descendent */</p>
+<p>ul &gt; li {} /* direct child */</p>
+<p>#title + ul {} /* adjacent sibling */</p>
+<p>#title ~ ul {} /* general sibling */</p>
+<p>&lt;article&gt;</p>
+<p>&lt;ul id=&quot;list-0&quot;&gt;&lt;/ul&gt;</p>
+<p>&lt;div id=&quot;title&quot;&gt;Title&lt;/div&gt;</p>
+<p>&lt;ul id=&quot;list-1&quot;&gt;</p>
+<p>&lt;li&gt;1&lt;/li&gt;</p>
+<p>&lt;li&gt;2</p>
+<p>&lt;ol id=&quot;nested-list&quot;&gt;</p>
+<p>&lt;li&gt;nested 1&lt;/li&gt;</p>
+<p>&lt;/ol&gt;</p>
+<p>&lt;/li&gt;</p>
+<p>&lt;/ul&gt;</p>
+<p>&lt;ul id=&quot;list-2&quot;&gt;</p>
+<p>&lt;li&gt;3&lt;/li&gt;</p>
+<p>&lt;/ul&gt;</p>
+<p>&lt;/article&gt;</p>
+<p>children and sibling selectors</p>
+<p>p:hover { color: orange;}</p>
+<p>a:link { color: blue;}</p>
+<p>a:visited { color: purple;}</p>
+<p>p:nth-child(2) {background: grey;}</p>
+<p>div:not(.classy) {background: white;}</p>
+<p>input[type=checkbox]:checked ~ #hiddenmenu {</p>
+<p>opacity: 1;</p>
+<p>}</p>
+<p>gets even better: states and other &quot;logic&quot;</p>
+<p>pseudo classes</p>
+<p>a[href=&quot;<a href="https://cs52.me%22%5C%5D">https://cs52.me&quot;\]</a> {</p>
+<p>color: green;</p>
+<p>}</p>
+<p>input[checked] {</p>
+<p>background-color: green;</p>
+<p>}</p>
+<p>button[disabled] {</p>
+<p>color: red;</p>
+<p>}</p>
+<p>[data-custom*=&quot;test&quot;] {</p>
+<p>background-color: blue</p>
+<p>}</p>
+<p>&lt;div&gt;</p>
+<p>&lt;a href=&quot;<a href="https://cs52.me%22&gt;cs52&lt;/a">https://cs52.me&quot;&gt;cs52&lt;/a</a>&gt;</p>
+<p>&lt;input type=&quot;checkbox&quot; checked&gt;</p>
+<p>&lt;button disabled&gt;Disabled button&lt;/button&gt;</p>
+<p>&lt;div data-custom=&quot;test-selector&quot;&gt;&lt;/div&gt;</p>
+<p>&lt;/div&gt;</p>
+<p>attribute selectors</p>
+<p>additive digital color:</p>
+<p>red, green, and blue color light, + alpha channel</p>
+<p>1 byte per color intensity</p>
+<p>unsigned integer value of 0-255</p>
+<p>colors</p>
+<p>Predefined names: pink, orange, lightblue, darkgrey, etc.</p>
+<p>hexadecimal, 2 digits per channel: #cc0000</p>
+<p>0-255 decimal intensities: rgb(150,0,150)</p>
+<p>Percentage intensities: rgb(50%,50%,100%)</p>
+<p>with transparency: rgba(255,100,100,.5)</p>
+<p>how are colors defined?</p>
+<p>selectors and colors playground</p>
+<p><a href="http://flukeout.github.io">http://flukeout.github.io</a></p>
+<p>The default &quot;websafe&quot; fonts that browsers support are a bajillion years old</p>
+<p>fonts on the web</p>
+<p>Google Fonts.</p>
+<p>Here&#39;s Open Sans (a lovely simple font):</p>
+<p>&lt;head&gt;</p>
+<p>&lt;link rel=&quot;preconnect&quot; href=&quot;<a href="https://fonts.gstatic.com">https://fonts.gstatic.com</a>&quot; crossorigin&gt;</p>
+<p>&lt;link rel=&quot;stylesheet&quot;</p>
+<p>href=&quot;<a href="https://fonts.googleapis.com/css2?family=Open%5C+Sans&amp;display=swap">https://fonts.googleapis.com/css2?family=Open\+Sans&amp;display=swap</a>&quot;&gt;</p>
+<p>&lt;/head&gt;</p>
+<p>&lt;style&gt;</p>
+<p>body {</p>
+<p>font-family: &#39;Open Sans&#39;, sans-serif;</p>
+<p>}</p>
+<p>&lt;/style&gt;</p>
+<p>google fonts save the day</p>
+<p>i want my handwriting as a font</p>
+<p>@font-face {</p>
+<p>font-family: &#39;MyWebFont&#39;;</p>
+<p>src: url(&#39;myfont.woff2&#39;) format(&#39;woff2&#39;);</p>
+<p>font-display: swap;</p>
+<p>}</p>
+<p>p {</p>
+<p>font-family: &quot;MyWebFont&quot;, sans-serif;</p>
+<p>font-style: normal; /* italic oblique */</p>
+<p>font-size: 14px;</p>
+<p>font-weight: bold; /* normal light */</p>
+<p>font-variant: small-caps;</p>
+<p>}</p>
+<p>or use your own</p>
+<p>many css properties take size/length values:</p>
+<p>font-size, width, height, margin, padding</p>
+<p>many units to choose from</p>
+<p>absolute units</p>
+<p>relative units</p>
+<p>size units</p>
+<p>px: css pixels — a fixed reference unit, not your device&#39;s pixels ✅</p>
+<p>pt: points (1/72 of 1in) ❌</p>
+<p>pc: pica (12 pt) ❌</p>
+<p>in: inches (96px) ❌</p>
+<p>cm: centimeters (37.8px) ❌</p>
+<p>mm: millimeter (3.78px) ❌</p>
+<p>what are absolute units?</p>
+<p>#moon {</p>
+<p>width: 24.3px</p>
+<p>/* 5376 * (1079 miles radius of moon / */</p>
+<p>/* 238900 miles distance from earth) */</p>
+<p>}</p>
+<p>1 ref px = visual angle of 1px at a density of 96dpi at 28inches</p>
+<p>more at <a href="http://tinyurl.com/cssmath">http://tinyurl.com/cssmath</a></p>
+<p>pixel math tangent</p>
+<p>em: relative to this element&#39;s own font-size (for font-size itself: the parent&#39;s)</p>
+<p>rem: relative to font-size of the root element</p>
+<p>ex: the x-height of the current font</p>
+<p>ch: relative to width of the character &#39;0&#39; in current font</p>
+<p>vw: 1% of the width of the viewport</p>
+<p>vh: 1% of the height of the viewport</p>
+<p>vmin: 1% of viewport&#39;s smaller dimension</p>
+<p>vmax: 1% of viewport&#39;s larger dimension</p>
+<p>what are relative units? and why so many!</p>
+<p>css-tricks rems-ems</p>
+<p>reasonable best practice</p>
+<p>There are 3 ways to include CSS styles in your page</p>
+<p>&lt;html&gt;</p>
+<p>&lt;head&gt;</p>
+<p>&lt;title&gt;CSS Loaded 3 Ways&lt;/title&gt;</p>
+<p>&lt;!-- Internal Style Sheet: MEDIOCRE --&gt;</p>
+<p>&lt;style&gt;</p>
+<p>h1 { color: purple;}</p>
+<p>body { background-color: orange;}</p>
+<p>&lt;/style&gt;</p>
+<p>&lt;!-- External Style Sheet: BEST --&gt;</p>
+<p>&lt;link rel=&quot;stylesheet&quot; href=&quot;mystyle.css&quot;&gt;</p>
+<p>&lt;/head&gt;</p>
+<p>&lt;body&gt;</p>
+<p>&lt;h1&gt;Title&lt;/h1&gt;</p>
+<p>&lt;!-- Inline Style: WORST --&gt;</p>
+<p>&lt;p style=&quot;color: white&quot;&gt;Paragraph Stuff&lt;/p&gt;</p>
+<p>&lt;/body&gt;</p>
+<p>&lt;/html&gt;</p>
+<p>how do i include these stylesheets?</p>
+<p>for years css was missing some basics:</p>
+<p>selectors were unable to ascend — no way to select a parent</p>
+<p>CSS rules can&#39;t be named, just a big ol&#39;mess.</p>
+<p>Can&#39;t declare new scope independently of position (z-index)</p>
+<p>SASS and other libraries filled the gaps</p>
+<p>/* SASS teaser */</p>
+<p>variables: $primary-color: #333</p>
+<p>nesting:</p>
+<p>nav {</p>
+<p>ul {</p>
+<p>color: $primary-color;</p>
+<p>}</p>
+<p>a {...}</p>
+<p>}</p>
+<p>mixins: @mixin border-radius($radius) {...}</p>
+<p>partials: import &#39;navbar&#39;</p>
+<p>math: 5px + 10px</p>
+<p>css limits — the sass era</p>
+<p>:has() selects upward — selectors ascend now</p>
+<p>variables and nesting are built into css</p>
+<p>@layer and @scope scope things without naming tricks</p>
+<p>sass still exists — you just need it a lot less</p>
+<p>:root { --brand: #cc0000;} /* variables */</p>
+<p>.card {</p>
+<p>color: var(--brand);</p>
+<p>&amp; h2 { margin: 0;} /* nesting */</p>
+<p>&amp;:hover { opacity:.9;}</p>
+<p>}</p>
+<p>.card:has(img) { padding: 0;} /* styles the PARENT */</p>
+<p>css grew up</p>
+<p>each style sheet applies in a cascading manner</p>
+<p>what is cascading?</p>
+<p>!important</p>
+<p>tell me about precedence</p>
+<p>&lt;p style=&quot;color:#ffffff;&quot;&gt;hi there&lt;/p&gt; &lt;!-- inline please no --&gt;</p>
+<p>&lt;style type=&quot;text/css&quot;&gt;</p>
+<p>p {</p>
+<p>color: #ababab!important; /*sparingly*/</p>
+<p>}</p>
+<p>#main-article p {...}</p>
+<p>#main-article.excerpt ul li p {...} /* specificity is power*/</p>
+<p>&lt;/style&gt;</p>
+<p>precedence and cascading</p>
+<p>more specific selector with more classes wins</p>
+<p>more specific wins regardless of order</p>
+<p>same specificity, then load order matters, later wins</p>
+<p>!important gets the highest precedence (use sparingly!)</p>
+<p>inline styles have second highest precedence (bad: hard to override)</p>
+<p>(from: Zacky Pickholz)</p>
+<p>precedence and cascading</p>
+<p>score a selector as (ids, classes, tags)</p>
+<p>compare left to right — one id beats any pile of classes</p>
+<p>exact tie? the rule that comes later wins</p>
+<p>:where() always scores zero — defaults you can override</p>
+<p>#main-article p /* (1, 0, 1) */</p>
+<p>#main-article.excerpt ul li p /* (1, 1, 3) more tags, still one id */</p>
+<p>.card.featured /* (0, 2, 0) beats plain.card */</p>
+<p>:where(.card) img /* (0, 0, 1) trivial to override */</p>
+<p>specificity is a score</p>
+<p>Every element on the page is a box</p>
+<p>css box model: content-box</p>
+<p>Better newer CSS3 model</p>
+<p>border and padding on the inside!</p>
+<p>css box model: border-box</p>
+<p>css box model</p>
+<p>html {</p>
+<p>box-sizing: border-box;</p>
+<p>}</p>
+<p>*, *::before, *::after {</p>
+<p>box-sizing: inherit;</p>
+<p>}</p>
+<p>border-box best practice</p>
+<p>border-box best practice in practice</p>
+<p>div {</p>
+<p>position: _______;</p>
+<p>top: 10px;</p>
+<p>left: 10px;</p>
+<p>}</p>
+<p>ok, how do we position something on a page?</p>
+<p>Default. Elements take up space within the document flow.</p>
+<p>No properties like top, right, bottom, left take effect.</p>
+<p>position: static;</p>
+<p>Nudged from where it would normally sit, via top, right, bottom, left. Its original space is still reserved.</p>
+<p>position: relative;</p>
+<p>Position is relative to the nearest positioned ancestor (anything but static) via top, right, bottom, left.</p>
+<p>Element is removed from flow so other elements ignore it.</p>
+<p>position: absolute;</p>
+<p>Position is relative to the window via top, right, bottom, left properties.</p>
+<p>Otherwise similar to absolute. Position 0,0 is the top left corner.</p>
+<p>position: fixed;</p>
+<p>.nav {</p>
+<p>position: sticky;</p>
+<p>top: 0;</p>
+<p>}</p>
+<p>Sits in normal flow until it would scroll past the offset you gave it — then it stops and stays. Needs a top, right, bottom or left to stick to.</p>
+<p>position: sticky;</p>
+<p>Layers any positioned element (relative, absolute, fixed, sticky) — and flex/grid children. Parameter: signed integer. stacking contexts</p>
+<p>z-index: 10;</p>
+<p>float CSS property</p>
+<p>float: left, right, none</p>
+<p>element should be taken from the normal flow</p>
+<p>placed along the left or right side of its container</p>
+<p>inline elements will wrap around it</p>
+<p>clear CSS property</p>
+<p>clear: left, right, none, both</p>
+<p>specifies which side floating elements are not allowed on</p>
+<p>if not allowed will move past them (clear past them)</p>
+<p>float and clear — alignment</p>
+<p>alignment — basic</p>
+<p>Alignment used to be miserable.</p>
+<p>CSS Flexbox makes things much better!</p>
+<p>what about more complicated alignment and spacing?</p>
+<p>justify along main axis</p>
+<p>align along cross axis</p>
+<p>flexbox model</p>
+<p>flexbox foxes</p>
+<p>.container {</p>
+<p>flex-direction: column | column-reverse | row | row-reverse;</p>
+<p>}</p>
+<p>container: flex direction</p>
+<p>.container{</p>
+<p>flex-wrap: nowrap | wrap | wrap-reverse;</p>
+<p>}</p>
+<p>container: flex-wrap</p>
+<p>.container {</p>
+<p>justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;</p>
+<p>}</p>
+<p>container: justify-content</p>
+<p>.container {</p>
+<p>align-items: flex-start | flex-end | center | baseline | stretch;</p>
+<p>}</p>
+<p>container: align-items</p>
+<p>.container {</p>
+<p>align-content: flex-start | flex-end | center | space-between | space-around | space-evenly | stretch;</p>
+<p>}</p>
+<p>container: align-content</p>
+<p>space between items, set once on the container</p>
+<p>works in flex and grid — no margins, no last-child hacks</p>
+<p>.container {</p>
+<p>display: flex;</p>
+<p>gap: 1rem; /* between every item */</p>
+<p>row-gap: 2rem; /* only matters once they wrap */</p>
+<p>}</p>
+<p>container: gap</p>
+<p>.item {</p>
+<p>order: &lt;integer&gt;;</p>
+<p>}</p>
+<p>flex-item: order</p>
+<p>.item {</p>
+<p>flex-grow: &lt;number&gt;; /* default 0 non negative */</p>
+<p>flex-shrink: &lt;number&gt;; /* default 1 non negative */</p>
+<p>flex-basis: &lt;length&gt; | auto; /* default auto */</p>
+<p>flex: none | [ &lt;&#39;flex-grow&#39;&gt; &lt;&#39;flex-shrink&#39;&gt;? || &lt;&#39;flex-basis&#39;&gt;] /* shorthand for above */</p>
+<p>}</p>
+<p>flex-item: proportions</p>
+<p>.item {</p>
+<p>align-self: auto | flex-start | flex-end | center | baseline | stretch;</p>
+<p>}</p>
+<p>flex-item: align-self</p>
+<p><a href="http://flexboxfroggy.com/">http://flexboxfroggy.com/</a></p>
+<p>more games!</p>
+<p><a href="http://flexboxdefense.com">http://flexboxdefense.com</a></p>
+<p><a href="https://codepip.com/games/">https://codepip.com/games/</a> (registration required, various games)</p>
+<p>resources:</p>
+<p>guide-to-flexbox</p>
+<p>an interactive guide to flexbox (comeau)</p>
+<p>a-visual-guide-to-css3-flexbox-properties</p>
+<p>another slightly competing technology</p>
+<p><a href="https://cssgridgarden.com/">https://cssgridgarden.com/</a> can be useful for overall grid layouts</p>
+<p>more games and resources!</p>
+<p>CSS Grid layout is a two-dimensional grid-based layout system</p>
+<p>Flexbox is a one-dimensional layout system (with wrapping)</p>
+<p>CSS Grid</p>
+<p>two dimensional grid with cells that can span specified widths and lengths</p>
+<p>CSS Grid model</p>
+<p>container is the wrapping element that displays the grid</p>
+<p>grid item is the child that displays on the grid</p>
+<p>&lt;div class=&quot;container&quot;&gt;</p>
+<p>&lt;div class=&quot;item&quot; id=&quot;item1&quot;&gt; &lt;/div&gt;</p>
+<p>&lt;div class=&quot;item&quot; id=&quot;item2&quot;&gt; &lt;/div&gt;</p>
+<p>&lt;div class=&quot;item&quot; id=&quot;item3&quot;&gt; &lt;/div&gt;</p>
+<p>&lt;/div&gt;</p>
+<p>.container {</p>
+<p>display: grid;</p>
+<p>}</p>
+<p>grid container &amp; grid item</p>
+<p>fr = one share of whatever space is left over</p>
+<p>auto-fit + minmax = cards that re-wrap with no media query</p>
+<p>.page {</p>
+<p>display: grid;</p>
+<p>grid-template-columns: 200px 1fr 1fr; /* sidebar + two equal columns */</p>
+<p>gap: 1rem;</p>
+<p>}</p>
+<p>.cards {</p>
+<p>display: grid;</p>
+<p>grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));</p>
+<p>}</p>
+<p>grid: columns, fr, repeat</p>
+<p>grid-area, column/row start/end</p>
+<p>.item-d {</p>
+<p>/* grid-area: &lt;name&gt; | &lt;row-start&gt; / &lt;column-start&gt; / &lt;row-end&gt; / &lt;column-end&gt;; */</p>
+<p>grid-area: 1 / 4 / 4 / 6;</p>
+<p>}</p>
+<p>/* OR */</p>
+<p>.item-d {</p>
+<p>grid-column-start: 4;</p>
+<p>grid-column-end: 6;</p>
+<p>grid-row-start: 1;</p>
+<p>grid-row-end: 4;</p>
+<p>}</p>
+<p>.container {</p>
+<p>/* standard */</p>
+<p>column-gap: &lt;line-size&gt;;</p>
+<p>row-gap: &lt;line-size&gt;;</p>
+<p>gap: &lt;line-size&gt;;</p>
+<p>/* old */</p>
+<p>grid-column-gap: &lt;line-size&gt;;</p>
+<p>grid-row-gap: &lt;line-size&gt;;</p>
+<p>}</p>
+<p>column-gap and row-gap</p>
+<p><a href="https://cssgridgarden.com/">https://cssgridgarden.com/</a></p>
+<p>one line in the head, or none of the rest works:</p>
+<p>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</p>
+<p>then one breakpoint for the big switches:</p>
+<p>@media (max-width: 640px) {</p>
+<p>.row { flex-direction: column;}</p>
+<p>}</p>
+<p>flexbox already handles most widths. the query is for the big switches.</p>
+<p>responsive: the two moves</p>
+<p>/* two navs, one for each layout */</p>
+<p>nav.mobile { display: none;}</p>
+<p>@media (max-width: 640px) {</p>
+<p>nav.desktop { display: none;}</p>
+<p>nav.mobile { display: flex;}</p>
+<p>}</p>
+<p>rows become columns, whole chunks get swapped</p>
+<p>100vh lies on phones — use 100dvh</p>
+<p>test it in devtools device mode, not by squinting</p>
+<p>the mobile swap</p>
+<p>display: none; not displayed and takes no space in layout</p>
+<p>display: inline; inlined (like spans)</p>
+<p>display: block; block (like divs)</p>
+<p>visibility: hidden; not displayed but space still allocated</p>
+<p>visibility: visible; is displayed and space allocated</p>
+<p>opacity: 0.5; displayed with transparency and takes up space</p>
+<p>element visibility</p>
+<p>transitions</p>
+<p>div {</p>
+<p>transition-property: [property];</p>
+<p>transition-duration: [duration];</p>
+<p>transition-timing-function: [timing-function];</p>
+<p>transition-delay: [delay];</p>
+<p>}</p>
+<p>/* or shorthand */</p>
+<p>div {</p>
+<p>transition: [property] [duration] [timing-function] [delay];</p>
+<p>}</p>
+<p>transitions model</p>
+<p>property: (required) of the element to apply to. can be specific property like background-color, a list, or all.</p>
+<p>duration: (required) timespan in milliseconds or seconds units that the effect lasts.</p>
+<p>timing-function: (optional) animation interpolation type: linear, ease (default), ease-in, ease-out, ease-in-out, even cubic-bezier.</p>
+<p>delay: (optional) delay before the start of the animation in milliseconds or seconds units.</p>
+<p>transitions properties</p>
+<p>transitions</p>
+<p>transform: translate(x, y);</p>
+<p>transform: perspective(distance_from_view) translate3d(x, y, z);</p>
+<p>2d &amp; 3d transforms: translate</p>
+<p>rotate(angle) /* 2D rotation */</p>
+<p>rotate3d(x,y,z,angle) /* 3D rotation with axis (with transform-origin)and rotation*/</p>
+<p>rotateX(angle) /* shorthand 3D along the X-axis */</p>
+<p>rotateY(angle) /* shorthand 3D along the Y-axis */</p>
+<p>rotateZ(angle) /* shorthand 3D along the Z-axis */</p>
+<p>2d &amp; 3d transforms: rotate</p>
+<p>simpler example</p>
+<p>2d &amp; 3d transforms: rotate</p>
+<p>Ok, that might be enough of 3D for one day! more demos here</p>
+<p>2d &amp; 3d transforms all the demos</p>
+<p>MDN css reference — the actual docs</p>
+<p>web.dev learn css</p>
+<p>comeau: interactive guide to flexbox / to grid</p>
+<p>webstatus.dev — can i use it yet?</p>
+<p>learn.shayhowe.com is also a good resource.</p>
+<p>css-tricks</p>
+<p>flexbox patterns</p>
+<p>grid guide</p>
+<p>bootstrap (not for lab 1 - we want your own css)</p>
+<p>transitions and transforms</p>
+<p>3d transforms</p>
+<p>so many resources</p>
+<p>UTSL</p>
+<p>CSS is huge. There are just too many things to cover!</p>
+<p>Use the Chrome Devtools Inspector!</p>
+<p>further learning: use the source, Luke</p>
+<p>Press Ctrl + Shift + I (Windows, Linux) or Command + Option + I (Mac)</p>
+<p>or right click on an element in website and select Inspect.</p>
+<p>the little flex / grid badges next to an element turn on layout overlays</p>
+<p>chrome devtools</p>
+<p>Text</p>
+<p>select elements</p>
+<p>Text</p>
+<p>change text</p>
+<p>Text</p>
+<p>change images</p>
+<p>Text</p>
+<p>inspect hover states</p>
+<p>Text</p>
+<p>add rules</p>
+<p><a href="https://developer.chrome.com/docs/devtools/">https://developer.chrome.com/docs/devtools/</a></p>
+<p>full javascript debugger with breakpoints, etc</p>
+<p>analyze performance</p>
+<p>run code</p>
+<p>device mode: test your mobile layout without a phone</p>
+<p>much more</p>
+<p>Text</p>
+<p>get neighbors domain name and open it up in inspector</p>
+<p>or together edit some random webpage</p>
+<p>play around with it</p>
+<p>if you make something funny, take a screenshot and post it in Slack #random</p>
+<p>another activity?!</p>
+<p>lab 1 part 1 (html) due sunday night</p>
+<p>lab 1 part 2 (css): flexbox layout + one media query</p>
+<p>find a landing page you like - adapt it to your own liking</p>
+<p>be creative: fake/real company, family site, parody, the sky is the limit</p>
+<p>play flexbox froggy + grid garden all the way through first</p>
+<p>monday: the dom</p>
+<p>next up</p>
+
+</body>
+</html>
