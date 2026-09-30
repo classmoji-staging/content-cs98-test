@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 85%;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      color: #333;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1rem 0;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      background: #f5f5f5;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<p>Lab 1 Part 1:  Build A Landing Page HTML</p>
+<p>Your assignment, should you choose to accept it, (not sure you have much choice there…) is to create a landing page.</p>
+<p>A landing page, you say? Yes, you will be making a landing page based on a real page out there in the world. You will be mimicking the structure and style of a page but with your own content.</p>
+<p>Goal Overview</p>
+<p>Become comfortable with Chrome DevTools</p>
+<p>Be able to mimic the structure of a real page using semantic HTML (styling comes in Part 2)</p>
+<p>Focus on HTML foundations</p>
+<p>Understand and use semantic HTML elements</p>
+<p>Lay out the skeleton of a beautiful static landing page</p>
+<p>Getting Started</p>
+<p>🚀 Please use the repository created for you in Classm🍎ji. There&#39;s a GitHub repo waiting for you under the CS52 class GitHub organization, and it&#39;s what gives course staff access to your work. Please use the provided repo for this assignment — do not use a personal repo!</p>
+<p>🚀 We’ll be choosing a landing page website to flatter. And by flatter, I mean rip-off. But by rip-off, I mean reconstruct a clean version using our own content. You’ll be looking at some webpages, and then inspecting them and seeing how much of the look and feel you can copy onto your own page.</p>
+<p>Here, I chose slack.com (it no longer looks like this).</p>
+<p>And if you narrow your browser you’ll see some responsive design and it looks like so:</p>
+<p>You should choose another landing page to base your page on, as long as it has the following features:</p>
+<p>responsive navigation menu - one that collapses from columns into rows when in mobile.</p>
+<p>expanding image(s) - either as a background or central element</p>
+<p>a clear call to action button with some hover states, some nice styling, and responsive</p>
+<p>a set of highlights in the body</p>
+<p>text input bar for signup or search (ours will be non-functional)</p>
+<p>a footer with links that are responsive (change from side by side to vertical in smaller sizes)</p>
+<p>Some examples (in approx order of difficulty, from easier to harder):</p>
+<p>flourbakery.com</p>
+<p>github.com (logged out incognito mode)</p>
+<p>starbucks.com (add a fullwidth image)</p>
+<p>stripe.com</p>
+<p>tempo.fit</p>
+<p>collegepulse (words changing using css animations, EC)</p>
+<p>figma.com (moving pointers on media size css animations are pretty sweet, EC)</p>
+<p>mixpanel.com</p>
+<p>wistia.com</p>
+<p>notion.so (logged out incognito)</p>
+<p>simpleanalytics.com (can you do the typewriter effect using css animations? EC)</p>
+<p>monday.com</p>
+<p>patagonia.com (with carousel in pure css challenge)</p>
+<p>strangeworks.com/ (some scrolling effects can’t be done with css)</p>
+<p>You can also browse for inspiration here: landingfolio.com. You can also choose multiple pages to pick and choose things from.</p>
+<p>Please be creative with your content! You can and should make your own content on this page. Do not copy my content, or the websites content, make up your own.</p>
+<p>What you’ll find is that many product landing pages have a lot of similarities:</p>
+<p>A navbar that when resized turns into the hamburger menu 🍔</p>
+<p>A CTA (call to action)</p>
+<p>some resizing background image</p>
+<p>some set of side by side highlights</p>
+<p>You can and should alter the text and images as you please — make it be a landing page for your imagination! What you are doing is basing the structure and styling of your landing page on that of one of these others. However, make the content your own – that is the whole point of the exercise. The screenshots below are from one attempt at this and are examples only. There are lots of places to get cool free images if you need content.</p>
+<p>unsplash.com</p>
+<p>pixabay.com</p>
+<p>No functionality needs to be implemented. No JS, or any external libraries or CSS frameworks are allowed for this assignment. You can do all of it with just HTML/CSS from scratch. Don’t worry it’ll be fun!</p>
+<p>Across the two parts of this lab you&#39;ll make an HTML and CSS only version of this landing page (no JS allowed). ❗None of the links or functionality needs to be there, it just needs to look good and be laid out properly. Part 1 is structure only — you&#39;ll hang the styles on it in Part 2.</p>
+<p>All anchor tags should look like this:</p>
+<p>&lt;a href=&quot;#&quot;&gt;&lt;/a&gt;</p>
+<p>Links to nowhere.</p>
+<p>Simplify a lot! This is more re-imagining than it is making a carbon copy. You’ll very much need to simplify and leave things out. You will submit both the original that you used for inspiration and your version, but what we are looking for is for a clever adaptation given the limitations of no javascript.</p>
+<p>Note: You can and should use the Chrome DevTools Inspector 🔍 to examine the structure of the original page. You’ll find it is really messy and complicated! Although it is a good idea to inspect individual elements (for instance: a button to see how they styled the borders) it won’t really help you much to try to copy more. If your code blatantly includes un-cited code copied from one of these websites or another students assignment, that will be considered an honor code violation ⚠️. Ask me if you have questions about this.</p>
+<p>About AI on this lab: you can use an agent — but cite it. If Claude or a tutorial wrote a chunk of your markup, note it in your README.md and be ready to explain what it does and why it&#39;s there. Uncited code — from a classmate, a website, or a model — is still an honor code violation ⚠️.</p>
+<p>PART 1: HTML</p>
+<p>Dive Right In!</p>
+<p>🚀 Start in the provided repo by Classm🍎ji. It will look like dartmouth-cs52/lab1-landingpage-yourgithubusername. Please do not work in your own repo — use the class provided repository only.</p>
+<p>🚀 Open up your code editor and create an index.html and a style.css file in the root of the folder.</p>
+<p>basic html page</p>
+<p>empty style.css</p>
+<p>🚀 Link your style.css file into the head of your html file. (no CSS allowed for the first part just set up the file)</p>
+<p>📌 Use relative paths for everything you link — style.css and img/hero.jpg, not /style.css. That leading slash means “start at the root of the server”: it works once your site is hosted, but not when you open index.html straight off your disk — which is how the test suite opens it. Your page will look completely unstyled and the reason won&#39;t be obvious.</p>
+<p>Outline</p>
+<p>In HTML only, outline the main elements you envision for the page. Here’s some hints:</p>
+<p>remember to use semantic elements that we discussed in class.</p>
+<p>&lt;nav&gt; for the navbar (even though it is transparent).</p>
+<p>&lt;ul&gt; unordered lists are often used for nav components, if you do it’ll help to get rid of the bullets using list-style-type: none; in your css later.</p>
+<p>&lt;footer&gt; is a good tag to use for… footer things.</p>
+<p>&lt;div&gt;, &lt;span&gt;, &lt;a&gt;, &lt;h1&gt;, &lt;p&gt; will all be useful.</p>
+<p>&lt;input&gt;, and &lt;button&gt; for any form like elements.</p>
+<p>Don’t worry about styling 💇 at this point. Just lay things out in an order that makes sense to you. BUT do think about how to label your structure.  Use id and class as appropriate to differentiate your elements so that later you can style them. Remember this is structure you are describing.</p>
+<p>It may look approximately like this.</p>
+<p>⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️</p>
+<p>⚠️⚠️⚠️ 🚀 Take a screencap at this point!</p>
+<p>⚠️⚠️⚠️ 🚀 You will need to submit this for part of the grade.</p>
+<p>⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️</p>
+<p>Git Tags</p>
+<p>🐙 To keep track of specific important changes in our repositories, we’re going to be using git tags. Tags are a way to give a specific git commit a name/label for easy retrieval later. Github uses tags to mark software release versions as well.</p>
+<p># first make sure you&#39;ve committed your code</p>
+<p>git commit -am &quot;done with html layout stage&quot;</p>
+<p># when you run git tag it will label the current latest commit</p>
+<p>git tag html</p>
+<p># tags need to be pushed to github manually</p>
+<p>git push origin --tags</p>
+<p>Now you can take a break, we’ll learn some CSS in class, and you can come back and make this pretty in Lab 1 Part 2: Build a Landing Page CSS.</p>
+<p>You Are Done with the HTML Part 1 of the lab! Now, don’t forget to host it.</p>
+<p>Three ways to do it — pick one. Option A: render.com — connect your GitHub account and publish this repo as a static site. It has a decent free tier and it works with the private class repo. Option B: GitHub Pages — the same flow you already did in SA0, from this repo&#39;s Settings → Pages (check it&#39;s offered there; Pages on a private repo depends on the org plan). Option C: Cloudflare Pages — connect this repo from the Cloudflare dashboard and it redeploys on every push. Free, fast, and worth setting up now: we&#39;ll be diving into Cloudflare properly later in the term when we get to Workers and Durable Objects, so you&#39;ll already have the account. Whichever you pick, this is a separate site from the personal domain you set up in SA0 — don&#39;t overwrite that one. All three HOST your site on an internet connected server (ie. “in the cloud”) ☁️.</p>
+<p>Screen Shot 2022-03-31 at 10.15.07 PM.png</p>
+<p>To Turn In:</p>
+<p>👉 The GitHub assignment Issue will be considered your submission! To officially turn it in, please comment on the Issue in the repository when you have completed the assignment and 📫mark the issue as closed.</p>
+<p>CleanShot 2026-09-16 at 8.56.33 <a href="mailto:PM@2x.png">PM@2x.png</a></p>
+<p>🙏 In your comment, please include:</p>
+<p>link to the hosted version of your page (render, Cloudflare Pages, or GitHub Pages — whichever you used)</p>
+<p>couple of sentences on what worked / didn’t</p>
+<p>🚀 also in the comment include:</p>
+<p>url to the original landing page you were mimicking and screenshot of the original landing page</p>
+<p>screenshot of your skeleton page in browser</p>
+<p>your page should:</p>
+<p>display as many elements from the original site as possible</p>
+<p>use only pure HTML</p>
+<p>have clean HTML you can explain line by line (your html file should only be a few hundred lines).</p>
+<p>have clear document structure with proper semantic naming</p>
+<p>Resources:</p>
+<p>The DOM with Ijemma</p>
+<p>HTML with Ijemma</p>
+<p><a href="http://www.w3schools.com">http://www.w3schools.com</a></p>
+<p>MDN: HTML elements reference — the one to keep open while you work</p>
+<p>MDN: Semantics — why &lt;nav&gt; beats &lt;div class=&quot;nav&quot;&gt;</p>
+
+</body>
+</html>
