@@ -28,23 +28,6 @@
       },
       "content": [],
       "children": []
-    },
-    {
-      "id": "b90dfb94a41",
-      "type": "paragraph",
-      "props": {
-        "backgroundColor": "default",
-        "textColor": "default",
-        "textAlignment": "left"
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "Warm check - safe to delete",
-          "styles": {}
-        }
-      ],
-      "children": []
     }
   ]
 }
