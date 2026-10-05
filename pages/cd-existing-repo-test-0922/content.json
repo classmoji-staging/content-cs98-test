@@ -28,23 +28,6 @@
       },
       "content": [],
       "children": []
-    },
-    {
-      "id": "b06aede1594",
-      "type": "paragraph",
-      "props": {
-        "backgroundColor": "default",
-        "textColor": "default",
-        "textAlignment": "left"
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "Staging live-edit check 05:23:25Z - safe to delete",
-          "styles": {}
-        }
-      ],
-      "children": []
     }
   ]
 }
