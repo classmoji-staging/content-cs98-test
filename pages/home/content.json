@@ -105,8 +105,105 @@
             }
           ],
           "children": []
+        },
+        {
+          "id": "94a5c8ea-ecc4-4338-8c40-8e3720cead91",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "this is more locked content",
+              "styles": {}
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "202ab8a9-1008-45fd-b352-5bdee1be9064",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "and more",
+              "styles": {}
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "31ccc722-3b56-4d01-b6c3-628944be5757",
+          "type": "heading",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left",
+            "level": 2,
+            "isToggleable": false
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "a subheading",
+              "styles": {}
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "99838926-7f65-4262-a8fc-4b53555a4077",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "more content",
+              "styles": {}
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "dbc1c4f4-e9af-4f4f-80d5-2456c27c2bd6",
+          "type": "codeBlock",
+          "props": {
+            "language": "javascript",
+            "copyable": true
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "adfadfasdfasdf\nadsf\nasdf\nasd\nfas\ndfa\nsdf",
+              "styles": {}
+            }
+          ],
+          "children": []
         }
       ]
+    },
+    {
+      "id": "34d25b7e-f61d-4e4e-bb81-f27f754b7af9",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
     },
     {
       "id": "418e5f75-0108-4393-b4e4-008463b22b0c",
