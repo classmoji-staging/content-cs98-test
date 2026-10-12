@@ -35,10 +35,81 @@
         "backgroundColor": "default",
         "textColor": "default",
         "textAlignment": "left",
-        "level": 1,
-        "isToggleable": false
+        "level": 2,
+        "isToggleable": false,
+        "checkable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "this is a heading yayahahah",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "29570664-18bf-412d-8029-b8e9807ef07b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "and there is content here",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "12aca89e-04a3-4324-95ce-92f7221a0187",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "and here",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "67ca503c-0b37-47ed-a6f3-e690dab88b70",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
       },
       "content": [],
+      "children": []
+    },
+    {
+      "id": "418e5f75-0108-4393-b4e4-008463b22b0c",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 4,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "subheading where does this land?  is checkable heading only h2 or something?  checkable headings should be a setting on a heading",
+          "styles": {}
+        }
+      ],
       "children": []
     },
     {
@@ -49,7 +120,8 @@
         "textColor": "default",
         "textAlignment": "left",
         "level": 1,
-        "isToggleable": false
+        "isToggleable": false,
+        "checkable": true
       },
       "content": [
         {
