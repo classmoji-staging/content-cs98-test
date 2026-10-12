@@ -84,14 +84,29 @@
     },
     {
       "id": "67ca503c-0b37-47ed-a6f3-e690dab88b70",
-      "type": "paragraph",
+      "type": "lockedSection",
       "props": {
-        "backgroundColor": "default",
-        "textColor": "default",
-        "textAlignment": "left"
+        "title": "this is a HINT"
       },
-      "content": [],
-      "children": []
+      "children": [
+        {
+          "id": "053f4193-3bb2-4860-b680-4df2cc5fc3da",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "locked content not for you. ",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
     },
     {
       "id": "418e5f75-0108-4393-b4e4-008463b22b0c",
