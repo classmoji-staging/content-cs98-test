@@ -1,0 +1,365 @@
+{
+  "blocks": [
+    {
+      "id": "d29f2258-9d7a-404a-88ec-0d063a56e4a0",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Overview",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "4d1e0f80-9fa8-42f1-9869-96b59b206c90",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Plain ",
+          "styles": {}
+        },
+        {
+          "type": "text",
+          "text": "bold",
+          "styles": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": " and ",
+          "styles": {}
+        },
+        {
+          "type": "link",
+          "href": "https://example.com",
+          "content": [
+            {
+              "type": "text",
+              "text": "a link",
+              "styles": {}
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": ".",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b44a6008-0cc7-4055-892e-da158d0e0a83",
+      "type": "callout",
+      "props": {
+        "textAlignment": "left",
+        "emoji": "🔥"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Hot tip callout",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "3851a094-4247-4728-947b-4de2b9b5741e",
+      "type": "callout",
+      "props": {
+        "textAlignment": "left",
+        "emoji": "⚠️"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Careful alert",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "8932e687-793b-4522-a2a4-97628071fcf5",
+      "type": "checkListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "checked": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Done thing",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "c86545d5-2370-44f7-898d-9cb25deec3be",
+      "type": "checkListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "checked": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Open thing",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "5ea5b4f7-ddbe-4522-bb80-926855a52168",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "eeed5ed1-a802-445a-b375-7c758078973e",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 3,
+        "isToggleable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Show more",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "a14c3b37-9e35-46c7-91c7-7003ab07f800",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Hidden text inside a toggle",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "130dfbd6-7af8-443d-8e1b-ea5b8955490a",
+      "type": "columnList",
+      "props": {},
+      "children": [
+        {
+          "id": "0bddef7f-48e0-406d-af6b-90a9ef6822ca",
+          "type": "column",
+          "props": {
+            "width": 1
+          },
+          "children": [
+            {
+              "id": "1cf11434-4b06-4ceb-af05-54732dffeddf",
+              "type": "paragraph",
+              "props": {
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Left column",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "264559ed-5d4f-4321-9a44-9d36496148f6",
+          "type": "column",
+          "props": {
+            "width": 1
+          },
+          "children": [
+            {
+              "id": "eae3eb74-045b-487a-93c4-7ea34fe12c8c",
+              "type": "paragraph",
+              "props": {
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Right column",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9dd94a95-bbd1-42a6-a78c-65823d330f76",
+      "type": "terminal",
+      "props": {
+        "code": "npm run dev",
+        "title": "Start the server",
+        "copyable": true
+      },
+      "children": []
+    },
+    {
+      "id": "065e7328-4626-454b-8c94-5b80d5b396c2",
+      "type": "codeBlock",
+      "props": {
+        "language": "javascript",
+        "copyable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "const answer = 42;",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "be3ff36e-2f50-40a3-b3b4-c2793ea7e6ac",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Intro text with ",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "3a067105-5ff3-4f6f-83b4-7d0062f2f674",
+      "type": "image",
+      "props": {
+        "textAlignment": "left",
+        "backgroundColor": "default",
+        "name": "",
+        "url": "https://placehold.co/120x60.png",
+        "caption": "",
+        "showPreview": true,
+        "previewWidth": 512
+      },
+      "children": []
+    },
+    {
+      "id": "028e7d37-a9d4-4475-89de-67110b800133",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": " an inline image.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "2b860fce-a52b-4f29-9382-ba0078a84fab",
+      "type": "image",
+      "props": {
+        "textAlignment": "left",
+        "backgroundColor": "default",
+        "name": "",
+        "url": "https://placehold.co/300x120.png",
+        "caption": "",
+        "showPreview": true,
+        "previewWidth": 512
+      },
+      "children": []
+    },
+    {
+      "id": "ddd67b3c-6bdb-4ce3-b964-8d8f5d6804ee",
+      "type": "bulletListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "first item",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "d7e0b7ac-15bc-40d3-95f4-8ca7188c3076",
+      "type": "bulletListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "second item",
+          "styles": {}
+        }
+      ],
+      "children": []
+    }
+  ]
+}
