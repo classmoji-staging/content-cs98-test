@@ -1,0 +1,1857 @@
+{
+  "blocks": [
+    {
+      "id": "be63b819e3b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Lab 1 Part 1:  Build A Landing Page HTML",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b069374b355",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Your assignment, should you choose to accept it, (not sure you have much choice there…) is to create a landing page.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b4318e987a0",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "A landing page, you say? Yes, you will be making a landing page based on a real page out there in the world. You will be mimicking the structure and style of a page but with your own content.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b2852b44c5f",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Goal Overview",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b0e2c310dbd",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Become comfortable with Chrome DevTools",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b5061e7fb5a",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Be able to mimic the structure of a real page using semantic HTML (styling comes in Part 2)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b18aafca7ec",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Focus on HTML foundations",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bee9e2883ad",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Understand and use semantic HTML elements",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bfe4d581290",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Lay out the skeleton of a beautiful static landing page",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "baf64dce0a3",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Getting Started",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b22f4dd1640",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "🚀 Please use the repository created for you in Classm🍎ji. There's a GitHub repo waiting for you under the CS52 class GitHub organization, and it's what gives course staff access to your work. Please use the provided repo for this assignment — do not use a personal repo!",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b8ddba0ad0c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "🚀 We’ll be choosing a landing page website to flatter. And by flatter, I mean rip-off. But by rip-off, I mean reconstruct a clean version using our own content. You’ll be looking at some webpages, and then inspecting them and seeing how much of the look and feel you can copy onto your own page.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b101de0f609",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Here, I chose slack.com (it no longer looks like this).",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b1c5dc8473b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "And if you narrow your browser you’ll see some responsive design and it looks like so:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b2d8ea6ae33",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "You should choose another landing page to base your page on, as long as it has the following features:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b4d3bf27e4b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "responsive navigation menu - one that collapses from columns into rows when in mobile.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bea4524fb0f",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "expanding image(s) - either as a background or central element",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bdb8cf265c1",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "a clear call to action button with some hover states, some nice styling, and responsive",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b44a57ec6f5",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "a set of highlights in the body",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "badd044eeaa",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "text input bar for signup or search (ours will be non-functional)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bdc2bb308a8",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "a footer with links that are responsive (change from side by side to vertical in smaller sizes)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b5b12e8758d",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Some examples (in approx order of difficulty, from easier to harder):",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bae72cfdfdc",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "flourbakery.com",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b64bceebb7a",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "github.com (logged out incognito mode)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bb84e403cc0",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "starbucks.com (add a fullwidth image)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b5685a5572c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "stripe.com",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b23fb6e1a3d",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "tempo.fit",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b134361c863",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "collegepulse (words changing using css animations, EC)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b44a6035638",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "figma.com (moving pointers on media size css animations are pretty sweet, EC)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b12339b0625",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "mixpanel.com",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b9b0a3e4715",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "wistia.com",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bb771c0bbaa",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "notion.so (logged out incognito)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b73a45b340d",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "simpleanalytics.com (can you do the typewriter effect using css animations? EC)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b3609576007",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "monday.com",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b1c1b80d85f",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "patagonia.com (with carousel in pure css challenge)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b572bd8a15c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "strangeworks.com/ (some scrolling effects can’t be done with css)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bf73fbc35c6",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "You can also browse for inspiration here: landingfolio.com. You can also choose multiple pages to pick and choose things from.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bcbc313a480",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Please be creative with your content! You can and should make your own content on this page. Do not copy my content, or the websites content, make up your own.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b9e8b4bd340",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "What you’ll find is that many product landing pages have a lot of similarities:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "be59c99875b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "A navbar that when resized turns into the hamburger menu 🍔",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b120a87d4e2",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "A CTA (call to action)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b10094f0de8",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "some resizing background image",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bce979aed08",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "some set of side by side highlights",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b827c82fc34",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "You can and should alter the text and images as you please — make it be a landing page for your imagination! What you are doing is basing the structure and styling of your landing page on that of one of these others. However, make the content your own – that is the whole point of the exercise. The screenshots below are from one attempt at this and are examples only. There are lots of places to get cool free images if you need content.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bd471a67e06",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "unsplash.com",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b5d71f4c60c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "pixabay.com",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bc47a32b66d",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "No functionality needs to be implemented. No JS, or any external libraries or CSS frameworks are allowed for this assignment. You can do all of it with just HTML/CSS from scratch. Don’t worry it’ll be fun!",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b0624f523fc",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Across the two parts of this lab you'll make an HTML and CSS only version of this landing page (no JS allowed). ❗None of the links or functionality needs to be there, it just needs to look good and be laid out properly. Part 1 is structure only — you'll hang the styles on it in Part 2.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b30a180aa37",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "All anchor tags should look like this:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bb32a9dc634",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "<a href=\"#\"></a>",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bad8b1fe8a1",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Links to nowhere.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bda38ebddc9",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Simplify a lot! This is more re-imagining than it is making a carbon copy. You’ll very much need to simplify and leave things out. You will submit both the original that you used for inspiration and your version, but what we are looking for is for a clever adaptation given the limitations of no javascript.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b1677323a66",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Note: You can and should use the Chrome DevTools Inspector 🔍 to examine the structure of the original page. You’ll find it is really messy and complicated! Although it is a good idea to inspect individual elements (for instance: a button to see how they styled the borders) it won’t really help you much to try to copy more. If your code blatantly includes un-cited code copied from one of these websites or another students assignment, that will be considered an honor code violation ⚠️. Ask me if you have questions about this.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b331644ae4b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "About AI on this lab: you can use an agent — but cite it. If Claude or a tutorial wrote a chunk of your markup, note it in your README.md and be ready to explain what it does and why it's there. Uncited code — from a classmate, a website, or a model — is still an honor code violation ⚠️.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bf2b7ea0f7d",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "PART 1: HTML",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b4594d3ea5a",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Dive Right In!",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b6aa974a16f",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "🚀 Start in the provided repo by Classm🍎ji. It will look like dartmouth-cs52/lab1-landingpage-yourgithubusername. Please do not work in your own repo — use the class provided repository only.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bfcee852676",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "🚀 Open up your code editor and create an index.html and a style.css file in the root of the folder.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b98c272812a",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "basic html page",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bc9c552fd38",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "empty style.css",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "be047e42cf3",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "🚀 Link your style.css file into the head of your html file. (no CSS allowed for the first part just set up the file)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b866d4b85e8",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "📌 Use relative paths for everything you link — style.css and img/hero.jpg, not /style.css. That leading slash means “start at the root of the server”: it works once your site is hosted, but not when you open index.html straight off your disk — which is how the test suite opens it. Your page will look completely unstyled and the reason won't be obvious.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b03fcff062c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Outline",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "be2ed574668",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "In HTML only, outline the main elements you envision for the page. Here’s some hints:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b52fa59ba50",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "remember to use semantic elements that we discussed in class.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "be5003df06c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "<nav> for the navbar (even though it is transparent).",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bb2c063f0de",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "<ul> unordered lists are often used for nav components, if you do it’ll help to get rid of the bullets using list-style-type: none; in your css later.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bd5a714ddae",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "<footer> is a good tag to use for… footer things.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b8a14e9ae73",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "<div>, <span>, <a>, <h1>, <p> will all be useful.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b434812ba97",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "<input>, and <button> for any form like elements.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b521bd2297b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Don’t worry about styling 💇 at this point. Just lay things out in an order that makes sense to you. BUT do think about how to label your structure.  Use id and class as appropriate to differentiate your elements so that later you can style them. Remember this is structure you are describing.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b77ba6de8f4",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "It may look approximately like this.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "be127ee2ddd",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b333face4a5",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "⚠️⚠️⚠️ 🚀 Take a screencap at this point!",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b183f57830a",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "⚠️⚠️⚠️ 🚀 You will need to submit this for part of the grade.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bc74749c95b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️ ⚠️⚠️⚠️",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b426e78cea2",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Git Tags",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b5b13edda27",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "🐙 To keep track of specific important changes in our repositories, we’re going to be using git tags. Tags are a way to give a specific git commit a name/label for easy retrieval later. Github uses tags to mark software release versions as well.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bcfbb82507e",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "# first make sure you've committed your code",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b92af657369",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "git commit -am \"done with html layout stage\"",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b0a239b4314",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "# when you run git tag it will label the current latest commit",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b72bb4e1f86",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "git tag html",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b49c3c43796",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "# tags need to be pushed to github manually",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b2bc4c70d59",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "git push origin --tags",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bab64a74dc8",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Now you can take a break, we’ll learn some CSS in class, and you can come back and make this pretty in Lab 1 Part 2: Build a Landing Page CSS.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bdffe71bb72",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "You Are Done with the HTML Part 1 of the lab! Now, don’t forget to host it.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b82e8475d6e",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Three ways to do it — pick one. Option A: render.com — connect your GitHub account and publish this repo as a static site. It has a decent free tier and it works with the private class repo. Option B: GitHub Pages — the same flow you already did in SA0, from this repo's Settings → Pages (check it's offered there; Pages on a private repo depends on the org plan). Option C: Cloudflare Pages — connect this repo from the Cloudflare dashboard and it redeploys on every push. Free, fast, and worth setting up now: we'll be diving into Cloudflare properly later in the term when we get to Workers and Durable Objects, so you'll already have the account. Whichever you pick, this is a separate site from the personal domain you set up in SA0 — don't overwrite that one. All three HOST your site on an internet connected server (ie. “in the cloud”) ☁️.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "ba2cb332005",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Screen Shot 2022-03-31 at 10.15.07 PM.png",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b1e04cd9490",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "To Turn In:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b6f31b0e876",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "👉 The GitHub assignment Issue will be considered your submission! To officially turn it in, please comment on the Issue in the repository when you have completed the assignment and 📫mark the issue as closed.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bef82083294",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "CleanShot 2026-09-16 at 8.56.33 ",
+          "styles": {}
+        },
+        {
+          "type": "link",
+          "href": "mailto:PM@2x.png",
+          "content": [
+            {
+              "type": "text",
+              "text": "PM@2x.png",
+              "styles": {}
+            }
+          ]
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bf4d617a7b8",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "🙏 In your comment, please include:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b8ca2b9a214",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "link to the hosted version of your page (render, Cloudflare Pages, or GitHub Pages — whichever you used)",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bffc83ac616",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "couple of sentences on what worked / didn’t",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bcd2e7caea0",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "🚀 also in the comment include:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b1e499e05b5",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "url to the original landing page you were mimicking and screenshot of the original landing page",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bbd48baff0a",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "screenshot of your skeleton page in browser",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b15cf03a6b5",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "your page should:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b641af45e10",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "display as many elements from the original site as possible",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b874f2a1d86",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "use only pure HTML",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b247b5732b4",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "have clean HTML you can explain line by line (your html file should only be a few hundred lines).",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b6ddb375fb5",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "have clear document structure with proper semantic naming",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b46f35371b3",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Resources:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "bac32dadbda",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "The DOM with Ijemma",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b60ee327a01",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "HTML with Ijemma",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b864bcc52cc",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "link",
+          "href": "http://www.w3schools.com",
+          "content": [
+            {
+              "type": "text",
+              "text": "http://www.w3schools.com",
+              "styles": {}
+            }
+          ]
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b025ab401b5",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "MDN: HTML elements reference — the one to keep open while you work",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b76c2c30acf",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "MDN: Semantics — why <nav> beats <div class=\"nav\">",
+          "styles": {}
+        }
+      ],
+      "children": []
+    }
+  ]
+}
