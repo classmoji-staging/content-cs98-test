@@ -33,21 +33,22 @@
     "pages": [
       "cd-test-page-0448-utc",
       "resources",
-      "lab-1-part-2-build-a-landing-page-css",
-      "home",
+      "widget-conversion-test",
       "secret-grading-key-draft",
       "exam-logistics-test",
       "lab-1-part-1-build-a-landing-page-html",
+      "lab-1-part-2-build-a-landing-page-css",
       "html-slides",
-      "css-slides"
+      "css-slides",
+      "home"
     ],
     "slides": [
       "ai-quizzes",
       "claude-size-test-30mb",
       "claude-size-test-35mb",
       "claude-boundary-test-35mb",
-      "cd-test-deck-0455-utc",
-      "staging-media-test-handout"
+      "staging-media-test-handout",
+      "cd-test-deck-0455-utc"
     ]
   }
 }
