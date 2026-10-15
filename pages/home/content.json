@@ -49,6 +49,74 @@
       "children": []
     },
     {
+      "id": "aa94b823-7749-40a1-aa2d-dab21835eb86",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "802a63bc-2c76-4b9e-b64f-5d5d7969631d",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "green",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 1,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "adfasdf",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "f4253637-892d-4b46-a069-e04d29bda4ca",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "red",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "asdfasdfasdf",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "a498ce15-d11d-43c8-9d85-3054dae1c729",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "green",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 3,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "adsfasdfasdf",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
       "id": "29570664-18bf-412d-8029-b8e9807ef07b",
       "type": "paragraph",
       "props": {
