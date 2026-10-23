@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.js"></script>
+<style>
+  html, body { margin: 0; background: #fff; overflow: hidden; font-family: 'Comic Neue', cursive; color: #2b2f36; }
+  #app { width: 900px; height: 600px; position: relative; margin: 0 auto; }
+  .mono { font-family: ui-monospace, Menlo, monospace; }
+  .bar { display: flex; gap: 7px; justify-content: center; align-items: center; padding-top: 8px; height: 52px; box-sizing: border-box; }
+  .bar .lbl { font-size: 16px; color: #6b7280; margin-right: 4px; }
+  button.ui { font: 700 17px 'Comic Neue', cursive; border-radius: 12px; padding: 5px 12px; cursor: pointer; border: 2.5px solid #d1d5db; background: #fff; color: #4b5563; white-space: nowrap; }
+  button.ui.on { border-color: #15803d; background: #e7f6ec; color: #15803d; }
+  button.ui.sm { font-size: 15px; border-radius: 10px; padding: 2px 9px; border-width: 2px; }
+  #send { position: absolute; left: 610px; top: 62px; width: 276px; color: #1d4ed8; border-color: #1d4ed8; background: #eef2ff; }
+  #send:active { background: #1d4ed8; color: #fff; }
+  #refresh { position: absolute; left: 70px; top: 70px; }
+  #refresh .ic { display: inline-block; transition: transform .4s; }
+  #refresh.spin .ic { transform: rotate(360deg); }
+
+  /* address bars: monospace, the query part in purple */
+  .addr { position: absolute; box-sizing: border-box; font: 15px ui-monospace, Menlo, monospace; color: #1f2937; white-space: nowrap; display: flex; align-items: center; padding: 0 10px; border-radius: 8px; transition: background .4s; }
+  .addr .q { color: #6d28d9; font-weight: 700; }
+  .addr.flash { background: #f3e8ff; }
+  #addr { left: 160px; top: 69px; width: 420px; height: 30px; font-size: 14px; }
+
+  /* your page inside the big browser; fades on refresh */
+  #page { position: absolute; left: 16px; top: 104px; width: 574px; height: 392px; transition: opacity .18s; }
+  #page.reloading { opacity: 0; }
+  #page .title { position: absolute; left: 16px; top: 8px; font-size: 22px; font-weight: 700; color: #1f2937; }
+  #page .ctrls { position: absolute; left: 14px; top: 44px; display: flex; gap: 5px; align-items: center; }
+  #page .ctrls .lbl { font-size: 15px; color: #6b7280; margin: 0 2px 0 0; }
+  #page .ctrls .gap { width: 14px; }
+  #shop { position: absolute; left: 14px; top: 88px; width: 546px; height: 296px; }
+
+  .card { position: absolute; text-align: center; line-height: 1.15; }
+  .card .nm { font-weight: 700; color: #1f2937; }
+  .card .pr { color: #4b5563; }
+
+  /* friend's browser */
+  #fwin { position: absolute; left: 610px; top: 118px; width: 276px; height: 352px; }
+  #fwin .who { position: absolute; left: 14px; top: 6px; font-size: 15px; color: #6b7280; }
+  #faddr { left: 10px; top: 30px; width: 256px; height: 42px; font-size: 12px; white-space: normal; word-break: break-all; line-height: 1.3; padding: 0 8px; }
+  #fstate { position: absolute; left: 14px; top: 80px; font-size: 14px; color: #6b7280; }
+  #fshop { position: absolute; left: 12px; top: 104px; width: 252px; height: 168px; }
+  #fnote { position: absolute; left: 12px; top: 282px; width: 252px; font-size: 18px; line-height: 1.25; text-align: center; }
+  #fnote .small { display: block; font-size: 14px; color: #6b7280; }
+  #fbody { transition: opacity .3s; }
+  #fbody.hide { opacity: 0; pointer-events: none; }
+  #fq { position: absolute; left: 0; top: 40px; width: 276px; text-align: center; font: 700 120px 'Comic Neue', cursive; color: #9ca3af; }
+  #fq .small { display: block; font-size: 16px; font-weight: 400; color: #9ca3af; }
+
+  /* code strip */
+  #code { position: absolute; left: 16px; top: 512px; width: 870px; height: 76px; display: flex; align-items: center; gap: 14px; padding: 0 18px; box-sizing: border-box; }
+  #code .lbl { font-size: 15px; color: #6b7280; white-space: nowrap; }
+  #code pre { margin: 0; font: 15px/1.55 ui-monospace, Menlo, monospace; color: #1f2937; }
+  #code .k { color: #6d28d9; }
+  #code .f { color: #1d4ed8; }
+  #code .s { color: #15803d; }
+  svg { position: absolute; left: 0; top: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <span class="lbl">keep the filter in:</span>
+    <button class="ui mode" data-mode="state" type="button">state in useState</button>
+    <button class="ui mode" data-mode="url" type="button">state in the URL</button>
+  </div>
+
+  <button class="ui sm" id="refresh" type="button"><span class="ic">↻</span> refresh</button>
+  <div class="addr" id="addr"></div>
+
+  <div id="page">
+    <div class="title">cs52 merch</div>
+    <div class="ctrls">
+      <span class="lbl">color</span>
+      <button class="ui sm chip" data-color="all" type="button">all</button>
+      <button class="ui sm chip" data-color="blue" type="button">blue</button>
+      <button class="ui sm chip" data-color="green" type="button">green</button>
+      <button class="ui sm chip" data-color="orange" type="button">orange</button>
+      <span class="gap"></span>
+      <span class="lbl">sort</span>
+      <button class="ui sm srt" data-sort="price-asc" type="button">price ↑</button>
+      <button class="ui sm srt" data-sort="price-desc" type="button">price ↓</button>
+      <button class="ui sm srt" data-sort="none" type="button">none</button>
+    </div>
+    <div id="shop"></div>
+  </div>
+
+  <button class="ui" id="send" type="button">copy link → send to a friend</button>
+  <div id="fwin">
+    <div class="who">your friend's browser</div>
+    <div id="fq">?<span class="small">what will they see?</span></div>
+    <div id="fbody" class="hide">
+      <div class="addr" id="faddr"></div>
+      <div id="fstate"></div>
+      <div id="fshop"></div>
+      <div id="fnote"></div>
+    </div>
+  </div>
+
+  <div id="code"><span class="lbl">in the component:</span><pre id="src"></pre></div>
+</div>
+<script>
+// A tiny shop with a color filter and a sort. The filter lives either in useState (memory only)
+// or in the URL (query params). Everything is simulated; the real page location is never touched.
+const ITEMS = [
+  { name: 'hoodie', color: 'blue', price: 45 },
+  { name: 'mug', color: 'orange', price: 12 },
+  { name: 'sticker', color: 'green', price: 3 },
+  { name: 'tote', color: 'blue', price: 18 },
+  { name: 'hat', color: 'green', price: 25 },
+  { name: 'socks', color: 'orange', price: 9 },
+];
+const INK = { blue: '#3b82f6', green: '#22c55e', orange: '#f97316' };
+const SORT_LABEL = { none: 'none', 'price-asc': 'price ↑', 'price-desc': 'price ↓' };
+const BASE = 'cs52.shop/merch';
+const DEFAULTS = { color: 'all', sort: 'none' };
+const CODE = {
+  state: `<span class="k">const</span> [color, setColor] = <span class="f">useState</span>(<span class="s">'all'</span>);`,
+  url: `<span class="k">const</span> [params, setParams] = <span class="f">useSearchParams</span>();\n<span class="k">const</span> color = params.<span class="f">get</span>(<span class="s">'color'</span>) ?? <span class="s">'all'</span>;`,
+};
+
+let mode = 'state';
+let view = { ...DEFAULTS };
+let sent = null; // what the friend got: { url, view }
+
+const $ = (id) => document.getElementById(id);
+const NS = 'http://www.w3.org/2000/svg';
+function makeSvg(parent, w, h) {
+  const s = document.createElementNS(NS, 'svg');
+  s.setAttribute('width', w); s.setAttribute('height', h);
+  parent.appendChild(s);
+  return s;
+}
+
+// the address bar: in useState mode nothing ever gets written to it
+function urlFor(v) {
+  if (mode === 'state') return BASE;
+  const q = [];
+  if (v.color !== 'all') q.push('color=' + v.color);
+  if (v.sort !== 'none') q.push('sort=' + v.sort);
+  return q.length ? BASE + '?' + q.join('&') : BASE;
+}
+// what a fresh page load reads back out of a URL (like useSearchParams does)
+function viewFrom(url) {
+  const params = new URLSearchParams(url.split('?')[1] || '');
+  return { color: params.get('color') ?? 'all', sort: params.get('sort') ?? 'none' };
+}
+function itemsFor(v) {
+  const list = ITEMS.filter((it) => v.color === 'all' || it.color === v.color);
+  if (v.sort === 'price-asc') list.sort((a, b) => a.price - b.price);
+  if (v.sort === 'price-desc') list.sort((a, b) => b.price - a.price);
+  return list;
+}
+function addrHtml(url) {
+  const [base, q] = url.split('?');
+  // one wrapper span so a long URL wraps as plain text inside the (flex) bar
+  return `<span>${base}` + (q ? `<span class="q"><wbr>?${q.replace(/&/g, '<wbr>&amp;')}</span>` : '') + '</span>';
+}
+
+// draw a grid of hand-drawn product cards into a host div
+function drawCards(host, list, L) {
+  host.innerHTML = '';
+  const svg = makeSvg(host, host.clientWidth, host.clientHeight);
+  const rc = rough.svg(svg, { options: { roughness: 1.1, strokeWidth: L.stroke } });
+  list.forEach((it, i) => {
+    const x = (i % L.cols) * (L.w + L.gap);
+    const y = Math.floor(i / L.cols) * (L.h + L.gap);
+    const seed = ITEMS.indexOf(it) + 1; // same item, same wobble wherever it moves
+    svg.appendChild(rc.rectangle(x + 2, y + 2, L.w - 4, L.h - 4, { stroke: '#4b5563', seed }));
+    svg.appendChild(rc.rectangle(x + L.pad, y + L.pad, L.w - 2 * L.pad, L.sh, { stroke: INK[it.color], fill: INK[it.color], fillStyle: 'hachure', hachureGap: L.hg, fillWeight: L.stroke * 0.8, seed: seed + 20 }));
+    const d = document.createElement('div');
+    d.className = 'card';
+    d.style.cssText = `left:${x}px; top:${y + L.pad + L.sh + L.tg}px; width:${L.w}px;`;
+    d.innerHTML = `<div class="nm" style="font-size:${L.fs}px">${it.name}</div><div class="pr" style="font-size:${L.fs - 1}px">$${it.price}</div>`;
+    host.appendChild(d);
+  });
+}
+const BIG = { cols: 3, w: 172, h: 140, gap: 14, pad: 12, sh: 62, tg: 8, fs: 19, stroke: 2.2, hg: 6 };
+const SMALL = { cols: 3, w: 78, h: 80, gap: 9, pad: 7, sh: 26, tg: 4, fs: 14, stroke: 1.5, hg: 4 };
+
+let lastUrl = null;
+function render() {
+  document.querySelectorAll('.mode').forEach((b) => b.classList.toggle('on', b.dataset.mode === mode));
+  document.querySelectorAll('.chip').forEach((b) => b.classList.toggle('on', b.dataset.color === view.color));
+  document.querySelectorAll('.srt').forEach((b) => b.classList.toggle('on', b.dataset.sort === view.sort));
+
+  const url = urlFor(view);
+  const addr = $('addr');
+  addr.innerHTML = addrHtml(url);
+  if (lastUrl !== null && url !== lastUrl) { addr.classList.add('flash'); setTimeout(() => addr.classList.remove('flash'), 450); }
+  lastUrl = url;
+
+  drawCards($('shop'), itemsFor(view), BIG);
+  $('src').innerHTML = CODE[mode];
+
+  // friend's panel stays a "?" until you send a link
+  $('fq').style.display = sent ? 'none' : 'block';
+  $('fbody').classList.toggle('hide', !sent);
+  if (sent) {
+    $('faddr').innerHTML = addrHtml(sent.url);
+    $('fstate').textContent = `color: ${sent.view.color} · sort: ${SORT_LABEL[sent.view.sort] || sent.view.sort}`;
+    drawCards($('fshop'), itemsFor(sent.view), SMALL);
+    const yours = sent.mine.color !== 'all' || sent.mine.sort !== 'none';
+    $('fnote').innerHTML = sent.mode === 'state'
+      ? `<b style="color:#be123c">they got the default page</b>` + (yours ? `<span class="small">your filter stayed behind in your tab</span>` : '')
+      : `<b style="color:#15803d">same view</b>` + (yours ? `<span class="small">the link carried your filter</span>` : '');
+  }
+}
+
+document.querySelectorAll('.mode').forEach((b) => b.addEventListener('click', () => {
+  if (mode === b.dataset.mode) return;
+  mode = b.dataset.mode;
+  sent = null; // new mode, new guess
+  render();
+}));
+document.querySelectorAll('.chip').forEach((b) => b.addEventListener('click', () => { view = { ...view, color: b.dataset.color }; render(); }));
+document.querySelectorAll('.srt').forEach((b) => b.addEventListener('click', () => { view = { ...view, sort: b.dataset.sort }; render(); }));
+
+// the friend opens exactly the URL you pasted, nothing more
+$('send').addEventListener('click', () => {
+  const url = urlFor(view);
+  sent = { url, view: viewFrom(url), mine: { ...view }, mode };
+  render();
+});
+
+// refresh: memory is wiped, the page rebuilds itself from the URL
+let reloading = false;
+$('refresh').addEventListener('click', () => {
+  if (reloading) return;
+  reloading = true;
+  const btn = $('refresh');
+  btn.classList.remove('spin'); void btn.offsetWidth; btn.classList.add('spin');
+  $('page').classList.add('reloading');
+  setTimeout(() => {
+    view = viewFrom(urlFor(view));
+    render();
+    $('page').classList.remove('reloading');
+    setTimeout(() => { btn.classList.remove('spin'); reloading = false; }, 250);
+  }, 220);
+});
+
+// static hand-drawn frames: your browser, your friend's browser, the code strip
+const frame = makeSvg($('app'), 900, 600);
+const rc = rough.svg(frame, { options: { roughness: 1.2, strokeWidth: 2.4 } });
+frame.appendChild(rc.rectangle(16, 60, 574, 438, { stroke: '#1d4ed8', seed: 3 }));
+frame.appendChild(rc.line(16, 106, 590, 106, { stroke: '#1d4ed8', strokeWidth: 1.6, seed: 4 }));
+['#fca5a5', '#fcd34d', '#86efac'].forEach((c, i) => frame.appendChild(rc.circle(32 + i * 13, 84, 10, { stroke: c, fill: c, fillStyle: 'solid', strokeWidth: 1.2, seed: 5 + i })));
+frame.appendChild(rc.rectangle(160, 69, 420, 30, { stroke: '#9ca3af', strokeWidth: 1.6, seed: 9 }));
+frame.appendChild(rc.rectangle(610, 118, 276, 352, { stroke: '#4b5563', seed: 11 }));
+// the friend's address bar is part of what gets revealed, so it lives inside #fbody
+const fsvg = makeSvg($('fbody'), 276, 352);
+fsvg.appendChild(rc.rectangle(10, 30, 256, 42, { stroke: '#9ca3af', strokeWidth: 1.4, seed: 12 }));
+frame.appendChild(rc.rectangle(16, 512, 870, 76, { stroke: '#4b5563', strokeWidth: 1.8, seed: 13 }));
+
+render();
+</script>
+</body>
+</html>

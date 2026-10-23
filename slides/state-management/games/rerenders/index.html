@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>who re-renders?</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.js"></script>
+<style>
+  html, body { margin: 0; background: #fff; overflow: hidden; font-family: 'Comic Neue', cursive; color: #2b2f36; }
+  #app { width: 900px; height: 600px; position: relative; margin: 0 auto; }
+  .bar { display: flex; gap: 7px; justify-content: center; align-items: center; padding-top: 8px; height: 52px; box-sizing: border-box; }
+  .bar .lbl { font-size: 16px; color: #6b7280; margin-right: 4px; }
+  .sep { width: 18px; }
+  button.ui { font: 700 17px 'Comic Neue', cursive; border-radius: 12px; padding: 5px 12px; cursor: pointer; border: 2.5px solid #d1d5db; background: #fff; color: #4b5563; white-space: nowrap; }
+  button.ui.on { border-color: #15803d; background: #e7f6ec; color: #15803d; }
+  button.act { color: #1d4ed8; border-color: #1d4ed8; background: #eef2ff; width: 150px; }
+  button.act:active { background: #1d4ed8; color: #fff; }
+
+  /* one component box: rough frame + glow drawn in its own svg, text on top */
+  .node { position: absolute; box-sizing: border-box; text-align: center; padding-top: 6px; line-height: 1.2; }
+  .node svg { overflow: visible; }
+  .node .nm { position: relative; font: 700 13px ui-monospace, Menlo, monospace; color: #1f2937; }
+  .node .uses { position: relative; font-size: 12.5px; color: #9ca3af; margin-top: 1px; padding: 0 6px; }
+  .node .body { position: relative; font-size: 15px; font-weight: 700; color: #4b5563; margin-top: 4px; }
+  .node .glow { opacity: 0; transition: opacity .45s; }
+  .node.flash .glow { opacity: 1; transition: none; }
+  .node.flash > svg { filter: drop-shadow(0 0 6px rgba(234, 88, 12, .75)); }
+  .node.dark .nm, .node.dark .body { color: #f8fafc; }
+  .node.dark .uses { color: #cbd5e1; }
+  .node.dark .items, .node.dark .items .more { color: #e2e8f0; }
+  .node.dark button.mini { color: #f1f5f9; border-color: #64748b; background: transparent; }
+  button.mini { position: relative; font: 700 13px 'Comic Neue', cursive; border-radius: 9px; padding: 1px 8px; margin-top: 5px; cursor: pointer; border: 2px solid #d1d5db; background: #fff; color: #4b5563; }
+  .node .items { position: relative; font: 13px/1.45 ui-monospace, Menlo, monospace; color: #4b5563; margin-top: 6px; }
+  .node .items .more { font-family: 'Comic Neue', cursive; color: #9ca3af; }
+
+  /* the render counter in each box's top-right corner */
+  .cnt { position: absolute; width: 24px; height: 24px; border-radius: 50%; border: 2px solid #d1d5db; background: #fff; box-sizing: border-box; font: 700 13px/20px 'Comic Neue', cursive; color: #9ca3af; text-align: center; transition: transform .2s, color .3s, border-color .3s; }
+  .cnt.hot { color: #ea580c; border-color: #ea580c; }
+  .cnt.bump { transform: scale(1.3); }
+
+  #foot { position: absolute; left: 0; top: 337px; width: 900px; text-align: center; font-size: 13px; color: #9ca3af; }
+
+  #acts { position: absolute; left: 24px; top: 366px; display: flex; flex-direction: column; gap: 8px; }
+  #result { position: absolute; left: 196px; top: 364px; width: 400px; height: 94px; font-size: 15px; line-height: 1.3; }
+  #result .head { font-size: 19px; font-weight: 700; margin-bottom: 3px; }
+  #result .head b { color: #ea580c; }
+  #result .why { color: #4b5563; }
+  #prompt { font-size: 17px; }
+
+  /* scoreboard: each cell stays "?" until you click that action in that mode */
+  #score { position: absolute; left: 614px; top: 362px; width: 270px; font-size: 15px; }
+  #score .t { font-size: 14px; color: #6b7280; margin-bottom: 2px; }
+  #score table { border-collapse: collapse; width: 100%; }
+  #score td, #score th { padding: 1px 4px; text-align: center; }
+  #score th { font-weight: 400; color: #6b7280; font-size: 14px; }
+  #score td.row { text-align: left; color: #4b5563; }
+  #score td.v { font-weight: 700; font-size: 18px; }
+  #score td.v.q { color: #9ca3af; }
+  #score td.v.big { color: #be123c; }
+  #score td.v.small { color: #15803d; }
+
+  /* code strip */
+  #code { position: absolute; left: 16px; top: 466px; width: 870px; height: 122px; padding: 8px 18px 0; box-sizing: border-box; }
+  #code .lbl { font-size: 14px; color: #6b7280; }
+  #code pre { margin: 2px 0 0; font: 15px/1.5 ui-monospace, Menlo, monospace; color: #1f2937; }
+  #code pre .ln { border-radius: 4px; transition: background .5s; }
+  #code pre .ln.flash { background: #ffedd5; transition: none; }
+  #code .k { color: #6d28d9; }
+  #code .f { color: #1d4ed8; }
+  #code .c { color: #9ca3af; }
+  svg { position: absolute; left: 0; top: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <span class="lbl">shared state lives in:</span>
+    <button class="ui mode" data-mode="context" type="button">one context</button>
+    <button class="ui mode" data-mode="zustand" type="button">zustand + selectors</button>
+    <span class="sep"></span>
+    <button class="ui" id="reset" type="button">reset counts</button>
+  </div>
+
+  <div id="tree"></div>
+  <div id="foot">App doesn't re-render: the state lives in a provider or store above it, not in App.</div>
+
+  <div id="acts">
+    <button class="ui act" id="add" type="button">add to cart</button>
+    <button class="ui act" id="theme" type="button">toggle theme</button>
+  </div>
+  <div id="result"></div>
+  <div id="score"></div>
+
+  <div id="code"><div class="lbl">how the components read the state:</div><pre id="src"></pre></div>
+</div>
+<script>
+// A little shop app drawn as a component tree. Shared state = theme + cart. In "one context" mode every
+// useContext reader gets the whole value object; in "zustand" mode each component runs a selector and
+// only re-renders when what it selected changes (Object.is). Re-renders are computed from that rule,
+// not hard-coded, then flashed on the boxes.
+const PRODUCTS = ['hoodie', 'mug', 'sticker'];
+
+// the tree. uses = the selectors a component runs in zustand mode; ctx = it calls useContext(AppContext)
+const NODES = [
+  { id: 'App', name: 'App', x: 370, y: 57, w: 160, h: 47, uses: [] },
+  // like a real app, everything you can see is themed: only App (which just lays out the page) skips it
+  { id: 'Header', name: 'Header', x: 84, y: 130, w: 108, h: 50, uses: ['theme'], ctx: true, themed: true },
+  { id: 'ProductList', name: 'ProductList', x: 396, y: 130, w: 108, h: 50, uses: ['theme'], ctx: true, themed: true },
+  { id: 'CartPage', name: 'CartPage', x: 648, y: 130, w: 118, h: 200, uses: ['theme', 'items'], ctx: true, themed: true },
+  { id: 'Footer', name: 'Footer', x: 782, y: 130, w: 100, h: 50, uses: ['theme'], ctx: true, themed: true },
+  { id: 'ThemeToggle', name: 'ThemeToggle', x: 24, y: 222, w: 108, h: 108, uses: ['theme'], ctx: true, themed: true },
+  { id: 'CartBadge', name: 'CartBadge', x: 144, y: 222, w: 108, h: 108, uses: ['theme', 'count'], ctx: true, themed: true },
+  { id: 'card1', name: 'ProductCard', x: 276, y: 222, w: 108, h: 108, uses: ['theme', 'addToCart'], ctx: true, themed: true, product: 0 },
+  { id: 'card2', name: 'ProductCard', x: 396, y: 222, w: 108, h: 108, uses: ['theme', 'addToCart'], ctx: true, themed: true, product: 1 },
+  { id: 'card3', name: 'ProductCard', x: 516, y: 222, w: 108, h: 108, uses: ['theme', 'addToCart'], ctx: true, themed: true, product: 2 },
+];
+const USES_LABEL = { theme: 'theme', count: 'cart count', items: 'cart items', addToCart: 'addToCart' };
+
+// zustand selectors, exactly what the code strip shows
+const SELECT = {
+  theme: (s) => s.theme,
+  count: (s) => s.items.length,
+  items: (s) => s.items,
+  addToCart: (s) => s.addToCart,
+};
+
+const CODE = {
+  context: [
+    { html: `<span class="c">// every component except App does:</span>` },
+    { key: 'ctx', html: `<span class="k">const</span> { theme, cart, addToCart } = <span class="f">useContext</span>(AppContext);` },
+    { html: `<span class="c">// the provider passes value={{ theme, cart, addToCart }}: a new object on every change</span>` },
+  ],
+  zustand: [
+    { key: 'theme', html: `<span class="k">const</span> theme = <span class="f">useStore</span>((s) => s.theme);          <span class="c">// every component except App</span>` },
+    { key: 'count', html: `<span class="k">const</span> count = <span class="f">useStore</span>((s) => s.items.length);   <span class="c">// CartBadge</span>` },
+    { key: 'items', html: `<span class="k">const</span> items = <span class="f">useStore</span>((s) => s.items);          <span class="c">// CartPage</span>` },
+    { key: 'addToCart', html: `<span class="k">const</span> addToCart = <span class="f">useStore</span>((s) => s.addToCart);      <span class="c">// ProductCard (never changes)</span>` },
+  ],
+};
+
+const WHY = {
+  'context-add': 'the cart changed, so the provider\'s value is a new object. every useContext reader re-renders, even the ones that only use theme.',
+  'context-theme': 'everything on screen is themed, so everything re-renders. that\'s expected: it all changes color.',
+  'zustand-add': 'only selectors whose result changed: s.items.length and s.items. theme and addToCart didn\'t change, so everyone else skips it.',
+  'zustand-theme': 'everyone selects s.theme, so all 9 re-render, same as context. fine: themes flip rarely. (or use a CSS class on &lt;html&gt; and nothing re-renders.)',
+};
+const MODE_LABEL = { context: 'one context', zustand: 'zustand + selectors' };
+
+// --- the app's state (a tiny fake store) -------------------------------------------------------
+function addToCart(product) { setState({ items: [...state.items, product] }); }
+let state = { theme: 'light', items: [], addToCart };
+let ctxValue = { theme: state.theme, cart: state.items, addToCart }; // what <AppContext.Provider> passes down
+let nextProduct = 0;
+function setState(patch) {
+  const before = state;
+  state = { ...state, ...patch };
+  ctxValue = { theme: state.theme, cart: state.items, addToCart }; // new object whenever theme or cart change
+  return before;
+}
+
+let mode = 'context';
+let counts = {};
+let last = null;      // { mode, action, ids } for the most recent click
+let tried = {};       // 'context-add' etc. -> number re-rendered, for the scoreboard
+const timers = {};
+
+const $ = (id) => document.getElementById(id);
+const NS = 'http://www.w3.org/2000/svg';
+function makeSvg(parent, w, h) {
+  const s = document.createElementNS(NS, 'svg');
+  s.setAttribute('width', w); s.setAttribute('height', h);
+  parent.appendChild(s);
+  return s;
+}
+
+// which components re-render when state goes from `before` to `after`?
+function whoRerenders(before, beforeCtx) {
+  if (mode === 'context') {
+    // context: if the value object is new, every consumer re-renders, whatever part it uses
+    const changed = !Object.is(beforeCtx, ctxValue);
+    return { ids: NODES.filter((n) => n.ctx && changed).map((n) => n.id), keys: changed ? ['ctx'] : [] };
+  }
+  // zustand: each selector is re-run and compared with Object.is
+  const keys = Object.keys(SELECT).filter((k) => !Object.is(SELECT[k](before), SELECT[k](state)));
+  return { ids: NODES.filter((n) => n.uses.some((k) => keys.includes(k))).map((n) => n.id), keys };
+}
+
+function act(action, fn) {
+  const before = state, beforeCtx = ctxValue;
+  fn();
+  const { ids, keys } = whoRerenders(before, beforeCtx);
+  ids.forEach((id) => { counts[id] = (counts[id] || 0) + 1; });
+  last = { mode, action, ids };
+  tried[mode + '-' + action] = ids.length;
+  render();
+  ids.forEach((id) => flash(`.node[data-id="${id}"]`));
+  keys.forEach((k) => flash(`#src .ln[data-key="${k}"]`));
+}
+// orange glow for ~600ms; a second click restarts it. looked up by selector because render() rebuilds the boxes
+function flash(sel) {
+  const el = document.querySelector(sel);
+  if (!el) return;
+  clearTimeout(timers[sel]);
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+  el.querySelector('.cnt')?.classList.add('bump');
+  timers[sel] = setTimeout(() => {
+    const now = document.querySelector(sel);
+    if (!now) return;
+    now.classList.remove('flash');
+    now.querySelector('.cnt')?.classList.remove('bump');
+  }, 600);
+}
+
+// --- drawing ---------------------------------------------------------------------------------
+// static: the lines between boxes
+const lines = makeSvg($('tree'), 900, 600);
+const rcl = rough.svg(lines, { options: { roughness: 1, strokeWidth: 1.8, stroke: '#9ca3af' } });
+function elbow(px, py, kids, midY, seed) {
+  lines.appendChild(rcl.line(px, py, px, midY, { seed }));
+  lines.appendChild(rcl.line(Math.min(...kids.map((k) => k[0])), midY, Math.max(...kids.map((k) => k[0])), midY, { seed: seed + 1 }));
+  kids.forEach(([x, y], i) => lines.appendChild(rcl.line(x, midY, x, y, { seed: seed + 2 + i })));
+}
+const mid = (n) => n.x + n.w / 2;
+const byId = (id) => NODES.find((n) => n.id === id);
+elbow(450, 104, ['Header', 'ProductList', 'CartPage', 'Footer'].map((id) => [mid(byId(id)), 130]), 116, 40);
+elbow(138, 180, ['ThemeToggle', 'CartBadge'].map((id) => [mid(byId(id)), 222]), 201, 50);
+elbow(450, 180, ['card1', 'card2', 'card3'].map((id) => [mid(byId(id)), 222]), 201, 60);
+
+// one box per component, redrawn on every render (seeded, so the wobble stays put)
+function bodyHtml(n) {
+  const dark = state.theme === 'dark';
+  if (n.id === 'ThemeToggle') return `<div class="body">${state.theme}</div><button class="mini" data-do="theme" type="button">${dark ? 'go light' : 'go dark'}</button>`;
+  if (n.id === 'CartBadge') return `<div class="body" style="font-size:20px">cart: ${state.items.length}</div>`;
+  if (n.product !== undefined) return `<div class="body">${PRODUCTS[n.product]}</div><button class="mini" data-do="add" data-p="${n.product}" type="button">+ add</button>`;
+  if (n.id === 'CartPage') {
+    if (!state.items.length) return `<div class="items"><span class="more">empty</span></div>`;
+    const shown = state.items.slice(-6);
+    const more = state.items.length - shown.length;
+    return `<div class="items">${more ? `<span class="more">+${more} more</span><br>` : ''}${shown.join('<br>')}</div>`;
+  }
+  return '';
+}
+function drawNode(n, i) {
+  const dark = n.themed && state.theme === 'dark';
+  const d = document.createElement('div');
+  d.className = 'node' + (dark ? ' dark' : '');
+  d.dataset.id = n.id;
+  d.style.cssText = `left:${n.x}px; top:${n.y}px; width:${n.w}px; height:${n.h}px;`;
+  const svg = makeSvg(d, n.w, n.h);
+  const rc = rough.svg(svg, { options: { roughness: 1.1, strokeWidth: 2.2 } });
+  const reads = n.ctx ? '#4b5563' : '#9ca3af';
+  svg.appendChild(rc.rectangle(2, 2, n.w - 4, n.h - 4, dark
+    ? { stroke: '#1f2937', fill: '#334155', fillStyle: 'solid', seed: i + 1 }
+    : { stroke: reads, seed: i + 1 }));
+  const glow = document.createElementNS(NS, 'g');
+  glow.setAttribute('class', 'glow');
+  glow.appendChild(rc.rectangle(-4, -4, n.w + 8, n.h + 8, { stroke: '#ea580c', strokeWidth: 3, seed: i + 30 }));
+  svg.appendChild(glow);
+  // in context mode the state lives in an <AppProvider> wrapped around App, so App itself still reads nothing
+  const uses = n.uses.length ? 'uses ' + n.uses.map((k) => USES_LABEL[k]).join(', ')
+    : n.id === 'App' && mode === 'context' ? 'wrapped in &lt;AppProvider&gt;' : 'reads no state';
+  d.insertAdjacentHTML('beforeend', `<div class="nm">${n.name}</div>` + `<div class="uses">${uses}</div>` + bodyHtml(n));
+  const c = counts[n.id] || 0;
+  d.insertAdjacentHTML('beforeend', `<div class="cnt${c ? ' hot' : ''}" style="left:${n.w - 14}px; top:-11px" title="re-renders">${c}</div>`);
+  return d;
+}
+
+function render() {
+  document.querySelectorAll('.mode').forEach((b) => b.classList.toggle('on', b.dataset.mode === mode));
+
+  // keep any running glow when we redraw the boxes
+  const flashing = new Set([...document.querySelectorAll('.node.flash')].map((e) => e.dataset.id));
+  document.querySelectorAll('#tree .node').forEach((e) => e.remove());
+  NODES.forEach((n, i) => {
+    const d = drawNode(n, i);
+    if (flashing.has(n.id)) d.classList.add('flash');
+    $('tree').appendChild(d);
+  });
+
+  const hotLines = new Set([...document.querySelectorAll('#src .ln.flash')].map((e) => e.dataset.key));
+  $('src').innerHTML = CODE[mode].map((l) => `<span class="ln${hotLines.has(l.key) ? ' flash' : ''}"${l.key ? ` data-key="${l.key}"` : ''}>${l.html}</span>`).join('\n');
+
+  // result: a guessing prompt until you click something in this mode
+  if (last && last.mode === mode) {
+    const n = last.ids.length;
+    $('result').innerHTML = `<div class="head">this click: <b>${n}</b> component${n === 1 ? '' : 's'} re-rendered</div><div class="why">${WHY[mode + '-' + last.action]}</div>`;
+  } else {
+    const other = mode === 'context' ? 'zustand' : 'context';
+    const again = Object.keys(tried).some((k) => k.startsWith(other));
+    $('result').innerHTML = `<div id="prompt">${again ? `now with <b>${MODE_LABEL[mode]}</b>: same clicks.` : ''} <b>add to cart</b> or <b>toggle theme</b>: which boxes will re-render? guess, then click.</div>`;
+  }
+
+  const cell = (k) => {
+    if (!(k in tried)) return '<td class="v q">?</td>';
+    return `<td class="v ${tried[k] > 2 ? 'big' : 'small'}">${tried[k]}</td>`;
+  };
+  $('score').innerHTML = `<div class="t">components re-rendered per click</div><table>
+    <tr><th></th><th>add to cart</th><th>toggle theme</th></tr>
+    <tr><td class="row">one context</td>${cell('context-add')}${cell('context-theme')}</tr>
+    <tr><td class="row">zustand</td>${cell('zustand-add')}${cell('zustand-theme')}</tr></table>`;
+}
+
+// --- wiring ----------------------------------------------------------------------------------
+function doAdd(p) {
+  const product = PRODUCTS[p ?? nextProduct];
+  if (p === undefined) nextProduct = (nextProduct + 1) % PRODUCTS.length;
+  act('add', () => state.addToCart(product));
+}
+function doTheme() { act('theme', () => setState({ theme: state.theme === 'light' ? 'dark' : 'light' })); }
+
+$('add').addEventListener('click', () => doAdd());
+$('theme').addEventListener('click', doTheme);
+// the + add / toggle buttons inside the boxes do the same thing
+$('tree').addEventListener('click', (e) => {
+  const b = e.target.closest('button.mini');
+  if (!b) return;
+  if (b.dataset.do === 'add') doAdd(Number(b.dataset.p));
+  else doTheme();
+});
+document.querySelectorAll('.mode').forEach((b) => b.addEventListener('click', () => {
+  if (mode === b.dataset.mode) return;
+  mode = b.dataset.mode;
+  counts = {}; last = null; // fresh counters for a fair comparison
+  render();
+}));
+$('reset').addEventListener('click', () => { counts = {}; last = null; render(); });
+
+// static frame around the code strip
+const frame = makeSvg($('app'), 900, 600);
+const rcf = rough.svg(frame, { options: { roughness: 1.2, strokeWidth: 1.8 } });
+frame.appendChild(rcf.rectangle(16, 466, 870, 122, { stroke: '#4b5563', seed: 13 }));
+
+render();
+</script>
+</body>
+</html>

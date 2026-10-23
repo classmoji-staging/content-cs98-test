@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>optimistic likes</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.js"></script>
+<style>
+  html, body { margin: 0; background: #fff; overflow: hidden; font-family: 'Comic Neue', cursive; color: #2b2f36; }
+  #app { width: 900px; height: 600px; position: relative; margin: 0 auto; overflow: hidden; }
+  .bar { display: flex; gap: 7px; justify-content: center; align-items: center; padding-top: 8px; height: 52px; box-sizing: border-box; }
+  .bar .lbl { font-size: 16px; color: #6b7280; margin-right: 2px; }
+  button.ui { font: 700 17px 'Comic Neue', cursive; border-radius: 12px; padding: 5px 12px; cursor: pointer; border: 2.5px solid #d1d5db; background: #fff; color: #4b5563; white-space: nowrap; }
+  button.ui.on { border-color: #15803d; background: #e7f6ec; color: #15803d; }
+  button.ui.on.bad { border-color: #be123c; background: #fdecef; color: #be123c; }
+  .sep { width: 10px; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: .88em; }
+
+  /* the post card, inside the browser box */
+  .tag { position: absolute; font-size: 14px; }
+  #name { position: absolute; left: 98px; top: 104px; font-size: 18px; font-weight: 700; color: #1f2937; }
+  #name span { font-weight: 400; color: #9ca3af; font-size: 15px; }
+  #post { position: absolute; left: 42px; top: 160px; width: 296px; font-size: 19px; line-height: 1.3; color: #1f2937; }
+  #heart { position: absolute; left: 40px; top: 232px; font: 700 22px 'Comic Neue', cursive; border-radius: 12px; padding: 2px 14px; border: 2.5px solid #d1d5db; background: #fff; color: #1f2937; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  #heart .hg { color: #9ca3af; font-size: 22px; display: inline-block; }
+  #heart.liked .hg { color: #be123c; }
+  #heart:disabled { opacity: .5; cursor: wait; }
+  #count { display: inline-block; min-width: 26px; text-align: left; transition: color .3s; }
+  #heart.pop .hg, #heart.pop #count { animation: pop .3s ease-out; }
+  @keyframes pop { 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
+  #heart.undo { animation: shake .45s ease-in-out; border-color: #be123c; }
+  #heart.undo #count { color: #be123c; }
+  @keyframes shake { 15%, 55% { transform: translateX(-7px); } 35%, 75% { transform: translateX(7px); } 100% { transform: translateX(0); } }
+  #saving { position: absolute; left: 160px; top: 242px; font-size: 16px; color: #6b7280; display: none; align-items: center; gap: 6px; }
+  #saving.show { display: flex; }
+  .spin { width: 13px; height: 13px; border: 2.5px solid #c7d2fe; border-top-color: #1d4ed8; border-radius: 50%; animation: turn .8s linear infinite; }
+  @keyframes turn { to { transform: rotate(360deg); } }
+  #err { position: absolute; left: 42px; top: 276px; width: 300px; font-size: 15px; font-weight: 700; color: #be123c; }
+  #err span { font-weight: 400; color: #6b7280; }
+  /* a "−1" that floats off the count when React undoes the like */
+  #minus { position: absolute; left: 136px; top: 236px; font: 700 20px 'Comic Neue', cursive; color: #be123c; opacity: 0; pointer-events: none; }
+  #minus.go { animation: floatup .9s ease-out; }
+  @keyframes floatup { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-26px); } }
+
+  /* the wire between browser and server */
+  .wire { position: absolute; font-size: 14px; color: #9ca3af; }
+  /* a travelling dot; its label rides along just inside the gap between the two wires */
+  .dot { position: absolute; display: none; width: 14px; height: 14px; font: 700 13px ui-monospace, Menlo, monospace; white-space: nowrap; transition-property: left; transition-timing-function: linear; }
+  .dot i { width: 14px; height: 14px; border-radius: 50%; display: block; }
+  .dot span { position: absolute; left: 50%; transform: translateX(-50%); }
+  #req { top: 133px; color: #1d4ed8; }
+  #req span { top: 16px; }
+  #res span { top: -19px; }
+  #req i { background: #1d4ed8; }
+  #res { top: 205px; }
+  #res.ok { color: #15803d; } #res.ok i { background: #15803d; }
+  #res.bad { color: #be123c; } #res.bad i { background: #be123c; }
+
+  /* the server */
+  #sname { position: absolute; left: 616px; top: 74px; font-size: 19px; font-weight: 700; color: #9a6a12; }
+  #sdelay { position: absolute; left: 760px; top: 78px; width: 104px; text-align: right; font-size: 14px; color: #9ca3af; }
+  #slbl { position: absolute; left: 726px; top: 118px; font-size: 15px; color: #6b7280; }
+  #slikes { position: absolute; left: 726px; top: 138px; font: 700 34px 'Comic Neue', cursive; color: #9a6a12; transition: color .3s; }
+  #sstat { position: absolute; left: 616px; top: 250px; width: 250px; font-size: 16px; color: #9ca3af; }
+  #sstat.work { color: #9a6a12; } #sstat.ok { color: #15803d; font-weight: 700; } #sstat.bad { color: #be123c; font-weight: 700; }
+
+  #log { position: absolute; left: 36px; top: 318px; width: 390px; }
+  #log .lbl { font: 14px 'Comic Neue', cursive; color: #9ca3af; margin-bottom: 2px; }
+  #log .line { font: 13px/21px ui-monospace, Menlo, monospace; color: #4b5563; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #log .old { opacity: .45; }
+  .opt { color: #6d28d9; font-weight: 700; }
+  .okc { color: #15803d; font-weight: 700; }
+  .badc { color: #be123c; font-weight: 700; }
+  .gray { color: #9ca3af; }
+
+  #explain { position: absolute; left: 456px; top: 316px; width: 424px; font: 15px/1.3 'Comic Neue', cursive; }
+  #prompt { font-size: 17px; margin-bottom: 8px; }
+  .ans { margin-bottom: 3px; white-space: nowrap; }
+  .ans .q { font-size: 20px; font-weight: 700; color: #9ca3af; line-height: 1; }
+  .red { color: #be123c; font-weight: 700; }
+  .green { color: #15803d; font-weight: 700; }
+
+  #code { position: absolute; left: 16px; top: 430px; width: 870px; height: 134px; display: flex; align-items: center; gap: 14px; padding: 0 18px; box-sizing: border-box; }
+  #code .lbl { font-size: 15px; color: #6b7280; white-space: nowrap; }
+  #code pre { margin: 0; font: 14px/1.3 ui-monospace, Menlo, monospace; color: #1f2937; }
+  #code .k { color: #6d28d9; }
+  #code .f { color: #1d4ed8; }
+  #code .c { color: #9ca3af; }
+  #takeaway { position: absolute; left: 0; width: 900px; top: 570px; text-align: center; font: 16px 'Comic Neue', cursive; color: #4b5563; }
+  svg { position: absolute; left: 0; top: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <button class="ui mode" data-mode="wait" type="button">wait for the server</button>
+    <button class="ui mode" data-mode="opt" type="button"><code>useOptimistic</code></button>
+    <span class="sep"></span>
+    <span class="lbl">server:</span>
+    <button class="ui speed" data-ms="300" type="button">fast 0.3s</button>
+    <button class="ui speed" data-ms="2000" type="button">slow 2s</button>
+    <span class="sep"></span>
+    <button class="ui" id="fails" type="button">server fails</button>
+    <span class="sep"></span>
+    <button class="ui" id="reset" type="button">reset</button>
+  </div>
+
+  <div class="tag" style="left:292px; top:74px; color:#1d4ed8">browser</div>
+  <div id="name">@sourdough_sam <span>· 2m</span></div>
+  <div id="post">my sourdough starter has more followers than me. it doesn't even have hands.</div>
+  <button id="heart" type="button" aria-label="like"><span class="hg">♡</span><span id="count">41</span></button>
+  <div id="minus">−1</div>
+  <div id="saving"><span class="spin"></span>saving…</div>
+  <div id="err"></div>
+
+  <div class="wire" style="left:438px; top:110px">request</div>
+  <div class="wire" style="left:434px; top:226px">response</div>
+  <div class="dot" id="req"><i></i><span>POST /like</span></div>
+  <div class="dot" id="res"><i></i><span></span></div>
+
+  <div id="sname">server</div>
+  <div id="sdelay"></div>
+  <div id="slbl">likes saved:</div>
+  <div id="slikes">41</div>
+  <div id="sstat"></div>
+
+  <div id="log"></div>
+  <div id="explain">
+    <div id="prompt"></div>
+    <div class="ans" id="ans-wait"></div>
+    <div class="ans" id="ans-opt"></div>
+  </div>
+
+  <div id="code"><span class="lbl">in the component:</span><pre id="src"></pre></div>
+  <div id="takeaway"></div>
+</div>
+<script>
+// A post with a like button and a pretend server. In "wait" mode the UI only changes when the server
+// answers; in "opt" mode the count jumps right away (like useOptimistic) and gets undone if the server
+// says no. The server is just setTimeout: nothing is ever fetched.
+const START = 41;
+const CODE = {
+  wait: `<span class="k">async function</span> <span class="f">like</span>() {
+  <span class="f">setSaving</span>(<span class="k">true</span>);
+  <span class="k">try</span> { <span class="f">setLikes</span>(<span class="k">await</span> <span class="f">saveLike</span>()); }
+  <span class="k">catch</span> { <span class="f">setError</span>("couldn't save"); }
+  <span class="k">finally</span> { <span class="f">setSaving</span>(<span class="k">false</span>); }
+}`,
+  opt: `<span class="k">const</span> [shown, setShown] = <span class="f">useOptimistic</span>(likes);
+<span class="k">async function</span> <span class="f">likeAction</span>() {
+  <span class="f">setShown</span>(likes + 1);  <span class="c">// React undoes this when the Action ends</span>
+  <span class="k">try</span> { <span class="k">const</span> n = <span class="k">await</span> <span class="f">saveLike</span>(); <span class="f">startTransition</span>(() => <span class="f">setLikes</span>(n)); }
+  <span class="k">catch</span> { <span class="f">setError</span>("couldn't save"); }
+}
+&lt;<span class="k">form</span> action={likeAction}&gt;&lt;<span class="k">button</span>&gt;♥ {shown}&lt;/<span class="k">button</span>&gt;&lt;/<span class="k">form</span>&gt;`,
+};
+// x positions of the wire (left edge of the dot)
+const WIRE_L = 372, WIRE_R = 572;
+
+let mode, speed, fails, likes, liked, serverLikes, pending, timers, lines, tried, failed, err;
+const $ = (id) => document.getElementById(id);
+
+// what the button shows: the confirmed value, or the optimistic one while a request is out
+function shown() {
+  if (pending && pending.mode === 'opt') return { n: pending.target, liked: true };
+  return { n: likes, liked };
+}
+
+function render() {
+  document.querySelectorAll('.mode').forEach((b) => b.classList.toggle('on', b.dataset.mode === mode));
+  document.querySelectorAll('.speed').forEach((b) => b.classList.toggle('on', +b.dataset.ms === speed));
+  $('fails').classList.toggle('on', fails);
+  $('fails').classList.toggle('bad', fails);
+
+  const s = shown();
+  $('count').textContent = s.n;
+  $('heart').classList.toggle('liked', s.liked);
+  $('heart').querySelector('.hg').textContent = s.liked ? '♥' : '♡';
+  $('heart').disabled = !!(pending && pending.mode === 'wait');
+  $('saving').classList.toggle('show', !!(pending && pending.mode === 'wait'));
+  $('err').innerHTML = err;
+
+  $('slikes').textContent = serverLikes;
+  $('sdelay').textContent = 'answers in ' + (speed / 1000) + 's';
+  $('src').innerHTML = CODE[mode];
+
+  // prompt walks the student through: both modes, then a failure in useOptimistic
+  const both = tried.wait && tried.opt;
+  if (both && failed.opt) $('prompt').innerHTML = 'flip "server fails" off and on, try fast vs slow. which would you ship?';
+  else if (both) $('prompt').innerHTML = 'now flip <b>"server fails"</b> and click ♥ in <code>useOptimistic</code> mode. <b>what happens to the count?</b>';
+  else if (tried.wait || tried.opt) $('prompt').innerHTML = 'now switch modes and click ♥ again. <b>which feels better?</b>';
+  else $('prompt').innerHTML = 'the server is slow. click ♥ in each mode. <b>which feels better?</b> then flip "server fails".';
+
+  const q = '<span class="q">?</span>';
+  $('ans-wait').innerHTML = '<b>wait:</b> ' + (failed.wait
+    ? 'spinner, then an error. the count <span class="green">never moved</span>.'
+    : tried.wait ? 'a spinner, then the number. <span class="red">feels slow</span>.' : q);
+  $('ans-opt').innerHTML = '<b><code>useOptimistic</code>:</b> ' + (failed.opt
+    ? 'instant +1, then React <span class="red">snapped it back</span>.'
+    : tried.opt ? 'the number changed <span class="green">instantly</span>.' : q);
+  $('takeaway').innerHTML = both && failed.opt
+    ? '<b>optimistic:</b> feels instant, and React rolls it back if the server says no.'
+    : '';
+}
+
+function log(html) {
+  lines.push(html);
+  lines = lines.slice(-4);
+  $('log').innerHTML = '<div class="lbl">what happened</div>' +
+    lines.map((l, i) => `<div class="line${i < lines.length - 1 ? ' old' : ''}">${l}</div>`).join('');
+}
+
+// restart a css animation class on an element
+function replay(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+
+// slide a dot along the wire; it hides itself when it lands
+function fly(el, from, to, ms) {
+  el.style.transitionDuration = '0ms';
+  el.style.left = from + 'px';
+  el.style.display = 'flex';
+  void el.offsetWidth;
+  el.style.transitionDuration = ms + 'ms';
+  el.style.left = to + 'px';
+  timers.push(setTimeout(() => { el.style.display = 'none'; }, ms));
+}
+function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+
+function setStat(cls, text) { $('sstat').className = cls; $('sstat').textContent = text; }
+
+// one click on ♥: send the request; in opt mode, show the new number right away
+function like() {
+  if (pending) return; // one request at a time keeps the picture readable
+  const target = likes + 1;
+  pending = { mode, target, fail: fails, ms: speed };
+  err = '';
+  $('heart').classList.remove('undo'); // last failure's red shake is over
+  if (mode === 'opt') {
+    replay($('heart'), 'pop');
+    log(`click → UI shows ${target} <span class="opt">(optimistic)</span>`);
+  } else {
+    log(`click → saving… UI still shows ${likes}`);
+  }
+  render();
+
+  // request leg, a beat on the server, response leg: adds up to the server speed
+  const leg = Math.round(speed * 0.42), think = speed - 2 * leg;
+  setStat('', 'waiting for a request…');
+  fly($('req'), WIRE_L, WIRE_R, leg);
+  later(() => setStat('work', 'saving…'), leg);
+  later(() => {
+    const p = pending;
+    if (p.fail) setStat('bad', '✗ 500: database hiccup');
+    else { serverLikes = p.target; setStat('ok', '✓ saved ' + p.target); }
+    $('res').className = 'dot ' + (p.fail ? 'bad' : 'ok');
+    $('res').querySelector('span').textContent = p.fail ? '✗ 500' : '✓ ' + p.target;
+    fly($('res'), WIRE_R, WIRE_L, leg);
+    render();
+  }, leg + think);
+  later(() => respond(), speed);
+}
+
+// the response lands in the browser
+function respond() {
+  const p = pending;
+  pending = null;
+  tried[p.mode] = true; // answers reveal once the result is in
+  if (!p.fail) {
+    likes = p.target; liked = true;
+    if (p.mode === 'wait') { replay($('heart'), 'pop'); log(`<span class="okc">server ✓ ${likes}</span> → UI shows ${likes}`); }
+    else log(`<span class="okc">server ✓ ${likes}</span> → already showing it`);
+  } else {
+    failed[p.mode] = true;
+    if (p.mode === 'wait') {
+      err = "couldn't save, try again";
+      log(`<span class="badc">server ✗</span> → nothing to undo, still ${likes}`);
+    } else {
+      err = `couldn't save <span>· React put it back to ${likes}</span>`;
+      replay($('heart'), 'undo');
+      replay($('minus'), 'go');
+      log(`<span class="badc">server ✗</span> → React reverts to ${likes}`);
+    }
+  }
+  render();
+}
+
+function reset() {
+  (timers || []).forEach(clearTimeout);
+  timers = [];
+  mode = 'wait'; speed = 2000; fails = false;
+  likes = START; liked = false; serverLikes = START; pending = null; err = '';
+  tried = { wait: false, opt: false };
+  failed = { wait: false, opt: false };
+  lines = [];
+  $('req').style.display = 'none';
+  $('res').style.display = 'none';
+  ['heart', 'minus'].forEach((id) => $(id).classList.remove('pop', 'undo', 'go'));
+  setStat('', 'idle');
+  log('<span class="gray">// ready</span>');
+  render();
+}
+
+document.querySelectorAll('.mode').forEach((b) => b.addEventListener('click', () => {
+  if (pending || mode === b.dataset.mode) return;
+  mode = b.dataset.mode;
+  err = '';
+  $('heart').classList.remove('undo');
+  log(`<span class="gray">// mode: ${mode === 'wait' ? 'wait for the server' : 'useOptimistic'}</span>`);
+  render();
+}));
+document.querySelectorAll('.speed').forEach((b) => b.addEventListener('click', () => { speed = +b.dataset.ms; render(); }));
+$('fails').addEventListener('click', () => {
+  fails = !fails;
+  log(`<span class="gray">// the server will ${fails ? 'fail' : 'succeed'} from now on</span>`);
+  render();
+});
+$('heart').addEventListener('click', like);
+$('reset').addEventListener('click', reset);
+
+// static hand-drawn pieces: browser box + avatar, the two wires, the server + its rack, log, code strip
+const NS = 'http://www.w3.org/2000/svg';
+const svg = document.createElementNS(NS, 'svg');
+svg.setAttribute('width', 900); svg.setAttribute('height', 600);
+$('app').appendChild(svg);
+const rc = rough.svg(svg, { options: { roughness: 1.2, strokeWidth: 2.4 } });
+svg.appendChild(rc.rectangle(24, 68, 330, 234, { stroke: '#1d4ed8', seed: 3 }));
+svg.appendChild(rc.circle(66, 124, 44, { stroke: '#6d28d9', fill: '#c4b5fd', fillStyle: 'hachure', hachureGap: 5, fillWeight: 1.6, strokeWidth: 2, seed: 4 }));
+const w1 = { stroke: '#9ca3af', strokeWidth: 1.8, seed: 5 };
+svg.appendChild(rc.line(364, 140, 590, 140, w1));
+svg.appendChild(rc.line(580, 133, 590, 140, w1));
+svg.appendChild(rc.line(580, 147, 590, 140, w1));
+const w2 = { stroke: '#9ca3af', strokeWidth: 1.8, seed: 6 };
+svg.appendChild(rc.line(590, 212, 364, 212, w2));
+svg.appendChild(rc.line(374, 205, 364, 212, w2));
+svg.appendChild(rc.line(374, 219, 364, 212, w2));
+svg.appendChild(rc.rectangle(600, 68, 276, 234, { stroke: '#9a6a12', seed: 7 }));
+[112, 142, 172].forEach((y, i) => {
+  svg.appendChild(rc.rectangle(622, y, 80, 24, { stroke: '#9a6a12', strokeWidth: 1.6, roughness: 0.9, seed: 8 + i }));
+  svg.appendChild(rc.circle(636, y + 12, 7, { stroke: '#86efac', fill: '#86efac', fillStyle: 'solid', strokeWidth: 1, seed: 12 + i }));
+  svg.appendChild(rc.line(650, y + 12, 692, y + 12, { stroke: '#d6c08a', strokeWidth: 1.4, seed: 15 + i }));
+});
+svg.appendChild(rc.rectangle(24, 312, 410, 112, { stroke: '#d1d5db', strokeWidth: 1.8, seed: 18 }));
+svg.appendChild(rc.rectangle(16, 430, 870, 134, { stroke: '#4b5563', strokeWidth: 1.8, seed: 19 }));
+
+reset();
+</script>
+</body>
+</html>

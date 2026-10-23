@@ -1,0 +1,421 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>stale while revalidate</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.js"></script>
+<style>
+  html, body { margin: 0; background: #fff; overflow: hidden; font-family: 'Comic Neue', cursive; color: #2b2f36; }
+  #app { width: 900px; height: 600px; position: relative; margin: 0 auto; overflow: hidden; }
+  .bar { display: flex; gap: 7px; justify-content: center; align-items: center; padding-top: 8px; height: 52px; box-sizing: border-box; }
+  .bar .lbl { font-size: 16px; color: #6b7280; margin-right: 2px; }
+  button.ui { font: 700 17px 'Comic Neue', cursive; border-radius: 12px; padding: 5px 12px; cursor: pointer; border: 2.5px solid #d1d5db; background: #fff; color: #4b5563; white-space: nowrap; }
+  button.ui.on { border-color: #15803d; background: #e7f6ec; color: #15803d; }
+  button.ui:disabled { opacity: .45; cursor: default; }
+  .sep { width: 10px; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: .88em; }
+
+  /* the page, inside the browser box */
+  .tag { position: absolute; font-size: 14px; }
+  #nav { position: absolute; left: 38px; top: 78px; display: flex; gap: 6px; }
+  #nav button { font: 700 16px 'Comic Neue', cursive; border: none; background: none; padding: 2px 6px; color: #6b7280; cursor: pointer; border-bottom: 3px solid transparent; }
+  #nav button.on { color: #1d4ed8; border-bottom-color: #1d4ed8; }
+  #nav button:disabled { cursor: wait; }
+  #badge { position: absolute; left: 44px; top: 106px; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+  #badge.stale { color: #b45309; } #badge.fresh { color: #15803d; } #badge.loading { color: #1d4ed8; }
+  /* pull to refresh: the list slides down inside a clipped window, uncovering the arrow behind it */
+  #pagewrap { position: absolute; left: 40px; top: 128px; width: 300px; height: 128px; overflow: hidden; touch-action: none; }
+  #page { position: relative; width: 300px; height: 128px; background: #fff; user-select: none; -webkit-user-select: none; }
+  #page.grab { cursor: grab; }
+  #page.back { transition: transform .2s ease-out; }
+  #pull { position: absolute; left: 0; top: 6px; width: 300px; text-align: center; font-size: 14px; color: #6b7280; }
+  #pull.ready { color: #1d4ed8; font-weight: 700; }
+  #pullhint { position: absolute; left: 220px; top: 107px; width: 120px; text-align: right; font-size: 13px; color: #9ca3af; }
+  .post { margin-bottom: 5px; font-size: 15px; line-height: 18px; border-radius: 6px; padding: 0 4px; }
+  .post b { color: #1f2937; }
+  .post div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #374151; }
+  .post.new { animation: glow 2.2s ease-out; }
+  @keyframes glow { 0%, 40% { background: #bbf7d0; } 100% { background: transparent; } }
+  .center { height: 112px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 17px; color: #6b7280; }
+  .center span { font-size: 14px; color: #9ca3af; }
+  .spin { width: 13px; height: 13px; border: 2.5px solid #c7d2fe; border-top-color: #1d4ed8; border-radius: 50%; animation: turn .8s linear infinite; display: inline-block; }
+  .spin.big { width: 26px; height: 26px; border-width: 4px; }
+  .spin.amber { border-color: #fde68a; border-top-color: #b45309; }
+  @keyframes turn { to { transform: rotate(360deg); } }
+
+  /* the cache strip, also in the browser: it's memory, not the server */
+  #clbl { position: absolute; left: 50px; top: 268px; font-size: 14px; color: #9ca3af; }
+  #ckey { position: absolute; left: 50px; top: 289px; font: 13px ui-monospace, Menlo, monospace; color: #6b7280; }
+  #centry { position: absolute; left: 50px; top: 310px; width: 284px; font-size: 16px; font-weight: 700; color: #b45309; }
+  #centry.empty { color: #9ca3af; font-weight: 400; }
+  #centry.off { color: #9ca3af; font-weight: 400; font-style: italic; }
+  #centry.saved { animation: flash 1s ease-out; }
+  @keyframes flash { 0% { color: #15803d; } 100% { color: #b45309; } }
+
+  /* the wire between browser and server */
+  .wire { position: absolute; font-size: 14px; color: #9ca3af; }
+  .dot { position: absolute; display: none; width: 14px; height: 14px; font: 700 13px ui-monospace, Menlo, monospace; white-space: nowrap; transition-property: left; transition-timing-function: linear; }
+  .dot i { width: 14px; height: 14px; border-radius: 50%; display: block; }
+  .dot span { position: absolute; left: 50%; transform: translateX(-50%); }
+  #req { top: 143px; color: #1d4ed8; }
+  #req span { top: 16px; }
+  #req i { background: #1d4ed8; }
+  #res { top: 223px; color: #15803d; }
+  #res span { top: -19px; }
+  #res i { background: #15803d; }
+
+  /* the server */
+  #sname { position: absolute; left: 616px; top: 74px; font-size: 19px; font-weight: 700; color: #9a6a12; }
+  #sdelay { position: absolute; left: 760px; top: 78px; width: 104px; text-align: right; font-size: 14px; color: #9ca3af; }
+  #slbl { position: absolute; left: 726px; top: 118px; width: 140px; font-size: 15px; line-height: 17px; color: #6b7280; }
+  #sposts { position: absolute; left: 726px; top: 154px; font: 700 34px 'Comic Neue', cursive; color: #9a6a12; }
+  #sstat { position: absolute; left: 616px; top: 216px; width: 250px; font-size: 16px; color: #9ca3af; }
+  #sstat.work { color: #9a6a12; } #sstat.ok { color: #15803d; font-weight: 700; }
+  #someone { position: absolute; left: 616px; top: 296px; }
+
+  #log { position: absolute; left: 36px; top: 368px; width: 390px; }
+  #log .lbl { font: 14px 'Comic Neue', cursive; color: #9ca3af; margin-bottom: 2px; }
+  #log .line { font: 13px/20px ui-monospace, Menlo, monospace; color: #4b5563; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #log .old { opacity: .45; }
+  .stc { color: #b45309; font-weight: 700; }
+  .okc { color: #15803d; font-weight: 700; }
+  .blc { color: #1d4ed8; font-weight: 700; }
+  .gray { color: #9ca3af; }
+
+  #explain { position: absolute; left: 456px; top: 366px; width: 424px; font: 15px/1.3 'Comic Neue', cursive; }
+  #prompt { font-size: 17px; margin-bottom: 8px; }
+  .ans { margin-bottom: 3px; }
+  .ans .q { font-size: 20px; font-weight: 700; color: #9ca3af; line-height: 1; }
+  .red { color: #be123c; font-weight: 700; }
+  .green { color: #15803d; font-weight: 700; }
+
+  #code { position: absolute; left: 16px; top: 472px; width: 870px; height: 92px; display: flex; align-items: center; gap: 14px; padding: 0 18px; box-sizing: border-box; }
+  #code .lbl { font-size: 15px; color: #6b7280; white-space: nowrap; }
+  #code pre { margin: 0; font: 13px/1.3 ui-monospace, Menlo, monospace; color: #1f2937; }
+  #code .k { color: #6d28d9; }
+  #code .f { color: #1d4ed8; }
+  #code .s { color: #9a6a12; }
+  #code .c { color: #9ca3af; }
+  #takeaway { position: absolute; left: 0; width: 900px; top: 572px; text-align: center; font: 16px 'Comic Neue', cursive; color: #4b5563; }
+  svg { position: absolute; left: 0; top: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <button class="ui mode" data-mode="effect" type="button">plain <code>useEffect</code></button>
+    <button class="ui mode" data-mode="swr" type="button">stale-while-revalidate</button>
+    <span class="sep"></span>
+    <span class="lbl">server:</span>
+    <button class="ui speed" data-ms="300" type="button">fast 0.3s</button>
+    <button class="ui speed" data-ms="2000" type="button">slow 2s</button>
+    <span class="sep"></span>
+    <button class="ui" id="reset" type="button">reset</button>
+  </div>
+
+  <div class="tag" style="left:292px; top:74px; color:#1d4ed8">browser</div>
+  <div id="nav">
+    <button type="button" data-page="home">home</button>
+    <button type="button" data-page="posts">posts</button>
+  </div>
+  <div id="badge"></div>
+  <div id="pullhint"></div>
+  <div id="pagewrap"><div id="pull"></div><div id="page"></div></div>
+  <div id="clbl">cache · in memory</div>
+  <div id="ckey">'/api/posts' →</div>
+  <div id="centry"></div>
+
+  <div class="wire" style="left:438px; top:120px">request</div>
+  <div class="wire" style="left:434px; top:240px">response</div>
+  <div class="dot" id="req"><i></i><span>GET /api/posts</span></div>
+  <div class="dot" id="res"><i></i><span></span></div>
+
+  <div id="sname">server</div>
+  <div id="sdelay"></div>
+  <div id="slbl">posts in the database:</div>
+  <div id="sposts"></div>
+  <div id="sstat"></div>
+  <button class="ui" id="someone" type="button">+ someone posts</button>
+
+  <div id="log"></div>
+  <div id="explain">
+    <div id="prompt"></div>
+    <div class="ans" id="ans-effect"></div>
+    <div class="ans" id="ans-swr"></div>
+  </div>
+
+  <div id="code"><span class="lbl">in the component:</span><pre id="src"></pre></div>
+  <div id="takeaway"></div>
+</div>
+<script>
+// A posts page you can leave and come back to, and a pretend server. "effect" mode fetches on every
+// mount and starts from nothing; "swr" mode shows whatever the cache has right away (stale), fetches in
+// the background (revalidate), then swaps in the fresh list. The server is just setTimeout.
+const FIRST = [
+  { id: 3, who: '@css_at_3am', text: 'centered a div. going to bed.' },
+  { id: 2, who: '@tabs4life', text: 'hot take: tabs > spaces' },
+  { id: 1, who: '@sourdough_sam', text: 'my starter has more followers than me' },
+];
+const MORE = [
+  { who: '@moose_spotter', text: 'was that a moose on the green?!' },
+  { who: '@vite_fan', text: 'hmr is faster than my coffee maker' },
+  { who: '@kev_codes', text: 'renamed one variable. tests pass. scared.' },
+  { who: '@lab4_survivor', text: 'zustand store: done. sleep: not done.' },
+  { who: '@first_snow', text: 'the snow is here and so is my bug' },
+];
+const CODE = {
+  effect: `<span class="k">const</span> [posts, setPosts] = <span class="f">useState</span>(<span class="k">null</span>)  <span class="c">// null = show a spinner</span>
+<span class="f">useEffect</span>(() => {
+  <span class="f">fetch</span>(<span class="s">'/api/posts'</span>).<span class="f">then</span>(r => r.<span class="f">json</span>()).<span class="f">then</span>(setPosts)
+}, [])  <span class="c">// runs on every mount, and every mount starts from null</span>`,
+  swr: `<span class="k">const</span> { data, isValidating } = <span class="f">useSWR</span>(<span class="s">'/api/posts'</span>, fetcher)
+<span class="c">// 1. stale: hand back whatever the cache has for '/api/posts' right now</span>
+<span class="c">// 2. revalidate: fetch again in the background (isValidating is true meanwhile)</span>
+<span class="c">// 3. swap in the fresh data and save it in the cache for next time</span>`,
+};
+// x positions of the wire (left edge of the dot)
+const WIRE_L = 372, WIRE_R = 572;
+
+let mode, speed, page, db, more, cache, shown, status, pending, newIds, timers, lines;
+let visits, spinMs, spinFrom, sawHit, sawUpdate;
+const $ = (id) => document.getElementById(id);
+
+function ago(t) { return Math.max(0, Math.round((Date.now() - t) / 1000)) + 's ago'; }
+function count(n) { return n + (n === 1 ? ' post' : ' posts'); }
+
+function renderCache() {
+  const c = $('centry');
+  if (mode === 'effect') { c.className = 'off'; c.textContent = 'not used: every visit starts from nothing'; return; }
+  if (!cache) { c.className = 'empty'; c.textContent = 'empty'; return; }
+  if (!c.classList.contains('saved')) c.className = '';
+  c.textContent = count(cache.posts.length) + ' · saved ' + ago(cache.at);
+}
+
+function render() {
+  document.querySelectorAll('.mode').forEach((b) => { b.classList.toggle('on', b.dataset.mode === mode); b.disabled = pending; });
+  document.querySelectorAll('.speed').forEach((b) => b.classList.toggle('on', +b.dataset.ms === speed));
+  document.querySelectorAll('#nav button').forEach((b) => { b.classList.toggle('on', b.dataset.page === page); b.disabled = pending; });
+  // no posting while a request is out: the in-flight fetch would pick it up, and it'd look like the server pushed it
+  $('someone').disabled = !more.length || pending;
+
+  const badge = $('badge');
+  badge.className = page === 'posts' ? status : '';
+  badge.innerHTML = page !== 'posts' ? ''
+    : status === 'loading' ? 'loading…'
+    : status === 'stale' ? 'stale · revalidating <span class="spin amber"></span>'
+    : status === 'fresh' ? 'fresh ✓' : '';
+
+  const html = page === 'home' ? '<div class="center">welcome home 🏠<span>(the posts page is unmounted)</span></div>'
+    : !shown ? '<div class="center"><span class="spin big"></span>loading posts…</div>'
+    : shown.slice(0, 3).map((p) =>
+      `<div class="post${newIds.has(p.id) ? ' new' : ''}"><b>${p.who}</b><div>${p.text}</div></div>`).join('');
+  // only touch the page when what it shows changed, or the green "new" glow replays on every click
+  if (html !== $('page').dataset.html) { $('page').innerHTML = html; $('page').dataset.html = html; }
+  $('page').classList.toggle('grab', !!canPull());
+  $('pullhint').textContent = canPull() ? '↓ pull to refresh' : '';
+
+  renderCache();
+  $('sposts').textContent = db.length;
+  $('sdelay').textContent = 'answers in ' + (speed / 1000) + 's';
+  $('src').innerHTML = CODE[mode];
+
+  // the prompt walks through: plain useEffect twice, then SWR twice, then a new post on the server
+  if (sawUpdate) $('prompt').innerHTML = 'now <b>pull the list down</b> to refresh, in each mode. <b>what happens to the list while it loads?</b>';
+  else if (sawHit) $('prompt').innerHTML = 'now click <b>+ someone posts</b>, then go home and back to posts. <b>when does the new post show up?</b>';
+  else if (visits.effect >= 2) $('prompt').innerHTML = 'now switch to <b>stale-while-revalidate</b> and do the same: posts, home, posts.';
+  else $('prompt').innerHTML = 'click <b>posts</b>, then <b>home</b>, then <b>posts</b> again. <b>how often do you stare at a spinner?</b>';
+
+  const q = '<span class="q">?</span>';
+  $('ans-effect').innerHTML = '<b><code>useEffect</code>:</b> ' + (visits.effect >= 2
+    ? `a spinner <span class="red">every visit</span> (${(spinMs.effect / 1000).toFixed(1)}s of spinners so far).` : q);
+  $('ans-swr').innerHTML = '<b>stale-while-revalidate:</b> ' + (sawUpdate
+    ? '<span class="green">instant</span> old list, new post a moment later.'
+    : sawHit ? '<span class="green">instant</span> from the cache, then it checked.' : q);
+  $('takeaway').innerHTML = sawUpdate
+    ? '<b>stale-while-revalidate:</b> show what you have now, fetch in the background, swap in what\'s new.' : '';
+}
+
+function log(html) {
+  lines.push(html);
+  lines = lines.slice(-4);
+  $('log').innerHTML = '<div class="lbl">what happened</div>' +
+    lines.map((l, i) => `<div class="line${i < lines.length - 1 ? ' old' : ''}">${l}</div>`).join('');
+}
+
+// slide a dot along the wire; it hides itself when it lands
+function fly(el, from, to, ms) {
+  el.style.transitionDuration = '0ms';
+  el.style.left = from + 'px';
+  el.style.display = 'flex';
+  void el.offsetWidth;
+  el.style.transitionDuration = ms + 'ms';
+  el.style.left = to + 'px';
+  timers.push(setTimeout(() => { el.style.display = 'none'; }, ms));
+}
+function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+function setStat(cls, text) { $('sstat').className = cls; $('sstat').textContent = text; }
+
+// the posts page mounts
+function openPosts() {
+  page = 'posts';
+  newIds = new Set();
+  if (mode === 'swr' && cache) {
+    shown = cache.posts; status = 'stale';
+    log(`mount → <span class="stc">cache hit</span>: ${count(shown.length)} from ${ago(cache.at)}`);
+  } else {
+    shown = null; status = 'loading'; spinFrom = Date.now();
+    log(`mount → <span class="blc">nothing to show</span>, spinner`);
+  }
+  request(status === 'stale');
+}
+
+// GET /api/posts: request leg, a beat on the server, response leg
+function request(revalidating) {
+  pending = true;
+  render();
+  const leg = Math.round(speed * 0.42), think = speed - 2 * leg;
+  setStat('', 'waiting for a request…');
+  fly($('req'), WIRE_L, WIRE_R, leg);
+  later(() => setStat('work', 'reading posts…'), leg);
+  later(() => {
+    const data = db.slice(); // what the server has at the moment it answers
+    setStat('ok', '✓ sent ' + count(data.length));
+    $('res').querySelector('span').textContent = '✓ ' + count(data.length);
+    fly($('res'), WIRE_R, WIRE_L, leg);
+    later(() => respond(data, revalidating), leg);
+  }, leg + think);
+}
+
+// the response lands in the browser
+function respond(data, revalidating) {
+  pending = false;
+  visits[mode]++;
+  if (spinFrom) { spinMs[mode] += Date.now() - spinFrom; spinFrom = 0; }
+  const before = new Set((shown || []).map((p) => p.id));
+  newIds = revalidating ? new Set(data.filter((p) => !before.has(p.id)).map((p) => p.id)) : new Set();
+  shown = data; status = 'fresh';
+  if (mode === 'swr') {
+    cache = { posts: data, at: Date.now() };
+    const c = $('centry'); c.classList.remove('saved'); void c.offsetWidth; c.classList.add('saved');
+  }
+  if (!revalidating) log(`<span class="okc">✓ ${count(data.length)}</span> → spinner gone, list shows`);
+  else if (newIds.size) { sawUpdate = true; log(`<span class="okc">✓ revalidated</span> → ${newIds.size} new swapped in`); }
+  else { sawHit = true; log(`<span class="okc">✓ revalidated</span> → nothing changed, nobody noticed`); }
+  if (revalidating) sawHit = true;
+  render();
+}
+
+// pull to refresh: same fetch as a visit, but you're already looking at the list
+function refresh() {
+  newIds = new Set();
+  if (mode === 'swr') {
+    status = 'stale';
+    log('pull to refresh → <span class="stc">list stays</span>, revalidating');
+  } else {
+    shown = null; status = 'loading'; spinFrom = Date.now();
+    log('pull to refresh → back to null, <span class="blc">spinner</span>');
+  }
+  request(mode === 'swr');
+}
+
+let drag = null; // { y, d } while the list is being pulled
+const canPull = () => page === 'posts' && shown && !pending;
+$('page').addEventListener('pointerdown', (e) => {
+  if (!canPull()) return;
+  drag = { y: e.clientY, d: 0 };
+  $('page').setPointerCapture(e.pointerId);
+  $('page').classList.remove('back');
+});
+$('page').addEventListener('pointermove', (e) => {
+  if (!drag) return;
+  drag.d = Math.min(70, Math.max(0, e.clientY - drag.y) * 0.5); // half speed, like a rubber band
+  $('page').style.transform = `translateY(${drag.d}px)`;
+  const ready = drag.d >= 36;
+  $('pull').className = ready ? 'ready' : '';
+  $('pull').textContent = ready ? '↑ let go to refresh' : '↓ pull to refresh';
+});
+const letGo = () => {
+  if (!drag) return;
+  const go = drag.d >= 36;
+  drag = null;
+  $('page').classList.add('back');
+  $('page').style.transform = '';
+  if (go) refresh();
+};
+$('page').addEventListener('pointerup', letGo);
+$('page').addEventListener('pointercancel', letGo);
+
+function goHome() {
+  page = 'home'; shown = null; status = '';
+  log('<span class="gray">// home: the posts page unmounts</span>');
+  render();
+}
+
+function reset() {
+  (timers || []).forEach(clearTimeout);
+  timers = [];
+  mode = 'effect'; speed = 2000; page = 'home';
+  db = FIRST.slice(); more = MORE.slice(); cache = null;
+  shown = null; status = ''; pending = false; newIds = new Set();
+  visits = { effect: 0, swr: 0 }; spinMs = { effect: 0, swr: 0 }; spinFrom = 0;
+  sawHit = false; sawUpdate = false;
+  lines = [];
+  $('req').style.display = 'none';
+  $('res').style.display = 'none';
+  setStat('', 'idle');
+  log('<span class="gray">// ready</span>');
+  render();
+}
+
+document.querySelectorAll('.mode').forEach((b) => b.addEventListener('click', () => {
+  if (pending || mode === b.dataset.mode) return;
+  mode = b.dataset.mode;
+  log(`<span class="gray">// mode: ${mode === 'effect' ? 'plain useEffect' : 'stale-while-revalidate'}</span>`);
+  goHome();
+}));
+document.querySelectorAll('.speed').forEach((b) => b.addEventListener('click', () => { speed = +b.dataset.ms; render(); }));
+document.querySelectorAll('#nav button').forEach((b) => b.addEventListener('click', () => {
+  if (pending || page === b.dataset.page) return;
+  if (b.dataset.page === 'posts') openPosts(); else goHome();
+}));
+$('someone').addEventListener('click', () => {
+  if (!more.length || pending) return;
+  const p = { id: db.length + 1, ...more.shift() };
+  db.unshift(p);
+  log(`<span class="gray">// server: ${p.who} posted (browser doesn't know yet)</span>`);
+  render();
+});
+$('reset').addEventListener('click', reset);
+setInterval(renderCache, 1000); // keeps "saved Ns ago" ticking
+
+// static hand-drawn pieces: browser box + cache strip, the two wires, the server + its rack, log, code strip
+const NS = 'http://www.w3.org/2000/svg';
+const svg = document.createElementNS(NS, 'svg');
+svg.setAttribute('width', 900); svg.setAttribute('height', 600);
+$('app').appendChild(svg);
+const rc = rough.svg(svg, { options: { roughness: 1.2, strokeWidth: 2.4 } });
+svg.appendChild(rc.rectangle(24, 68, 330, 284, { stroke: '#1d4ed8', seed: 3 }));
+svg.appendChild(rc.rectangle(38, 262, 302, 80, { stroke: '#b45309', strokeWidth: 1.8, strokeLineDash: [7, 5], seed: 4 }));
+const w1 = { stroke: '#9ca3af', strokeWidth: 1.8, seed: 5 };
+svg.appendChild(rc.line(364, 150, 590, 150, w1));
+svg.appendChild(rc.line(580, 143, 590, 150, w1));
+svg.appendChild(rc.line(580, 157, 590, 150, w1));
+const w2 = { stroke: '#9ca3af', strokeWidth: 1.8, seed: 6 };
+svg.appendChild(rc.line(590, 230, 364, 230, w2));
+svg.appendChild(rc.line(374, 223, 364, 230, w2));
+svg.appendChild(rc.line(374, 237, 364, 230, w2));
+svg.appendChild(rc.rectangle(600, 68, 276, 284, { stroke: '#9a6a12', seed: 7 }));
+[112, 142, 172].forEach((y, i) => {
+  svg.appendChild(rc.rectangle(622, y, 80, 24, { stroke: '#9a6a12', strokeWidth: 1.6, roughness: 0.9, seed: 8 + i }));
+  svg.appendChild(rc.circle(636, y + 12, 7, { stroke: '#86efac', fill: '#86efac', fillStyle: 'solid', strokeWidth: 1, seed: 12 + i }));
+  svg.appendChild(rc.line(650, y + 12, 692, y + 12, { stroke: '#d6c08a', strokeWidth: 1.4, seed: 15 + i }));
+});
+svg.appendChild(rc.rectangle(24, 362, 410, 102, { stroke: '#d1d5db', strokeWidth: 1.8, seed: 18 }));
+svg.appendChild(rc.rectangle(16, 472, 870, 92, { stroke: '#4b5563', strokeWidth: 1.8, seed: 19 }));
+
+reset();
+</script>
+</body>
+</html>

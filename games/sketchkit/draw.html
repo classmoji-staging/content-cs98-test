@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cs52 diagram</title>
+<!-- the deck's title font, declared here directly (no theme css, no @import chain).
+     only the three faces the kit uses; preloaded so they download alongside the scripts -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fullstack-mooc.github.io/Resources/fonts/ComicNeueAngular-BoldItalic.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fullstack-mooc.github.io/Resources/fonts/ComicNeueAngular-Italic.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fullstack-mooc.github.io/Resources/fonts/ComicNeueAngular-Bold.woff2">
+<style>
+  @font-face { font-family: 'Comic Neue Angular'; font-weight: bold; font-style: italic; font-display: swap;
+    src: url('https://fullstack-mooc.github.io/Resources/fonts/ComicNeueAngular-BoldItalic.woff2') format('woff2'); }
+  @font-face { font-family: 'Comic Neue Angular'; font-weight: normal; font-style: italic; font-display: swap;
+    src: url('https://fullstack-mooc.github.io/Resources/fonts/ComicNeueAngular-Italic.woff2') format('woff2'); }
+  @font-face { font-family: 'Comic Neue Angular'; font-weight: bold; font-style: normal; font-display: swap;
+    src: url('https://fullstack-mooc.github.io/Resources/fonts/ComicNeueAngular-Bold.woff2') format('woff2'); }
+  html, body { margin: 0; height: 100%; background: #fff; overflow: hidden; }
+  svg { display: block; width: 100%; height: 100%; }
+  .err { font: 16px ui-monospace, Menlo, monospace; color: #b91c1c; padding: 16px; }
+</style>
+<script>
+// draw one diagram that lives with its deck:
+//   draw.html?deck=routing-1768253383889&f=url-anatomy            (file with one diagram)
+//   draw.html?deck=routing-1768253383889&f=route-layouts&d=routeUsers
+// rough.js, kit.js and slides/<deck>/diagrams/<f>.js download in parallel and run in order;
+// the diagram file registers D.<name> = () => svg
+const q = new URLSearchParams(location.search);
+const deck = q.get('deck') || '', file = q.get('f') || '', want = q.get('d') || '', v = q.get('v') || '';
+function fail(msg) {
+  const show = () => { document.body.innerHTML = '<p class="err"></p>'; document.body.firstChild.textContent = msg; window.__done = true; };
+  if (document.body) show(); else addEventListener('DOMContentLoaded', show);
+}
+function draw() {
+  const names = Object.keys(D);
+  const name = want || (names.length === 1 ? names[0] : '');
+  if (!D[name]) return fail(`no diagram named "${want}" in ${file}.js. try: ${names.join(', ')}`);
+  // draw once the title font has loaded, so labels measure right
+  document.fonts.load("italic 700 20px 'Comic Neue Angular'").catch(() => {}).then(() => {
+    const svg = D[name]();
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    svg.removeAttribute('width'); svg.removeAttribute('height');
+    document.body.appendChild(svg);
+    window.__done = true;
+  });
+}
+if (!/^[a-z0-9][a-z0-9-]*$/.test(deck) || !/^[a-z0-9][a-z0-9-]*$/.test(file) || (want && !/^\w+$/.test(want)) || !/^[\w.-]*$/.test(v)) {
+  fail('usage: draw.html?deck=<deck folder>&f=<diagram file>[&d=<name>]');
+} else {
+  const srcs = ['rough.js', 'kit.js', `../../slides/${deck}/diagrams/${file}.js` + (v ? `?v=${v}` : '')];
+  srcs.forEach((src, i) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.async = false; // fetch now, run in list order
+    s.onerror = () => fail(`couldn't load ${src.replace('../../', '')}`);
+    if (i === srcs.length - 1) s.onload = () => (document.body ? draw() : addEventListener('DOMContentLoaded', draw));
+    document.head.appendChild(s);
+  });
+}
+</script>
+</head>
+<body>
+</body>
+</html>

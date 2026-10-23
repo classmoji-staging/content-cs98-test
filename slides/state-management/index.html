@@ -5,39 +5,2575 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>State Management</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/monokai.min.css">
+  <link rel="stylesheet" href="/content/classmoji-staging/content-cs98-test/.slidesthemes/cs52-theme/lib/offline-v2.css">
+  <link rel="stylesheet" href="/content/classmoji-staging/content-cs98-test/.slidesthemes/cs52-theme/custom-theme.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
   <style>
-    .reveal h1, .reveal h2, .reveal h3 { color: #333; }
-    .reveal .slides section { text-align: left; }
-    .reveal pre { width: 100%; }
-    .reveal code { background: #f5f5f5; padding: 2px 6px; border-radius: 4px; }
+    /* Override slides.com animation system - make all elements visible */
+    .sl-block-content,
+    .sl-block-content[data-animation-type],
+    .sl-block-content[data-animation-type="fade-in"],
+    .sl-block-content[data-animation-type="fade-out"] {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+    }
   </style>
 </head>
-<body>
-  <div class="reveal" data-theme="white" data-code-theme="monokai">
+<body class="reveal-viewport theme-font-montserrat theme-color-white-blue">
+  <div class="reveal" data-theme="shared:cs52-theme" data-code-theme="github">
     <div class="slides">
-<section data-cm-id="e0e6d176"><h1>State Management</h1></section>
-<section data-cm-id="26c4c3ec"><h2>Slide 2</h2>
-<p>Add your content here...</p></section>
-<section data-cm-id="5398f8ab"><h2>Code Example</h2>
-<pre><code class="language-javascript">// Your code here
-function example() {
-  return "Hello, World!";
-}</code></pre></section>
-<section data-cm-id="d103507b"><h2>Questions?</h2></section>
+<section data-cm-id="s1" data-id="227b26f26b7bdff09797bae9f14a1d0c"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="54a836d0169308531dd0c277225b7cd2" data-column-label="Column 1"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">State Management</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">What is it, and why is it?</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s5" data-id="995d3355ed5f6955a726ef89635b7908">
+<section data-cm-id="s2" data-id="c29230c3228cfc3e490d16b9030b0111">
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" data-name="text-7c0d87" data-block-id="b3dfd4c035781a62aee9fa4ecf3c9568" style="height: auto; width: 600px; left: 180px; top: 280px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<ul style="color:rgb(58, 62, 64)">
+	<li class="fragment" data-fragment-index="0">components</li>
+	<li class="fragment" data-fragment-index="1">unidirectional data flow</li>
+	<li class="fragment" data-fragment-index="2">events and callbacks</li>
+	<li class="fragment" data-fragment-index="3">state and props</li>
+	<li class="fragment" data-fragment-index="4">rendering jsx</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="ea06b9ae8c3a4defa68624de1618f38d"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">What do we know about React so far?</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s3" data-id="daaebfec6afca3ab7d8790e9619c44f5"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 560px; left: 30px; top: 100px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="a component tree: one change at a bottom leaf ripples from component to component all over the tree" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=trees&amp;d=drilling&amp;v=2" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="9dd95bcd062f83554dc0a54866a5249d"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">but we've had some problems also</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* look familiar? we will fix it
+* props all over the place, sometimes you rename them as you pass them down, super hard to track
+</aside></section>
+<section data-cm-id="s4" data-id="cdd10dadeb79653e0f37238370940242">
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" data-name="text-7962bf" data-block-id="936a568fe6f992910b972f853132131e" style="height: auto; width: 960px; left: 0.0005px; top: 127.416px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;"><ul style="color:rgb(58, 62, 64)">
+	<li>
+<strong><em>presentational component</em></strong>&nbsp;(just a function)
+	<ul>
+		<li>concerned with how things look</li>
+		<li>have state for ui things but not data</li>
+		<li>generally get data as props</li>
+		<li>real view</li>
+		<li>reusable</li>
+	</ul>
+	</li>
+	<li>
+<strong><em>container component</em></strong>&nbsp;(with state hooks)
+	<ul>
+		<li>concerned with data - have state or connected to state</li>
+		<li>pass data to presentational components</li>
+		<li>bind callbacks to self (if class)</li>
+		<li>and now with extra state management sprinkles 🎉</li>
+	</ul>
+	</li>
+</ul></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="616460784b8131a7f5cf24c692ebe603"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">components with state or without</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* so far we'd had both
+* we've not really talked about this abstraction - we won't be labelling these in code but useful distinction in your own minds
+* but will have a bit more of it soon with redux!
+
+</aside></section>
+</section>
+<section data-cm-id="s6" data-id="442a36d1d36726462d6705fa870a42ac"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="6f494a5c57f80c652e23d7d170230a20"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Application State</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">An idea to help make our app predictable and testable&nbsp;</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s11" data-id="1c87b3a9923ed00ffd4bc96095f6ebe4">
+<section data-cm-id="s7" data-id="c43955fe0f16f7a273d57e7cf4cbec48">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-ea5f0a" data-block-id="672a326bc965454ede1000a6665af8f7" style="width: 900.183px; height: 506.353px; left: 37.6606px; top: 96.8235px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 11;"><img style="" data-natural-width="1024" data-natural-height="576" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/12044ed71e3595d89a72fd4dac8a3b98.jpg"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="d6dd36cb0c5f3363feac75ba8dc435ea"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">application level state</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* backing up a sec - whats the issue again?
+* having consistent state which drives everything
+* take this OS screenshot
+</aside></section>
+<section data-cm-id="s8" data-id="99be7cec7160c5996ba98a686bbc28ff"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 560px; left: 30px; top: 90px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="application state as data: a json object with the user, open apps, desktop icons and the clock, rendered into a desktop screen; UI = f(state)" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=app-state&amp;d=dataLayer" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="bfb1a9b81fcb7d6fa95b5ed76e04a923"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">application level state</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* under the screen is plain data: who's signed in, which apps are open, where the icons sit, what time it is
+* each color in the json draws the same-colored part of the screen
+* UI = f(state): the screen is a function of the data. to change the screen, change the data
+* could store in one place
+* or multiple places
+* most likely a combo.
+</aside></section>
+<section data-cm-id="s9" data-id="ac8c8edea6d8575eb0ef41ab3371602d"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 330px; left: 30px; top: 100px;" data-column-label="Column 1"><div class="sl-block-content" style="z-index: 10;"><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="visibility: visible !important; position: absolute; top: 0px; left: 0px; pointer-events: none; margin: 0px; border: 0px; --rem: 16;"></grammarly-extension><iframe data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=app-state&amp;d=stateDrives" sandbox="allow-scripts allow-same-origin" spellcheck="false" style="width: 100%; height: 100%; border: none; pointer-events: none;" title="application state drives the component tree (App, Toolbar, NoteList); react-dom keeps the DOM (div, header, ul) in step"></iframe></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e4bd06" data-block-id="4f123c3aeeec6b500b0f3c3ab73cf01a" style="height: auto; width: 600px; left: 179px; top: 500px;" data-column-label="Column 2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><ul style="color: rgb(58, 62, 64);">
+	<li>react is great</li>
+	<li>but could use better data management</li><li>solutions?&nbsp;</li>
+</ul></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="b5ece5680af5db3deb5c52b89b8cf987" data-column-label="Column 3"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">application level state</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* so far we've done component level state vs application level state
+* we've used components to allow us to pass down component level state in props but what we wanted was application level state
+* not ideal solution</aside></section>
+<section data-cm-id="s10" data-id="faeedd4dcf38042fd9fc77da3332d77c">
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-874083" data-block-id="53d4cae7e2a217ca653502e7775cf759" style="width: 960px; height: 533.333px; left: 0px; top: 119.759px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="720" data-natural-height="400" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/c0e7f541644267e67568803c3f23eb3a.gif"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="e011501920c9d486a6e7d46d9bd876e7"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Imagine, interactive global state</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* the dream: one global store you can rewind and replay (that's Redux DevTools; we'll come back to it at the end)
+* before we build that: most state shouldn't be global at all. so where should each piece live?</aside></section>
+</section>
+<section data-cm-id="1070414c"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="wherelivetitle01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Where Does State Live?</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">One question, eight answers</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* the question for the rest of today: where should this piece of state live?
+* eight answers, from the least machinery to the most. we'll start with the cheap ones and work down
+* everything coming up (flux, redux, zustand, server caches, sync) is an answer to this one question</aside></section>
+<section data-cm-id="d497478c"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 560px; left: 30px; top: 90px;" data-cm-block-id="9216e880"><div class="sl-block-content" style="z-index: 10;"><iframe title="eight places state can live, from least machinery to most: derive it, in the component, in the parent, in the url, in context, in a store, in a server cache, synced everywhere; a dashed line separates state you own from the server's" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=state-ladder&amp;v=4" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="ladderhdr01" data-cm-block-id="f4fe2c94"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">where does this state live?</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* the map for the rest of today: context, flux, redux, zustand, server state are all answers to "where should this piece of state live?"
+* start at the top. each step down adds machinery: more code, more places for bugs, more for a teammate to learn
+* 1 derive it: the cheapest state is the state you don't store. a cart total, a filtered list, a count: compute them from what you already have
+* 2 in the component: useState (or useReducer) inside the one component that needs it
+* 3 in the parent: two siblings need it, so it moves up to their parent and comes down as props
+* 4 in the url: anything someone might share, bookmark or refresh into (the shop filters from the routing lecture)
+* 5 in context: app-wide and rarely changing: theme, language, the signed-in user
+* 6 in a store: shared and frequently changing; components subscribe to just the slice they read
+* 7 in a server cache: data that belongs to the server; you hold a copy that can go stale (TanStack Query, SWR, a plain fetch in useEffect, router loaders)
+* 8 synced everywhere: state that lives on several devices at once (Firebase from Lab 3, sync engines)
+* the dashed line: above it the data is yours, below it you're borrowing it from the server
+* we'll go top to bottom; the first four are quick</aside></section>
+<section data-cm-id="c630d8ef" data-id="place1title01"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="place1title01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">1 · Derive It</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">The state you don't store</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="2cf540ad" data-id="derivestate01"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="derivehdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">derive it: the state you don't store</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-derive01" style="width: 520px; height: auto; left: 20px; top: 95px;" data-block-id="derivecode01"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code>// ❌ storing what you could compute
+const [items, setItems] = useState([])
+const [total, setTotal] = useState(0)
+
+useEffect(() =&gt; {
+  setTotal(items.reduce((t, i) =&gt; t + i.price, 0))
+}, [items])
+
+
+// ✅ compute it while you render
+const [items, setItems] = useState([])
+const total = items.reduce((t, i) =&gt; t + i.price, 0)</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-derive01" data-block-id="derivetxt01" style="height: auto; width: 390px; left: 555px; top: 90px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 0.85em;">
+<p><strong>if you can compute it, don't store it</strong></p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>a cart total, a filtered list, an unread count, "is this form valid?"</li>
+	<li>a stored copy has to be kept in sync by hand.</li>
+	<li>unneccesary re-renders<br><br></li>
+</ul>
+<p style="color:#942323"><strong>rule of thumb:</strong> keep the smallest state you can, compute the rest</p>
+</div></div><aside class="notes">* the cheapest state is the state you don't store
+* your component function runs on every render, so a value computed from items is always in step with items
+* the useEffect version: React renders with the old total, runs the effect, sets state, renders again. an extra render, and for a moment the screen is wrong
+* with two pieces of state, every place that changes items also has to remember total. one forgotten setTotal and the cart is lying
+* this is the first example in React's "You Might Not Need an Effect" (react.dev/learn/you-might-not-need-an-effect)
+* the cart total shows up again in the sorter at the end; it's the classic trap</aside></section>
+<section data-cm-id="b433318d" data-id="place2title01"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="place2title01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">2 · In the Component</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">Only one component needs it</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s15" data-id="builtinstate01">
+<section data-cm-id="add32886" data-id="incomponent01"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="incomphdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">in the component: right where it's used</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-incomp01" style="width: 520px; height: auto; left: 20px; top: 95px;" data-block-id="incompcode01"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code>function Faq({ items }) {
+  // only this list cares which answer is open
+  const [openId, setOpenId] = useState(null)
+
+  return items.map((q) =&gt; (
+    &lt;div key={q.id}&gt;
+      &lt;button onClick={() =&gt; setOpenId(q.id)}&gt;
+        {q.question}
+      &lt;/button&gt;
+      {openId === q.id &amp;&amp; &lt;p&gt;{q.answer}&lt;/p&gt;}
+    &lt;/div&gt;
+  ))
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-incomp01" data-block-id="incomptxt01" style="height: auto; width: 390px; left: 555px; top: 90px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 0.85em;">
+<p><strong>most state belongs right here</strong></p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>one component reads it and changes it → <code>useState</code> in that component</li>
+	<li>which answer is open, is the password showing, a toggle<br><br></li>
+</ul>
+<p style="color:#942323"><strong>rule of thumb:</strong> start local, go global only when the pain is real</p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>UI state (form inputs, modals, dropdowns) → almost always local</li>
+</ul>
+</div></div><aside class="notes">* most state should live right where it's used. once students learn about stores they tend to put everything in one; resist it, useState is fine for most things
+* openId: only this list reads it and only this list changes it, so it stays here
+* if something else on the page ever needed to know which answer is open, that's when it would move up (section 3)
+* global state adds indirection and makes components harder to test on their own</aside></section>
+<section data-cm-id="s14" data-hidden="true" data-id="usereducer01" data-visibility="hidden"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="reducerhdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">useReducer: useState with actions</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-reducer01" style="width: 520px; height: auto; left: 20px; top: 95px;" data-block-id="reducercode01"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code>function reducer(state, action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [...state, action.payload]
+    case 'REMOVE_TODO':
+      return state.filter(t =&gt; t.id !== action.payload)
+    default:
+      return state
+  }
+}
+
+function TodoApp() {
+  const [todos, dispatch] = useReducer(reducer, [])
+  return (
+    &lt;button onClick={() =&gt;
+      dispatch({
+        type: 'ADD_TODO',
+        payload: { id: Date.now(), text: 'new todo' },
+      })
+    }&gt;Add&lt;/button&gt;
+  )
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-reducer01" data-block-id="reducertxt01" style="height: auto; width: 390px; left: 555px; top: 90px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 0.85em;">
+<p><strong>for when one component's state gets complicated</strong></p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>dispatch an action → the reducer returns the new state</li>
+	<li>all the update logic in one pure function, easy to test</li>
+	<li>still lives in one component (or its parent)<br><br></li><li>more on this</li></ul>
+</div></div><aside class="notes">* still in the component: useReducer is useState with the update logic pulled out into one function
+* reach for it when several pieces of state change together, or one event changes a bunch of things
+* the reducer is a pure function, (state, action) → new state, so you can test it without React at all
+* this is the pattern Flux and Redux are built on; we'll see it again in a few minutes
+* paired with Context it turns into a homemade store, which works fine for small apps (more on that with Context)</aside></section>
+</section>
+<section data-cm-id="b238a122" data-id="place3title01"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="place3title01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">3 · In the Parent</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">When siblings need it</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="71b59cc9" data-id="parentstack01">
+<section data-cm-id="s12" data-id="keeplocal01"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="keeplocalhdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">in the parent: lift it up</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-keeplocal01" style="width: 520px; height: auto; left: 20px; top: 95px;" data-block-id="keeplocalcode01"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code>function Shop() {
+  // both children need the cart, so it lives here
+  const [cart, setCart] = useState([])
+  const add = (p) =&gt; setCart([...cart, p])
+
+  return (
+    &lt;&gt;
+      &lt;ProductList onAdd={add} /&gt;
+      &lt;CartBadge count={cart.length} /&gt;
+    &lt;/&gt;
+  )
+}
+
+// the children just get props
+function CartBadge({ count }) {
+  return &lt;span className="badge"&gt;{count}&lt;/span&gt;
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-keeplocal01" data-block-id="keeplocaltxt01" style="height: auto; width: 390px; left: 555px; top: 90px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 0.85em;">
+<p><strong>two siblings need the same data</strong></p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>siblings can't talk to each other directly</li>
+	<li>move the state up to their closest shared parent</li>
+	<li>pass the value down, and a callback to change it</li>
+</ul>
+<p style="color:#942323"><strong>rule of thumb:</strong> lift it only as high as it needs to go</p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>the badge count? <code>cart.length</code>: derived, not stored</li>
+</ul>
+</div></div><aside class="notes">* the list adds to the cart, the badge shows it. they're siblings, so the cart moves up to Shop, their closest shared parent, and comes down as props. React's docs call this lifting state up
+* the children stay simple: CartBadge just renders a number, ProductList just calls onAdd
+* the badge count isn't its own state: cart.length, derived (section 1 again)
+* lift only to the closest shared parent. lifting everything to the top of the app "just in case" re-renders more than it needs to and hides who actually uses it</aside></section>
+<section data-cm-id="7cba8dd9" data-id="propdrill01"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 560px; left: 30px; top: 100px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="a component tree: one change at a bottom leaf ripples from component to component all over the tree" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=trees&amp;d=drilling&amp;v=2" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="propdrillhdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">when lifting hurts: prop drilling</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* the picture from the start of class
+* lift something high enough and it gets handed down through components that never use it, sometimes renamed on the way
+* that's the signal to move on: context for things that change rarely (next), a store for things that change often</aside></section>
+</section>
+<section data-cm-id="05d58198" data-id="place4title01"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="place4title01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">4 · In the URL</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">State you can share, bookmark and refresh into</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="274baa50" data-id="urlstack01">
+<section data-cm-id="b4e86dce" data-id="urldemo01"><div class="sl-block" data-block-type="iframe" data-name="iframe-sharelink" style="width: 900px; height: 600px; left: 30px; top: 90px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="a little shop with filters kept in useState or in the url; send the link to a friend and see what they get" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/slides/routing-1768253383889/games/sharelink/index.html" style="width: 100%; height: 100%; border: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="urldemohdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">remember this? useState vs the url</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* the shop demo from the routing lecture
+* pick blue + price up, then send the link, in each mode
+* useState: the filter lives in this tab's memory. refresh or share the link and it's gone
+* the url: refresh, back, bookmarks and shared links all keep it
+* next slide: the code for the url version</aside></section>
+<section data-cm-id="d0918089" data-id="urlstate01"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="urlstatehdr01" data-column-label="Column 1"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">in the url: state you can share</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-urlstate01" style="width: 520px; height: auto; left: 20px; top: 95px;" data-block-id="urlstatecode01" data-column-label="Column 2"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code>import { useSearchParams } from 'react-router'
+
+// /shop?color=blue&amp;sort=price-asc
+function Shop() {
+  const [params, setParams] = useSearchParams()
+  const color = params.get('color') ?? 'all'
+  const sort = params.get('sort') ?? 'popular'
+
+  function pickColor(c) {
+    setParams((p) =&gt; {
+      p.set('color', c) // sort stays as it was
+      return p
+    })
+  }
+  // ...show the products, filtered and sorted
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-urlstate01" data-block-id="urlstatetxt01" style="height: auto; width: 390px; left: 555px; top: 90px;" data-column-label="Column 3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 0.85em;">
+<p><br></p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>refresh: the filter is still there</li>
+	<li>send the link: they see what you see</li>
+	<li>back undoes the last filter</li>
+</ul>
+<p style="color:#942323"><strong>rule of thumb:</strong> if someone would share it, bookmark it or refresh into it, put it in the url</p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>yes: filters, search, sort, page number, the open tab</li>
+	<li>no: half-typed input, an open dropdown, anything secret</li>
+</ul>
+</div></div><aside class="notes">* callback to the "state in the url" demo in the routing deck: same shop, same ?color=blue&amp;sort=price-asc
+* with useState the filter lives in this tab's memory; refresh or share the link and it's gone. in the url, refresh, back, bookmarks and shared links all keep it
+* the url IS the state here: read it with params.get(), no separate useState to keep in sync
+* setParams({ color: c }) replaces the whole query string (sort would vanish); the function form edits the current params and keeps the rest. unlike setState, two calls in the same tick don't stack
+* everything comes back as a string: Number(params.get('page')) for numbers
+* keep it small and never put secrets in it: urls end up in history, server logs and screenshots</aside></section>
+</section>
+<section data-cm-id="f24a68fb" data-id="place5title01"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="place5title01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">5 · In Context</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">App-wide, rarely changes</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s13" data-id="reactcontext01">
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="contexthdr01" data-column-label="Column 1"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">in context: app-wide, rarely changes</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-context01" style="width: 520px; height: auto; left: 20px; top: 95px;" data-block-id="contextcode01" data-column-label="Column 2"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code>const ThemeCtx = createContext('light')
+
+function App() {
+  const [theme, setTheme] = useState('light')
+  return (
+    &lt;ThemeCtx value={theme}&gt;
+      &lt;Toolbar /&gt;
+    &lt;/ThemeCtx&gt;
+  )
+}
+
+// any descendant can read it:
+function Button() {
+  const theme = useContext(ThemeCtx)
+  return &lt;button className={theme}&gt;Hi&lt;/button&gt;
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-context01" data-block-id="contexttxt01" style="height: auto; width: 390px; left: 555px; top: 90px;" data-column-label="Column 3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 0.85em;">
+<p><strong>solves prop drilling!</strong></p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>createContext + a provider + useContext</li>
+	<li>any descendant can read the value</li></ul>
+<p style="color:#942323"><strong>limitation:</strong></p>
+<ul style="color:rgb(58, 62, 64)">
+	<li><em>all</em> consumers re-render when value changes</li>
+	<li>no built-in selector to pick a slice</li>
+	<li>fine for theme, auth, locale</li>
+	<li>gets painful for frequently updating data</li>
+</ul>
+</div></div>
+
+<aside class="notes">* React's built-in answer to prop drilling: wrap a subtree in a provider, any descendant can useContext to read it
+* React 19: you render the context itself as the provider, &lt;ThemeCtx value={theme}&gt;. older code (and most tutorials) write &lt;ThemeCtx.Provider value={theme}&gt;; React 19's release post says .Provider will be deprecated in a future version
+* great for things that change rarely: theme, locale, auth status
+* the problem is performance - when the value changes, EVERY consumer re-renders
+* no way to say "I only care about one field" like useSelector in redux
+* put a useReducer in a context and you have a homemade store; it works fine for small apps, but it has the same re-render problem
+* context answers "how does the data get there", not "who changed it, and when". Facebook hit that second problem in 2014 with chat's unread count. next: what they built</aside></section>
+<section data-cm-id="9c845290" data-id="place6title01"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="place6title01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">6 · In a Store</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">How Facebook, Redux and Zustand got here</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s16" data-id="5eb0d4b0beae1a826d114c134a21f52f"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="b6bd4df7be3fe5fe8d74df1ed6e0f511"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Flux Pattern</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">Where it started</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s24" data-id="d3d72620dcd39bb44bfa1e317397e7c0">
+<section data-cm-id="s17" data-id="2c97dca03721913871eab0d18c048011"><div class="sl-block" data-block-type="iframe" data-name="iframe-6ea9f2" data-block-id="72fb20014b37388c2dedac39ae663c73" style="width: 894.469px; height: 503px; left: 32.7655px; top: 100px;"><div class="sl-block-content" style="z-index: 10;"><iframe sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock allow-presentation" referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube-nocookie.com/embed/nYkdrAPrdcw" allow="fullscreen; accelerometer; gyroscope; encrypted-media; autoplay; picture-in-picture"></iframe></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-fluxtalk" data-block-id="fluxtalklink01" style="height: auto; width: 894px; left: 33px; top: 618px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;"><p style="font-size: 0.7em; color: #6b7280;"><a href="https://www.youtube.com/watch?v=nYkdrAPrdcw" target="_blank">Hacker Way: Rethinking Web App Development at Facebook</a> (F8 2014)</p></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="3cdb4090f0be1b179625decffdb3d165"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">in a state of flux</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* facebook's answer to scalability
+* interesting worth watching, but we'll do a cliffnotes version here now
+* the talk: "Hacker Way: Rethinking Web App Development at Facebook", F8 2014 (the link under the video opens it on YouTube if the embed misbehaves)
+* embed fix (Oct 2026): YouTube now refuses embeds that don't send a Referer ("Error 153: video player configuration error"), so the iframe sets referrerpolicy="strict-origin-when-cross-origin" and uses youtube-nocookie.com
+</aside></section>
+<section data-cm-id="s18" data-id="d82c51e71ef6f7f13bdac7293697022c">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-f866ba" data-block-id="0f896c23be892ea24e668f2759bb12ea" style="width: 806.4px; height: 454.4px; left: 64.2164px; top: 157.754px; min-width: 1px; min-height: 1px;"><div class="sl-block-style" style="z-index: 10; filter: drop-shadow(rgba(0, 0, 0, 0.5) 2px 2px 5px);"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1764" data-natural-height="994" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/8f53e78b2e760a320202c64748cf61c6.png"></div></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="268166adea25ae9fb911052b6a51ab08"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">the beginning</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* oh no not another one of tim's history rants
+* as yuval noah harari says - you need to know history to understand the present/future
+* multiple parts of webpage that tracked messages in different ways
+* had a messenger window but also unread count
+</aside></section>
+<section data-cm-id="s19" data-id="a6ed05ba694f71d8fc9c23ea499a766f">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-9d916a" data-block-id="74141f547f35322efe38df959395c61a" style="width: 912.562px; height: 513.9px; left: 23.719px; top: 107.562px; min-width: 1px; min-height: 1px;"><div class="sl-block-style" style="z-index: 10; filter: drop-shadow(rgba(0, 0, 0, 0.5) 2px 2px 5px);"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1758" data-natural-height="990" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/616664e5a5bb937821ed7b8e601c3d1c.png"></div></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="25dc559c0e513fcf1940cfee258a8385"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">questionable design notwithstanding</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* solving what was really a design issue with engineering
+* bugs were insidious
+* how do you handle both staying in synch - read in one meant mark as read in another
+* had multiple data models responsible for each view
+* updating one model would need to update another
+  * unread thread count
+  * unread messages
+* had unread counts that were false positive
+</aside></section>
+<section data-cm-id="s20" data-id="a6945690d12111b25a595f44bde8620b">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-2a545c" data-block-id="22ce2261f9dd597bc1da8f0c76fa8186" style="width: 916.145px; height: 511.41px; left: 21.9275px; top: 124.926px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1752" data-natural-height="978" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/626c43157453c695cf083cdb0792022d.png"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="f543b1b30d4b1db66ba36d3a8e52a7d5"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">how might study work</div>
+</div>
+</div>
+</div></div><aside class="notes">* increment unseen
+* append message in chat
+* if open append message in messages Views
+* if chat tab is focused or messages is open - decrement unseen
+* complex login living in multiple places
+* imperative code with lots of steps with checks
+</aside></section>
+<section data-cm-id="s21" data-id="a67a10d31ba46aafa4a3cc176d42c943">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-7e974c" data-block-id="026eafa6c796e0b98d0e2ceb32832ce5" style="width: 903.444px; height: 505.682px; left: 28.278px; top: 124.318px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1758" data-natural-height="984" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/b8f4a3b14044d88e0ed31829affb3fb6.png"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="6eb487fba000483c22922801bef15079"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">chat case study</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* attempt 1:
+  * problem kept coming back as they fixed things due to complexity
+  * here's what the basic logic looked like
+  * handler had too much to do
+  * large amount of centralized logic is one solution but have to code for consistency problems
+  * chat tabs is easy - get a new message - append it
+  * less clear about unseen count logic
+* realizations:
+  * use **explicit data** - actual unseen threads, not just counter
+  * **perhaps storing unseen as a list by threadID would be better**
+  * moving display logic to each component so it can decide based on data how to render (sound familiar?)
+  * separating data from view
+  * wanted to move these decisions closer to the actual views.
+</aside></section>
+<section data-cm-id="s22" data-id="6d4f7ba2de201be78ae76ae89c4b17e8">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-9244d5" data-block-id="455a8504eeb7fc4209b1a1783a6367fe" style="width: 806.4px; height: 450.771px; left: 76.8px; top: 124.614px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1746" data-natural-height="976" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/018d4cea9d456d01ff5a4652fa056662.png"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="35748f0482d1a2b991e54cf8c9a8c17f"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">MVC data binding</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* taking a step back to look at mvc and data binding
+* perhaps this way of thinking was part of the problem
+* two way binding here
+</aside></section>
+<section data-cm-id="s23" data-id="2d7eaadec06a4504941d5bef7b4269f4">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-99c6e4" data-block-id="f2adcebeb40f0e074725c0049a59be05" style="width: 806.4px; height: 453.715px; left: 76.8px; top: 169.283px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1756" data-natural-height="988" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/aa48949d7305d46be4dd9e5a878130e5.png"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="9584f11a896b0d298b586e351e320cdd"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">mvc problems</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* too much stuff to keep track off
+* data changing over time
+* would you be able to tell if there is an infinite loop - one model updating another and back
+</aside></section>
+</section>
+<section data-cm-id="s28" data-id="52e6f48c710e8ee9b6a3382790d44ccc">
+<section data-cm-id="s25" data-id="060d465f3b9464136821b315a176f8c9">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-af71a7" data-block-id="c2b90b1e3829cc5f8a52f406e5ea057c" style="width: 931.276px; height: 281.532px; left: 14.362px; top: 152.608px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1300" data-natural-height="393" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/7d1f57931a0853391705ba67d7237b7b.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-79dadd" data-block-id="370944df63734559b152f246132f072d" style="height: auto; width: 600px; left: 180px; top: 496.884px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><ul>
+	<li>MORE unidirectional flow!</li>
+	<li>Yay! &nbsp;</li>
+</ul></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="50bf50cb71e609612e78688255c08221"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">enter flux</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* unidirectional data flow
+* thanks facebook - these dev tools might be facebook biggest positive contribution to society
+* predictable - no multiple arrows
+* finish a layer you are done
+* with multiple Views easy as arrows go in one direction
+* easy to reason about
+* data changes - views update
+* except that is more global and neat
+</aside></section>
+<section data-cm-id="s26" data-id="8083868ce90d1b1f114e717828915d56">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-cedb0f" data-block-id="10cc75595d7d1ad0defa0626bb0c3fbf" style="width: 806.4px; height: 453.715px; left: 76.8px; top: 165.686px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 11;"><img style="" data-natural-width="1756" data-natural-height="988" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/721f00960d0b129ad91c559d3375885f.png"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="92fe8c2eeb5d8915f41e734c6800cf4f"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">what if we attempted distributed control?</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* not the full system - but if we had to list some of actions we had to take before
+* track an action through the system
+* what if each of these systems was responsible for its own responses to data changes? 
+</aside></section>
+<section data-cm-id="s27" data-id="284e3f38bb13ff2d4bbfe26a5198ea20">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-e100ee" data-block-id="afe77ffe327b84c451811bfb242e09c8" style="width: 806.4px; height: 450.041px; left: 76.8px; top: 140px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1756" data-natural-height="980" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/35b7b27529bff480262f1b3835df9255.png"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="07f66c617cd10b934c2852bef7239d8a"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">flow based programming</div>
+
+<div class="title">&nbsp;</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* the dark grey models are the actual data
+* so unseen count is list size rather than a counter
+* can imagine testing is easy
+
+</aside></section>
+</section>
+<section data-cm-id="s31" data-id="af3c4c8a7625bce2e36e5631bb10d4ac">
+<section data-cm-id="s29" data-id="294b6db6578bf165971c01c513a144f7">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" data-name="text-6b7197" data-block-id="df56420e6202e2b15643d558fdbf3b20" style="height: auto; width: 800px; left: 80px; top: 235.204px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>
+<span style="color:rgb(58, 62, 64); text-align:left">loosely:</span>
+	<ul>
+		<li>Views -&gt; Views (React Components)</li>
+		<li>Controllers -&gt; Views (Container Components/Data Connected Components)</li>
+		<li>Model -&gt; Store (also ~state)</li>
+	</ul>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="a5f3c81e6b82de9e6d404b9396d19095"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">MVC → Flux</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* how do we convert one way of reasoning to another?
+</aside></section>
+<section data-cm-id="s30" data-id="2e75ba9fe426582f8e434bb54a4a1d8f">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-a00904" data-block-id="0aa880de5ce5c8534e42328bb0a15148" style="width: 667.388px; height: 626px; left: 146.306px; top: 74px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1548" data-natural-height="1452" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/24356b8265adbae7e1b98b4fc8705d28.png"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="28e191d08c65e1ca0fe03e451d53d68f"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">reception</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* flux was a bit tricky
+* dan abramov comes up with answer - REDUX
+</aside></section>
+</section>
+<section data-cm-id="s32" data-id="25e0795b7beabee4795e0c67b970f6ff"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="380a62668526d9ee9a86ae89412f15e1"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Redux</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">Flux for the masses, version 1</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s43" data-id="b93b79297acd753edb0a002dd438242c">
+<section data-cm-id="s33" data-id="3e64e3c51f3108b9779e4e7db2c4aa9b"><div class="sl-block" data-block-type="image" data-name="image-7cbfe9" data-block-id="7008c2a82a507009c53abfd012ff6326" style="width: 377.496px; height: 51.013px; left: 13.602px; top: 108.487px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="148" data-natural-height="20" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/adebdc4376a96468113c12a9c1a448f1.svg"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-59e71c" data-block-id="a28c48daff9f725641552faae37cd362" style="width: 384.214px; height: 56.502px; left: 13.602px; top: 171.749px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 11;"><img style="" data-natural-width="136" data-natural-height="20" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/949577497125c7f68533ed7c1c59a869.svg"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-a038cf" data-block-id="90c743b149b58571a6ce6a0d1a4e5d1e" style="width: 402.274px; height: 59.158px; left: 13.602px; top: 240.342px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="136" data-natural-height="20" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/fdadd220f925dd24774c9a0a789983d8.svg"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-afd226" data-block-id="264bb5e1a0d5a6735363db2680871d31" style="width: 467.398px; height: 65.4357px; left: 12.602px; top: 311.5px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 13;"><img style="" data-natural-width="300" data-natural-height="42" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/23d4e1e0bb17989be7711cb9bb7bd118.svg"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-6953a1" data-block-id="f7396f6e651e4d08c50d88fa9eccc0b2" style="width: 511.975px; height: 72.1092px; left: 13.602px; top: 388.936px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 14;"><img style="" data-natural-width="142" data-natural-height="20" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/3644e51df3dee5241cf0fbe9740aea27.svg"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-841cb2" data-block-id="44dc9ee902f060e2d7617fd88d3b0304" style="width: 533.501px; height: 75.141px; left: 13.602px; top: 473.446px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 15;"><img style="" data-natural-width="142" data-natural-height="20" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/cc64725f0c000efebff21468257ca043.svg"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-c93f50" data-block-id="49740298524ce937bf88a957063869d5" style="height: auto; width: 248.963px; left: 408.648px; top: 114.493px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; text-align: left;">
+<p>7/2016</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 248.963px; left: 415.876px; top: 181.5px;" data-block-id="58de60764edde43bc2b10d43696ad892" data-name="text-141ee9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17; text-align: left;">
+<p>4/2017</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 248.963px; left: 435.519px; top: 249.418px;" data-block-id="52793cfe0cdb7289b1d3b72dc0fd76a1" data-name="text-72c774"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18; text-align: left;">
+<p>4/2018</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 248.963px; left: 498.006px; top: 324.718px;" data-block-id="6d2f5a1a1e31e6bcc8784dcc10a830b1" data-name="text-f2175d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19; text-align: left;">
+<p>4/2019</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 248.963px; left: 547.103px; top: 405.491px;" data-block-id="a3beaac3d6ac83165dd1bcbd089162b1" data-name="text-fa64d3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 20; text-align: left;">
+<p>4/2020</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 140px; left: 820px; top: 590px;" data-block-id="a1e4cefb6b224f5005fd89d721202060" data-name="text-0bdb93"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 21; text-align: left;">
+<p>10/2026</p>
+</div></div>
+<div class="sl-block" data-block-type="image" data-name="image-8760b3" data-block-id="5c70aedf4235dd1aa50acb4009479885" style="width: 386.401px; height: 190.987px; left: 547.103px; top: 77.9315px; min-width: 1px; min-height: 1px;"><div class="sl-block-content plain" style="z-index: 22;"><img style="left: 0px; top: 0px; width: 463px; height: 191px;" data-natural-width="800" data-natural-height="330" data-crop-x="0" data-crop-y="0" data-crop-width="0.834559" data-crop-height="1" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/a9c0ea6700cf53348c526978cb7ecef0.png"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="4a3bc482b4dac632f490e643f3371072"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 23;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">redux, an easier but still hard flux</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 248.963px; left: 567.547px; top: 491.517px;" data-block-id="d704e5b29b342011567882fb8d6b14ee" data-name="text-2954d7"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 24; text-align: left;">
+<p>4/2021</p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-reduxbadge2026" data-block-id="reduxbadge2026" style="height: auto; width: 800px; left: 13px; top: 566px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 25; text-align: left;"><p style="margin: 0; line-height: 1;"><span style="display: inline-block; font-family: Verdana, DejaVu Sans, sans-serif; font-size: 44px; color: #fff; background: #555; padding: 16px 22px; border-radius: 8px 0 0 8px;">downloads</span><span style="display: inline-block; font-family: Verdana, DejaVu Sans, sans-serif; font-size: 44px; color: #fff; background: #4c1; padding: 16px 22px; border-radius: 0 8px 8px 0;">187M/month</span></p></div></div><aside class="notes">* Redux - a flux framework for the rest of us
+* flux was more a paradigm
+* redux takes those principles and makes them functional and awesome
+* the last bar is real: npm downloads of `redux` for Sep 19 to Oct 18 2026 were 186,988,043. still climbing, even though most new projects reach for something lighter: a lot of it is existing apps (and other packages that depend on redux)
+* for comparison that month: react-redux 161M, @reduxjs/toolkit 132M, zustand 246M</aside></section>
+<section data-cm-id="s34" data-id="2d73ca71e93264595b55eb0f6de7fdb6">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" data-name="text-e4bd06" style="height: auto; width: 942.716px; left: 8.642px; top: 349px;" data-block-id="922e16fdc5461d28600a65425c7861a0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><ul style="color:#3a3e40">
+	<li>
+<strong>Single source of truth</strong><br>
+	One tree of state for entire application - not spread out over state variables all over the place</li>
+	<li>
+<strong>State is read-only</strong><br>
+	To change state emit an action, which are centrally processed, generating new state.</li>
+	<li>
+<strong>Changes are made with pure functions</strong><br>
+	No side effects or mutations. Reducers take existing state+action emit new state.</li>
+</ul></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-9cad55" data-block-id="9cd70f930e8c76cb41907eed4db017fc" style="height: auto; width: 933px; left: 27px; top: 101.5px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<p style="text-align:left"><span style="color:#942323"><strong>what is react state</strong><br>
+render(state)</span><br>
+&nbsp;</p>
+
+<p style="text-align:left"><span style="color:#942323"><strong>what is redux</strong><br>
+redux(prevState, action)<span style="text-align:left">→newState→</span>render(newState)</span></p>
+</div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="967534eaa4301456cf3c820a7aee7c52"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 13;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">redux principles</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s35" data-id="4945b47fbda187498134ffc234cbc7f8"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 560px; left: 30px; top: 110px;" data-cm-block-id="63873385"><div class="sl-block-content" style="z-index: 10;"><iframe title="a component tree: one leaf tries to talk straight to its grandparent and across to the other branch" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=trees&amp;d=direct&amp;v=3" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="2a6a15f34cd55e8242f184e57f2ead3c" data-cm-block-id="47cf4d4e"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">react component probs</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* not ideal, why do the parents need to know for instance?
+</aside></section>
+<section data-cm-id="s36" data-id="f01a7b719753f62f6569f65623d935cd"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 560px; left: 30px; top: 110px;" data-cm-block-id="80b5f02c"><div class="sl-block-content" style="z-index: 10;"><iframe title="a store beside the tree: one component dispatches up to it, others subscribe to it" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=trees&amp;d=store&amp;v=2" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="52ac5a803faca619f1883787bfb4f53f" data-cm-block-id="e692d579"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">add a dash of redux</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* what if we had an application-level store of data
+* where a component can dispatch an action
+* and others can subscribe to data - NOT EVENTS BUT ACTUAL DATA
+</aside></section>
+<section data-cm-id="s37" data-id="4a6ff6bf74a7d08f3f2154c69b7d368b"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 560px; left: 30px; top: 110px;" data-cm-block-id="ecfb0ff3"><div class="sl-block-content" style="z-index: 10;"><iframe title="without a store, changes climb up and down the tree; with a store, one dispatch and direct subscriptions" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=trees&amp;d=together&amp;v=2" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="bdecee03686f38c8f529942905066870" data-cm-block-id="c33c9851"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">together at last</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s38" data-id="e008ac82f5352b2736e232c4785f5768"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 300px; left: 30px; top: 190px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="dispatch current state and an action into a reducer, which produces the new state in the store" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=redux-flow&amp;d=flow" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="e3054bee114b10170cf6c47305ad80c3"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">state &amp; actions: redux flow</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* dispatch sends actions to reducers which return new state given old state
+</aside></section>
+<section data-cm-id="s39" data-id="6df6034b1187158d54ed3bb5fb73763c"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 300px; left: 30px; top: 180px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="one dispatch fans out to three reducers, user, posts and ui, each producing its slice of the store" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=redux-flow&amp;d=reducers" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="03cc7742b0fc0000012629ae5d18d81d"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">multiple reducers</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-48802a" data-block-id="a99bfe7e0082448119cc4461f4449073" style="height: auto; width: 344.299px; left: 307.851px; top: 511.753px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;"><ul>
+	<li>can have multiple reducers responsible for different parts of data called in parallel</li>
+</ul></div></div><aside class="notes">* lets dance
+* technically they aren't called in series but in parallel 
+</aside></section>
+<section data-cm-id="s40" data-id="2b1d6e4e5ffdf5fdb97ffc5fae00e349"><div class="sl-block" data-block-type="image" data-name="image-2e12ee" data-block-id="2fadbde438986b05bf4b9b493556838f" style="width: 888.418px; height: 599.682px; left: 35.791px; top: 91px; min-width: 1px; min-height: 1px;"><div class="sl-block-content plain" style="z-index: 10;"><img style="" data-natural-width="1600" data-natural-height="1080" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/2d277bc5eea279791453d8a66f82dbdf.gif"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="69712c559d268297d9a2241c1d59142c"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">redux in motion</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* and here's how it all moves Together
+* state comes in together with action to form new state
+
+</aside></section>
+<section data-cm-id="s41" data-hidden="true" data-id="4aa9e110573137464b246b5d0805227a" data-visibility="hidden">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-6e04b4" data-block-id="ffd7b13765beaf2752f123627d9c9663" style="width: 635.72px; height: 592.875px; left: 162.14px; top: 91px; min-width: 1px; min-height: 1px;"><div class="sl-block-content plain" style="z-index: 10;"><img style="" data-natural-width="1647" data-natural-height="1536" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/4f647599405712ca6665b97463b47b9f.png"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="04f488423ca58d4759342c86d83bacd2"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">example pre-redux</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* lets take youtube app
+* had some complicated double layer wiring
+* would have been nice not to pass so much stuff in props right?
+</aside></section>
+<section data-cm-id="s42" data-hidden="true" data-id="1424c1ad0b50bd242adab33ab1c69f4b" data-visibility="hidden">
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 960px; left: 0px; top: 0px; height: auto;" data-name="text-4ad971" data-block-id="704abac7091e08bdc3203fa54c52400f"><div class="sl-block-content title" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h2>example+redux</h2>
+</div></div>
+<div class="sl-block" data-block-type="image" data-name="image-9fae68" data-block-id="acefa1ec0db73af588fdf54f05f985f7" style="width: 942.394px; height: 577.825px; left: 8.803px; top: 95.9731px; min-width: 1px; min-height: 1px;"><div class="sl-block-content plain" style="z-index: 11;"><img style="" data-natural-width="1065" data-natural-height="653" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/6312f06e0805ae9a03c170161f6c4d12.jpg"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="df2def9f5bad3a93f5ee470f5f9bc36b"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">example +redux</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* heres a version with redux
+* this drawing is pretty much what you'll be doing is the redux short - refer back to this - not all things are named the same, this has 2 reducers but you'll be combining the state into 1 - this is purposeful, understand the concepts not the specifics.
+
+</aside></section>
+</section>
+<section data-cm-id="s49" data-id="f6975edb01818ba0f7c54af107b03877">
+<section data-cm-id="s44" data-id="9951f69a8787c58cf46c379dc9f8e69b">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" data-name="code-849030" data-block-id="6ae9ae3476dccb249ae49a39c1f96b61" style="width: 634.435px; height: auto; left: 151px; top: 102.562px;"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true"><pre style="font-size: 25px; line-height: 30px;"><code>{
+    type: 'VIDEO_SELECTED',
+    selected: video,
+}
+
+// is then dispatched to reducer
+// dispatch( { type: _, etc })
+
+</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-a0ddb4" data-block-id="4ba695ef3e6d21309f2b424a2dfa3c36" style="height: auto; width: 600px; left: 167.217px; top: 451px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>is just an object</li>
+	<li>has a mandatory type property</li>
+	<li>other properties as needed</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="e64f9f2afbb07129a20b68b9d63454aa"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">what is a redux action</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* can use a const or dict to have types not accessed as strings 
+* all Redux events trigger actions
+* remeber only way to change applicaiton state is through actions
+
+</aside></section>
+<section data-cm-id="s45" data-id="c159c50187bae05e28588cc6c431d667">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" data-name="code-849030" style="width: 869.541px; height: 335.736px; left: 42.792px; top: 92.352px;" data-block-id="f3b48f7b30e3a93798cb25c2a6a4f2c1"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;"><pre style="font-size: 25px; line-height: 30px;"><code>export function selectVideo(video) {
+  return {
+    type: 'VIDEO_SELECTED',
+    selected: video };
+  }
+}
+
+// must be `connect`ed to redux or dispatched
+// dispatch( selectVideo(video) )
+</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-a0ddb4" style="height: auto; width: 837.208px; left: 42.792px; top: 474.5px;" data-block-id="5855bc3ae45ded834839910959326041"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>is called in an event
+	<ul>
+		<li>user or ajax callback</li>
+	</ul>
+	</li>
+	<li>is a function that returns an action object</li>
+	<li>action is sent to all reducers</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="78b844a7c20c89261c0b2549aea7f8ea"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">what is a redux action creator?</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* CAVEAT + MUST CONNECT TO REDUX or be dispatched manually
+</aside></section>
+<section data-cm-id="s46" data-id="ec3184e05cb528fec800ea0c25f399de">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" data-name="code-849030" style="width: 903.575px; height: 364.665px; left: 42.792px; top: 92.352px;" data-block-id="a6ea30be614eba854fbf0b8c5f1af984"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;"><pre style="font-size: 25px; line-height: 30px;"><code>const initialState = { selected: null, all: [] }
+
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case 'VIDEO_SELECTED':
+      return { all: state.all, selected: action.video };
+    default:
+      return state;
+  }
+}
+</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-a0ddb4" style="height: auto; width: 837.208px; left: 42.792px; top: 501.5px;" data-block-id="72b2b2251eb199b73cdc6d1856e77fa6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>reducer pure function produces new state</li>
+	<li>based on current state + action</li>
+	<li>return is assigned to key in main state</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="b9c5d28bae004ffe73785f3b8fc7519e"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">what is a redux reducer?</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* we're going to use multiple reducers in most projects
+* each reducer is responsible for one piece of the state object
+* draw out what your state looks like - this is important!
+
+</aside></section>
+<section data-cm-id="s47" data-id="8802f8ad5ad0c6d9978472eb34efb15c"><div class="sl-block" data-block-type="text" data-name="text-a0ddb4" style="height: auto; width: 585.354px; left: 374.646px; top: 158.35px;" data-block-id="aa3014d232e80a877177ae4c1bb19af5"><div class="sl-block-style" style="z-index: 10; transform: rotate(0deg);"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>must be a pure function!</li>
+	<li>receive:
+	<ul>
+		<li>current state</li>
+		<li>action and any payload</li>
+	</ul>
+	</li>
+	<li>return:
+	<ul>
+		<li>new state</li>
+	</ul>
+	</li>
+	<li>do not have access to anything else</li>
+	<li>shape MUST stay consistent</li>
+	<li>what is a tool we learned to help keep this pure?</li>
+</ul>
+</div></div></div>
+<div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 370px; height: 390px; left: 4px; top: 170px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="a pure function: in and out only; an impure one also leaks effects like fetch, Math.random and changing a global" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=redux-flow&amp;d=pure" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="4ecbdd665d56ed26f0a820281595316a"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">reducers, more pure functions</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* side effects again
+* anybody remember what a side effect is?
+* has anyone tried hooks with useEffect?
+* do we need to hash this out? 
+* immer and produce! use it!</aside></section>
+<section data-cm-id="s48" data-id="e063732c586945a4b846975a6bfcb01c"><div class="sl-block" data-block-type="text" data-name="text-a0ddb4" style="height: auto; width: 508.777px; left: 385.611px; top: 171.964px;" data-block-id="1246324f636eefb49f215a8a6d920dfb"><div class="sl-block-style" style="z-index: 11; transform: rotate(0deg);"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>all reducers get called hence <span style="color:#4757ff">switch</span> on action</li>
+	<li>return state for particular key</li>
+	<li>must return some state, always merged</li>
+	<li>default action must return existing state</li>
+</ul>
+</div></div></div>
+<div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 380px; height: 494px; left: 0px; top: 150px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="a state object drawn inside an outline of New Hampshire; reducerA owns key a, reducerB owns key b" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=redux-flow&amp;d=shape" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="7b42b9225ebfc623b0f2a2db60129d8b"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 13;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">the shape of data</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* REMEMBER  component state is different and can and should still be used
+</aside></section>
+</section>
+<section data-cm-id="s56" data-id="aad068fa3c52748962be0ef2a8fbc953">
+<section data-cm-id="s50" data-id="0e2d8b6f09bf0716e6f624ed9effd044"><div class="sl-block" data-block-type="text" data-name="text-a0ddb4" style="height: auto; width: 800px; left: 80px; top: 478.267px;" data-block-id="972a5b94548f55f0ac3ac56344a31be2"><div class="sl-block-style" style="z-index: 11; transform: rotate(0deg);"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>components that control data</li>
+	<li>need to trigger actions (could use props though)</li>
+	<li>need access to global state</li>
+	<li>may pass data to presentational children components</li>
+	<li>don't overuse</li>
+</ul>
+</div></div></div>
+<div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 640px; height: 380px; left: 160px; top: 86px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="a container component reads and dispatches to the store and passes props to a presentational component" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=redux-flow&amp;d=container" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="b0d224687beb14fcc1f29f2dad5fda68"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 13;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">ok... and connecting a component?</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* some components, presentational ones don't need it
+* here we call them container components - since they contain presentatinal components and pass data to them
+* just props based
+* no need to overuse
+</aside></section>
+<section data-cm-id="s51" data-id="d884d95a53ff1b55d58e24ebac702261">
+
+
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" data-name="code-16c47c" style="width: 592.613px; height: auto; left: 183.693px; top: 543px;" data-block-id="2a07ce602e13bfac42e4209596b7470a"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 11;" data-code-autoheight="true" data-code-wrap="true"><pre style="font-size: 16px; line-height: 19px; tab-size: 4;" class="javascript"><code>import { configureStore } from '@reduxjs/toolkit';
+
+const store = configureStore({
+  reducer: rootReducer,
+});</code></pre></div></div>
+<div class="sl-block" data-block-type="iframe" data-name="iframe-ab335a" data-block-id="fda92bb9bfbfe068decfb1891697ba98" style="width: 960px; height: 542.083px; left: 0px; top: 2.5885px;"><div class="sl-block-content" style="z-index: 12;"><iframe allow="fullscreen; accelerometer; geolocation; gyroscope; camera; encrypted-media; microphone; midi; autoplay" data-src="https://redux-toolkit.js.org/" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock allow-presentation"></iframe></div></div></section>
+<section data-cm-id="s52" data-id="a513b87722b1c9f96ea25de1d4521fe9">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" data-name="text-a0ddb4" style="height: auto; width: 800px; left: 80px; top: 501.5px;" data-block-id="0dccb0c2d5f332e1c0af45f13894157f"><div class="sl-block-style" style="z-index: 10; transform: rotate(0deg);"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>global state selection as variable</li>
+	<li>takes function that parses out the bit of state needed</li>
+</ul>
+</div></div></div>
+<div class="sl-block" data-block-type="code" data-name="code-16c47c" style="width: 891.394px; height: 337.123px; left: 34.303px; top: 97.8773px;" data-block-id="ef75c6508e3f78a4d4507fac90033213"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 11;"><pre style="font-size: 18px; line-height: 22px;" class="javascript"><code>// in your connected function based component with hooks
+
+import { useSelector } from 'react-redux';
+
+function myComponent(props) {
+  const video = useSelector((reduxState) =&gt; reduxState.video.selected);
+  return (
+    &lt;div&gt;{video.snippet.title}&lt;/div&gt;
+  )
+}
+</code></pre></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="c449f4f593b833bc089bab7f59ef58cd"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">useSelector hook</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s53" data-id="e0192c3bf6681a1d63aa3d9880035e8f">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" data-name="text-a0ddb4" style="height: auto; width: 960px; left: 0px; top: 560px;" data-block-id="7002a41e177acd1c25d492e18e629af6"><div class="sl-block-style" style="z-index: 10; transform: rotate(0deg);"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>component must be connected to ActionCreator functions</li>
+	<li>if called directly won't trigger reducer!</li>
+	<li>lots of short hand <a href="https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options" target="_blank">here</a>
+</li>
+</ul>
+</div></div></div>
+<div class="sl-block" data-block-type="code" data-name="code-16c47c" style="width: 891.394px; height: 430.718px; left: 34.303px; top: 84.2636px;" data-block-id="d5b293a28ca6b351b9d322a6a134a80c"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 11;"><pre style="font-size: 16px; line-height: 19px;" class="javascript"><code>// import 1 action
+import {selectVideo} from './actions';
+
+
+function myComponent(props) {
+  const dispatch = useDispatch();
+
+  return (
+      &lt;button onClick={() =&gt; dispatch(selectVideo(props.video))}&gt;video&lt;/button&gt;
+  )
+}
+
+
+
+</code></pre></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="0db2248f528f9abef396b093b62b0ad6"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">useDispatch hook</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s54" data-id="2b2fb2b58bcb4c45c1732aa818e5c30b"><div class="sl-block" data-block-type="text" data-name="text-a0ddb4" style="height: auto; width: 960px; left: -7.10543e-14px; top: 528.685px;" data-block-id="dd14867850b7ae583de46cc5c9c5909f"><div class="sl-block-style" style="z-index: 10; transform: rotate(0deg);"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<ul style="color:rgb(58, 62, 64)">
+	<li>To provide access to the store to all</li>
+	<li>Wrap root App in a Provider tag at top level</li>
+</ul>
+</div></div></div>
+<div class="sl-block" data-block-type="code" data-name="code-16c47c" style="width: 592.613px; height: 352.838px; left: 16.7283px; top: 137.162px;" data-block-id="76503099e4bafc8f6608e0e2f6d7ebfb"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 11;"><pre style="font-size: 16px; line-height: 19px;" class="javascript"><code>import { configureStore } from '@reduxjs/toolkit';
+
+const store = configureStore({
+  reducer: rootReducer,
+});
+
+
+const root = createRoot(document.getElementById('main'));
+root.render(
+  &lt;Provider store={store}&gt;
+    &lt;MyRootComponent /&gt;
+  &lt;/Provider&gt;
+);</code></pre></div></div>
+<div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 330px; height: 398px; left: 620px; top: 100px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="the store wraps the app: Provider store={store} around App, so every component inside can read it" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=redux-flow&amp;d=provider" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="f94a65b56271e1259410b3306813d345"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 13;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">provider</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* last thing, provides access to store to connected components
+* required boilerplate
+</aside></section>
+</section>
+<section data-cm-id="1a54f268">
+<section data-cm-id="98dd1334" data-id="b5c4e975e81bb80b0684330fd50e58bc"><div class="sl-block" data-block-type="text" data-name="text-a0ddb4" style="height: auto; width: 959px; left: 1px; top: 140px;" data-block-id="5e84a8c2da15ef0d4161acdd40b78612"><div class="sl-block-style" style="z-index: 11; transform: rotate(0deg);"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><ul style="color:rgb(58, 62, 64)">
+	<li>
+	<p style="color:rgb(58, 62, 64)">But all that seems complicated, actions, reducers, providers, actionCreators, thunks?!</p>
+	</li>
+</ul></div></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-3f6a6c" data-block-id="f76e410a6df783acc4809fb7134de551" style="width: 711.86px; height: 384.404px; left: 124.07px; top: 245.596px; min-width: 1px; min-height: 1px;"><div class="sl-block-style" style="z-index: 12; filter: drop-shadow(rgba(0, 0, 0, 0.5) 2px 2px 5px);"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="500" data-natural-height="270" alt="totoro looking confused" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/2bfbab700d6f1a18db21fe80e065200b.gif"></div></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 1px; top: 0px;" data-name="snippet-26b630" data-block-id="b7bfe4e3f4b1aa2685967bebed459c82"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 13;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">all fine and dandy</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div></section>
+</section>
+<section data-cm-id="s57" data-id="02cd13cc26e9d1ce47903fe8fdcee8ce"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 259.912px; left: 80px; top: 179.023px;" data-block-id="a18b76cffb57975e4c799d59b6891ca8">
+<div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Zustand</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">A simpler redux</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div>
+<grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: 0px; left: 0px; pointer-events: none; z-index: 10;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: 0px; left: 0px; pointer-events: none; z-index: 10;"></grammarly-extension>
+</div></section>
+<section data-cm-id="s64" data-id="38ec6ea1f09d5bd7b2816799ff04110d">
+<section data-cm-id="s58" data-id="94a01b71265126ffaf850361d90e2fcb"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="ddfebb443fee5c76181e8be6f496947a"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Zustand</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-name="image-cb781a" data-block-id="2ff0e22f40993eb4e427c5c542bbce27" style="width: 806.4px; height: 403.2px; left: 76.8px; top: 86.8px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 11;"><img class="" data-natural-width="1200" data-natural-height="600" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/4ca6eecac6a50e716a26cb52af0c01c9.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-20ecbe" data-block-id="5080e1e6b2743f07b5b75e60a4e2ce5d" style="height: auto; width: 600px; left: 180px; top: 517.324px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;"><p>A small, fast and scalable bearbones state-management solution using simplified flux principles. Has a comfy API based on hooks, isn't boilerplatey or opinionated.</p></div></div><aside class="notes">* it is unopinionated, hence we'll have to bring our own opinions!</aside></section>
+<section data-cm-id="s59" data-id="4f4ff97968f4a3e3562ea1ad2d4c2968"><div class="sl-block" data-block-type="text" data-name="text-d197b9" data-block-id="2448e604e7f2792c985a9f450d7ac5f5" style="height: auto; width: 960px; left: 5.68434e-14px; top: 401.067px;"><div class="sl-block-style" style="z-index: 10; transform: rotate(0deg);"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<p>Why zustand over redux?</p>
+
+<ul>
+	<li>Simple and un-opinionated</li>
+	<li>Makes hooks the primary means of consuming state</li>
+	<li>Doesn't wrap your app in context providers</li>
+	<li>Can inform components transiently (without causing render)</li>
+</ul>
+
+<p>&nbsp;</p>
+</div></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="ccc0100d3c1feb43adb7ac7791a90bea"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">main premises</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-name="image-2ba2df" data-block-id="565831d53546c703e9c44c46fb83d564" style="width: 454.147px; height: 255.458px; left: 265.853px; top: 108.271px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 12;"><img class="" data-natural-width="1280" data-natural-height="720" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/cb8d006515e873f4568de61143b94a50.png"></div></div><aside class="notes">* this last one mostly means that it can operate outside of react if you want to,  we most likely never will but for very fast paced updates for instance where you might have say a game loop triggering re-renders anyway, but mouse events happening much faster you can update state and not trigger a cascade of re-rendering </aside></section>
+<section data-cm-id="s60" data-id="87b7e41ffb97e3d00c878635021a7a1d"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="35a8d8653001df570688e842ebf337df"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Step 1: create a store</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-849030" style="width: 960px; height: auto; left: 0px; top: 197px;" data-block-id="411d3f1d6c82194ffdcf5f3a96dfdbb0"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 11;" data-code-autoheight="true" data-code-wrap="true"><pre style="font-size: 19px; line-height: 23px; tab-size: 4;"><code>import { create } from 'zustand'
+
+const useBearStore = create((set) =&gt; ({
+  bears: 0,
+  increasePopulation: () =&gt; set((state) =&gt; ({ bears: state.bears + 1 })),
+  removeAllBears: () =&gt; set({ bears: 0 }),
+}))
+</code></pre></div></div></section>
+<section data-cm-id="s61" data-id="ea0af520a3775ad83070f029da9dc929"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="3e7d0615a30cab5c3b350f754e2f9210"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Step 2: use the store hook to filter state</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-849030" style="width: 960px; height: auto; left: 4.9738e-14px; top: 184px;" data-block-id="4aaa0640f99fe788a642d86172a6e1ac"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 11;" data-code-autoheight="true" data-code-wrap="true"><pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code>function BearCounter() {
+  const bears = useBearStore((state) =&gt; state.bears)
+  return &lt;h1&gt;{bears} around here ...&lt;/h1&gt;
+}
+
+function Controls() {
+  const increasePopulation = useBearStore((state) =&gt; state.increasePopulation)
+  return &lt;button onClick={increasePopulation}&gt;one up&lt;/button&gt;
+}
+</code></pre></div></div><aside class="notes">* the function you pass is a selector: it picks the one slice this component reads
+* the component re-renders only when that slice changes (compared with Object.is), which is Zustand's big win over one big Context (see the next slide)
+* picking several values at once? a selector that returns a new object every time would re-render on every change; wrap it: useBearStore(useShallow((s) =&gt; ({ bears: s.bears, food: s.food }))) with import { useShallow } from 'zustand/shallow' (Zustand 5)
+* actions are stable, so a component that only selects increasePopulation never re-renders because of bear counts</aside></section>
+<section data-cm-id="5986e56c"><div class="sl-block" data-block-type="iframe" data-name="iframe-rerenders" style="width: 900px; height: 600px; left: 30px; top: 90px;" data-cm-block-id="b1d9b839"><div class="sl-block-content" style="z-index: 10;"><iframe title="a component tree: add to cart or toggle the theme, and see which components re-render with one context versus a zustand store with selectors" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/slides/state-management/games/rerenders/index.html?v=2" style="width: 100%; height: 100%; border: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="rerendershdr01" data-cm-block-id="21e01a63"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">who re-renders?</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* guess first: in each mode, which boxes re-render when you add to cart? when you toggle the theme (light/dark mode)?
+* like a real app, every component you can see reads the theme; only App (which just lays out the page) doesn't
+* one context: the provider passes value={{ theme, cart, addToCart }}, a new object on every change, so every component that calls useContext(AppContext) re-renders: 9 for either click, even the ones that only care about the theme when you add to cart
+* zustand + selectors: one store, each component picks a slice; after a change zustand re-runs the selector and compares with Object.is; only changed slices re-render: add to cart = CartBadge + CartPage (2), toggle theme = all 9, same as context
+* so the theme isn't where selectors help: everything changes color, so everything re-renders either way, and that's fine because it flips once in a while. the cart is the point: it changes all the time and only 2 components show it
+* even cheaper for dark mode: put a class on  and let CSS variables do the colors; then only the toggle re-renders and the browser just repaints
+* addToCart is an action defined once in the store, so selecting it never causes a re-render
+* the footnote: App doesn't re-render in either mode because the state lives in a provider or store above it. if App kept the state in useState, everything under it would re-render unless memoized (React Compiler or memo)
+* the fix within Context is to split it (a ThemeContext and a CartContext); a store with selectors gets you that for free
+* the table on the right fills in as you try each mode and action</aside></section>
+<section data-cm-id="s62" data-id="3d9278303b8188c7d57a08d0dc34a7d8"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="b6a87a59cc9636e00ffebc79e695bee6"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Immer middleware for immutability</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-849030" style="width: 960px; height: auto; left: 4.9738e-14px; top: 150px;" data-block-id="00c1389d434aef9f4639a6f7e0c3fa74"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 11;" data-code-autoheight="true" data-code-wrap="true"><pre style="font-size: 19px; line-height: 23px; tab-size: 4;"><code>const useBearStore = create((set) =&gt; ({
+  bears: 0,
+  increasePopulation: () =&gt; set((state) =&gt; ({ bears: state.bears + 1 })),
+}))
+
+
+import { immer } from 'zustand/middleware/immer'
+
+const useBearStore = create(immer((set) =&gt; ({
+  bears: 0,
+  increasePopulation: () =&gt; set((draft) =&gt; { draft.bears += 1 }),
+})))
+</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-3c4e04" data-block-id="6da5b9781d4c3aa11900ec563bd32d24" style="height: auto; width: 600px; left: 180px; top: 590px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;"><p>ie: use immer and like it</p></div></div><aside class="notes">* immer middleware - no need for produce
+* you have to install immer yourself: npm install immer (zustand only ships the middleware)</aside></section>
+<section data-cm-id="s63" data-id="c3249854282c54a4a3f6775c60c6643d"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="9f823c578e1f16ef8c9bc2f9985a5cc1"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Summary</div>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 480px; height: 350px; left: 240px; top: 110px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="view, actions and state in a loop" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=state-maps&amp;d=cycle" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e8018f" data-block-id="c520a490237142770b44eccbbef7115c" style="height: auto; width: 960px; left: 5.68434e-14px; top: 506.971px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<p>No dispatch, reducers, actionCreators, createAsyncThunks, etc</p>
+
+<p>BUT</p>
+
+<p>a central store with actions collocated in the store</p>
+
+<p>most downloaded client-state library on npm: 246M/month</p>
+</div></div><aside class="notes">* docs need help keeping updated, seems like an active community so if you like it, contribute to it.
+* numbers (npm, last month as of Oct 21 2026): zustand 246M, react-redux 161M, @reduxjs/toolkit 132M, jotai 26M. downloads include installs pulled in by other packages, so they show shape more than exact rank
+* State of React 2025 also calls Zustand the fastest-growing and ranks it highest in satisfaction; Redux/RTK is still the most widespread</aside></section>
+<section data-cm-id="8ca3c108"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="signalshdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">signals: the other way to skip re-renders</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-signals" data-block-id="signalscode01" style="width: 580px; height: auto; left: 15px; top: 95px;"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 14px; line-height: 19px; tab-size: 4;"><code data-line-numbers="">import { signal, computed } from '@preact/signals-react'
+import { useSignals } from '@preact/signals-react/runtime'
+
+// lives outside any component, like a zustand store
+const bears = signal(0)
+const label = computed(() =&gt; `${bears.value} bears`)
+
+function BearCounter() {
+  useSignals() // subscribe to whatever this reads
+  return &lt;h1&gt;{label.value} around here ...&lt;/h1&gt;
+}
+
+function Controls() {
+  // no selector, no set(): just write it
+  return &lt;button onClick={() =&gt; bears.value++}&gt;one up&lt;/button&gt;
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-signals" data-block-id="signalstxt01" style="height: auto; width: 345px; left: 605px; top: 100px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 24px;">
+<ul style="color:rgb(58, 62, 64)">
+<li>a signal remembers who read it</li>
+<li>change it, and only those readers update</li>
+<li>Solid, Vue, Angular, Svelte 5 and Preact run on them</li>
+<li>React re-renders instead (the Compiler trims the extras)</li>
+<li>coming to JavaScript itself? TC39 proposal, Stage 1</li>
+</ul>
+</div></div><aside class="notes">* same bear store as the Zustand slides, written with signals
+* a signal is a box holding a value; reading .value inside a component (or a computed, or an effect) quietly subscribes the reader, and writing .value tells exactly those readers to update
+* compare: Zustand makes you pick a slice with a selector so the component only re-renders when that slice changes; with signals the subscription comes from just reading the value, so there's no selector to get wrong
+* computed is derived state that caches itself and only recomputes when a signal it read changes (the "derive it" idea from the start of the lecture)
+* the other frameworks: Solid (createSignal), Vue (ref), Angular (signal()), Svelte 5 ($state runes), Preact (@preact/signals). They update the DOM directly, with no component re-render at all
+* React went the other way on purpose: a component is a function you re-run, and the React Compiler auto-memoizes so the re-runs are cheap. React has no built-in signals (as of Oct 2026)
+* @preact/signals-react: either a Babel plugin, or call useSignals() at the top of a component like above. Works, but it's swimming against React's model, so we're sticking with Zustand
+* TC39 proposal-signals has been at Stage 1 since 2024; the plan is lots of framework prototyping before it advances: https://github.com/tc39/proposal-signals
+* Remix 3 doesn't use signals either: component state is a plain variable in a setup closure and you call handle.update() yourself when it changes (handle.signal there is an AbortSignal, not a reactive one)
+* Jotai's atoms (hidden this term) are the same fine-grained idea inside React: lots of tiny pieces of state that each know their readers</aside></section>
+</section>
+<section data-cm-id="s69" data-id="81d5e6865d9da0fe407174a3cb6d4e4d">
+<section data-cm-id="s65" data-id="9b5ff0afce396bed67cde9a534273ebb"><div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 620px; left: 30px; top: 75px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="the redux loop in six steps: component, action creator, action, middleware and dispatch, reducers, store, back to the component" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=state-maps&amp;d=reduxMap" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="8566573fb7bfe5bf01bc16c052357763"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">redux map</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* forever will redux confuse you
+</aside></section>
+<section data-cm-id="s66" data-id="3cbfeac464d294bf84391962c37643a5"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="6a55b08df8c5bc9f960a71e7f224303c"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">zustand map</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 900px; height: 620px; left: 30px; top: 75px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="the zustand loop in four steps: component calls an action function, optional middleware, set makes new state in the store, useStore selector back to the component" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=state-maps&amp;d=zustandMap" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div></section>
+<section data-cm-id="s67" data-id="af886d056f9a285f2dacf766a124c1ac">
+
+
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="dbce5232c6711df4de87d5280986d4cd"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Redux deconstructed</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="sandpack" data-name="sandpack-redux-deconstructed" data-block-id="6c1ee5738ea89cdef6d9c17fb26afccb" style="width: 960px; height: 616.84px; left: 0px; top: 83.1602px;"><div class="sl-block-content" style="z-index: 11;"><div class="sandpack-embed" data-template="react" data-theme="light" data-layout="preview-right" data-show-line-numbers="true" data-visible-files="[&quot;/App.js&quot;]"><script type="application/json" data-sandpack-files="">
+{
+"/App.js": "import React, {useState, useEffect, useReducer, useContext, createContext } from 'react';\n\n// Creating a Context\nconst StateContext = createContext();\n\n// Store creation function\nfunction createStore(reducer, initialState) {\n  const useStore = () => useContext(StateContext);\n  const StoreProvider = ({ children }) => {\n    const [state, dispatch] = useReducer(reducer, initialState);\n    return (\n      <StateContext.Provider value={{ state, dispatch }}>\n        {children}\n      <\/StateContext.Provider>\n    );\n  };\n  return { StoreProvider, useStore };\n}\n\n// Reducer function\nconst reducer = (state, action) => {\n  switch (action.type) {\n    case 'increment':\n      return { ...state, count: state.count + 1 };\n    case 'decrement':\n      return { ...state, count: state.count - 1 };\n    default:\n      return state;\n  }\n};\n\n// Usage\nconst { StoreProvider, useStore } = createStore(reducer, { count: 0 });\n\nfunction Counter() {\n  const { state, dispatch } = useStore();\n  return (\n    <div>\n      <span>{state.count}<\/span>\n      <button onClick={() => dispatch({ type: 'increment' })}>Increment<\/button>\n      <button onClick={() => dispatch({ type: 'decrement' })}>Decrement<\/button>\n    <\/div>\n  );\n}\n\n// In your app component\nexport default function App() {\n  return (\n    <StoreProvider>\n      <Counter />\n    <\/StoreProvider>\n  );\n}\n",
+"/styles.css": "body {\n  padding: 20px;\n}\n"
+}
+</script></div></div></div>
+<!-- Original CodePen: https://codepen.io/timofei/pen/BaEvZmz --></section>
+<section data-cm-id="s68" data-id="1e810960adcd1bce8569746458bc1bf1">
+
+
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="df47fac96029acb672d02253def15507"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Zustand deconstructed</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="sandpack" data-name="sandpack-zustand-deconstructed" data-block-id="0a2cdb7db0dc1c786729e503fd4c517f" style="width: 960px; height: 616.84px; left: 0px; top: 83.1602px;"><div class="sl-block-content" style="z-index: 11;"><div class="sandpack-embed" data-template="react" data-theme="light" data-layout="preview-right" data-show-line-numbers="true" data-visible-files="[&quot;/App.js&quot;]"><script type="application/json" data-sandpack-files="">
+{
+"/App.js": "import React, {useState, useEffect, useRef } from 'react';\n\n\n\nfunction createStore(initialState) {\n    let state = initialState;\n    const listeners = new Set();\n\n    const setState = (partialState) => {\n        state = { ...state, ...partialState };\n        listeners.forEach((listener) => listener(state));\n    };\n\n    const getState = () => state;\n\n    const useStore = (selector = getState) => {\n        const [selectedState, setSelectedState] = useState(() => selector(state));\n        const selectorRef = useRef(selector);\n\n        useEffect(() => {\n            const listener = (newState) => {\n                const newSelectedState = selectorRef.current(newState);\n                if (newSelectedState !== selectedState) {\n                    setSelectedState(newSelectedState);\n                }\n            };\n            listeners.add(listener);\n            return () => listeners.delete(listener);\n        }, [selectedState]);\n\n        return selectedState;\n    };\n\n    return { setState, useStore, getState};\n}\n\nconst {setState, useStore, getState} = createStore({\n  count: 0,\n  increment: () => { setState( {count: getState().count + 1})},\n  decrement: () => { setState( {count: getState().count - 1})},\n});\n\n\nfunction Counter() {\n    const count = useStore(state => state.count);\n    const increment = useStore(state => state.increment);\n    const decrement = useStore(state => state.decrement);\n    return (\n        <div>\n            <span>{count}<\/span>\n            <button onClick={increment}>Increment<\/button>\n            <button onClick={decrement}>Decrement<\/button>\n        <\/div>\n    );\n}\n\nexport default function App() {\n  return <Counter />;\n}\n",
+"/styles.css": "body {\n  padding: 20px;\n}\n"
+}
+</script></div></div></div>
+<!-- Original CodePen: https://codepen.io/timofei/pen/zYXywwN --></section>
+</section>
+<section data-cm-id="s74" data-hidden="true" data-id="a007192944cdedd1effbb64529df29ae" data-visibility="hidden">
+<section data-cm-id="s70" data-hidden="true" data-id="006451a612affc2f55ebd599057ecd9d" data-visibility="hidden"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 227.404px; left: 80px; top: 179.023px;" data-block-id="cc1d56410b031d3ed0fbce5d2bb54eaf"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">Jotai is to Recoil what Zustand is to Redux</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s71" data-hidden="true" data-id="5bf71bd8dafac310402711c908c6eeff" data-visibility="hidden"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="690f31a93327e354f6f9648e300272e9"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">a different ideology but same problem</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-3d8135" data-block-id="41f45a7cbe61850b25e185703c428b33" style="height: auto; width: 700px; left: 130px; top: 110px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p>recoil - meta/facebook <span style="color:#6b7280; font-size: 0.8em;">(archived, Jan 2025)</span></p>
+
+<p>jotai - community <span style="color:#6b7280; font-size: 0.8em;">(v3 out Sep 2026)</span></p>
+</div></div>
+<div class="sl-block" data-block-type="image" data-name="image-d95169" data-block-id="5e1d33e33be6888c4c0dd2d30915bd11" style="width: 700.651px; height: 329.773px; left: 129.674px; top: 230.227px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 12;"><img class="" data-natural-width="750" data-natural-height="353" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/aa5cdeba645453a408f905d187f3e768.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-7bd116" data-block-id="e22d9f2cf459bf1516d207b8ec9088a8" style="height: auto; width: 600px; left: 180px; top: 610.5px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;"><p>jotai slightly simpler with hooks</p></div></div><aside class="notes">* Recoil was Meta's experimental atom library; Meta archived the repo in Jan 2025, so atoms live on through Jotai
+* Jotai 3.0 shipped Sep 8 2026: "mostly backward-compatible", dropping legacy support and deprecated APIs</aside></section>
+<section data-cm-id="s72" data-hidden="true" data-id="be3983f23d0bce2f29aa82dcc891e284" data-visibility="hidden"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="784c6721b391b40a6a582bea88bf9ff7"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">atoms vs store</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="iframe" data-name="iframe-sketchkit" style="width: 800px; height: 420px; left: 80px; top: 90px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="atoms feed selectors; components subscribe to just the atoms and selectors they read" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/games/sketchkit/draw.html?deck=state-management&amp;f=state-maps&amp;d=atoms" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-cd10d9" data-block-id="d3a4039c57aed7dc6e1303d0bcae018c" style="height: auto; width: 960px; left: 5.68434e-14px; top: 544px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<p>individual bits of data called atoms</p>
+
+<p>selectors that derive data from multiple atoms</p>
+</div></div><aside class="notes">* personally while this seems simple for small use cases, i didn't like that you can just create an atom anywhere at all
+* i prefer the idea of a single store without weird inheritance derivation</aside></section>
+<section data-cm-id="s73" data-hidden="true" data-id="01cd8158300078665f15e8c6c5de0ddc" data-visibility="hidden"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="08058c136a091cfa0846c7fdd30fb4be"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">many state management options</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-name="image-770c1f" data-block-id="b9e21a435a497f3ea79494a0dd68bb22" style="width: 533.348px; height: 518px; left: 213.326px; top: 112px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 11;"><img class="" data-natural-width="1390" data-natural-height="1350" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/42f9f3fbd13d8ab0f7705193c17b3614.png"></div></div><aside class="notes">many options exist - the trend is towards more minimal and simpler. 
+we'll stick with zustand this time around - should help simplify. </aside></section>
+</section>
+<section data-cm-id="s75" data-id="a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">7 · In a Server Cache</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">Server state vs client state</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="s82" data-id="b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7">
+<section data-cm-id="s76" data-id="c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8">
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6" data-column-label="Column 1"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">two kinds of state</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-srv01" data-block-id="f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7" style="height: auto; width: 430px; left: 30px; top: 120px;" data-column-label="Column 2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<p><strong>Client State</strong></p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>UI state (modals, tabs, sidebar)</li>
+	<li>form input values</li>
+	<li>user preferences (theme)</li>
+	<li>synchronous, local, ephemeral</li>
+	<li><strong>you own this data</strong></li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-srv02" data-block-id="a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8" style="height: auto; width: 430px; left: 500px; top: 120px;" data-column-label="Column 3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<p><strong>Server State</strong></p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>data from your API / database</li>
+	<li>shared across users</li>
+	<li>can become stale</li>
+	<li>asynchronous, remote, persisted</li>
+	<li><strong>you are borrowing this data</strong></li>
+</ul>
+</div></div>
+
+<aside class="notes">* this is a really important distinction that's emerged in the react ecosystem
+* it's the dashed line on the map from earlier: everything above it you own, below it you're borrowing
+* zustand/redux are great for client state - UI things that live in the browser
+* but data from your API is fundamentally different - it lives on the server, can change without you knowing, other users might modify it
+* treating both the same way leads to bugs: stale data, cache invalidation issues, loading waterfalls</aside></section>
+<section data-cm-id="s77" data-id="d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9">
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">the classic useEffect pattern</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-srv01" style="width: 500px; height: auto; left: 20px; top: 100px;" data-block-id="c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code data-line-numbers="">function Posts() {
+  const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() =&gt; {
+    fetch('/api/posts')
+      .then(res =&gt; res.json())
+      .then(data =&gt; setPosts(data))
+      .catch(err =&gt; setError(err))
+      .finally(() =&gt; setLoading(false))
+  }, [])
+
+  // what about caching?
+  // refetching on focus?
+  // race conditions?
+  // deduplication?
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-srv03" data-block-id="d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1" style="height: auto; width: 400px; left: 540px; top: 140px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<p>problems with this approach:</p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>no caching - refetches every mount</li>
+	<li>no background refetch</li>
+	<li>race conditions possible</li>
+	<li>duplicate requests across components</li>
+	<li>lots of boilerplate per request</li>
+	<li>data goes stale silently</li>
+</ul>
+</div></div>
+
+<aside class="notes">* this is what we've been doing - useEffect + useState for every API call
+* it works but you end up reinventing caching, loading states, error handling everywhere
+* and you miss things: what if the user tabs away and comes back? data might be stale
+* what if two components need the same data? you fetch it twice
+* this is where server state libraries come in</aside></section>
+<section data-cm-id="88e55e99"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="impossiblehdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">make impossible states impossible</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-impossible" data-block-id="impossiblecode01" style="width: 540px; height: auto; left: 20px; top: 90px;"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code data-line-numbers="">// three separate pieces of state
+const [loading, setLoading] = useState(true)
+const [error, setError] = useState(null)
+const [posts, setPosts] = useState(null)
+// loading AND error? error AND posts?
+// nothing stops you from setting both
+
+// one piece of state, one status
+const [req, setReq] = useState({ status: 'loading' })
+
+// it can only ever be one of:
+// { status: 'loading' }
+// { status: 'error', error }
+// { status: 'success', posts }</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-impossible" data-block-id="impossibletxt01" style="height: auto; width: 380px; left: 570px; top: 100px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<ul style="color:rgb(58, 62, 64)">
+<li>3 flags = 8 combinations, only 3 make sense</li>
+<li>a single <code>status</code> can't contradict itself</li>
+<li>TanStack Query does exactly this: <code>status</code> is <code>'pending'</code>, <code>'error'</code> or <code>'success'</code></li>
+<li>TypeScript can enforce it with a union type</li>
+<li>state machines (XState) take the idea all the way</li>
+</ul>
+</div></div><aside class="notes">* look back at the useEffect slide: three useStates for one request
+* each flag can be true or false (or set or not), so 2 x 2 x 2 = 8 combinations, and the UI has to handle all 8 or quietly break
+* real bug shape: an error arrives, setError runs, but loading is still true, so the spinner and the error both show
+* fix the shape of the state instead of adding more if-checks: one object whose status says which case you're in, carrying only the data that case has
+* TypeScript: type Req = { status: 'loading' } | { status: 'error', error: Error } | { status: 'success', posts: Post[] }, and the compiler won't let you read posts until you've checked status
+* XState (v5) models a whole UI flow as a state machine: a checkout or a multi-step form; worth a look for complicated flows
+* the phrase comes from Richard Feldman's elm-conf talk "Making Impossible States Impossible": https://www.youtube.com/watch?v=IcgmSRJHu_8</aside></section>
+<section data-cm-id="25ba0051"><div class="sl-block" data-block-type="iframe" data-name="iframe-swr" style="width: 900px; height: 600px; left: 30px; top: 90px;" data-cm-block-id="c910202a"><div class="sl-block-content" style="z-index: 10;"><iframe title="a posts page you leave and come back to: plain useEffect shows a spinner every visit; stale-while-revalidate shows the cached list instantly, refetches in the background and swaps in new posts" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/slides/state-management/games/swr/index.html?v=3" style="width: 100%; height: 100%; border: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="swrhdr01" data-cm-block-id="d77e3915"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">stale-while-revalidate</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* the idea both TanStack Query and SWR are built on, so it gets its own slide before them
+* plain useEffect: the component starts from null on every mount, so every visit is a spinner, even if you saw the same list 5 seconds ago
+* stale-while-revalidate: keep the last answer in a cache (in memory, keyed by the URL / queryKey). on mount: 1) show the cached copy right away, even though it might be out of date (stale), 2) fetch again in the background (revalidate), 3) swap in the fresh data and save it
+* walk it: posts, home, posts in useEffect mode (spinner both times). switch modes: first visit still spins (empty cache), second is instant. then "+ someone posts", go home and back: old list first, the new post slides in a moment later
+* the browser only finds out about the new post when it fetches; nothing is pushed from the server (that's the "synced everywhere" place, later)
+* pull to refresh (drag the list down): useEffect mode resets to null, so the list blinks to a spinner; SWR mode keeps the list on screen while it revalidates. in code that's mutate() from useSWR, or refetch() from useQuery (isFetching is true, data stays)
+* the trade: for a second the user sees old data. for a feed that's fine; for a bank balance you might show a "refreshing" hint (that's what isValidating / isFetching are for)
+* the name comes from HTTP caching: Cache-Control: max-age=60, stale-while-revalidate=300 tells a browser or CDN it may serve a stale copy for up to 5 minutes while it refetches in the background (RFC 5861)
+* SWR also revalidates when you come back to the tab and when the network reconnects; TanStack Query does the same (refetchOnWindowFocus)
+* TanStack's staleTime (next slide) is how long cached data counts as fresh: inside that window it shows the cache and doesn't refetch at all. default is 0, so it always revalidates like this demo</aside></section>
+<section data-cm-id="s78" data-id="e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0">
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">TanStack Query (React Query)</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-srv02" style="width: 520px; height: auto; left: 20px; top: 95px;" data-block-id="f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code data-line-numbers="">import { useQuery } from '@tanstack/react-query'
+
+function Posts() {
+  const { data, isPending, error } = useQuery({
+    queryKey: ['posts'],
+    queryFn: () =&gt;
+      fetch('/api/posts').then(r =&gt; r.json()),
+    staleTime: 5 * 60 * 1000, // 5 min
+  })
+
+  if (isPending) return &lt;Spinner /&gt;
+  if (error) return &lt;Error msg={error} /&gt;
+
+  return data.map(p =&gt; &lt;Post key={p.id} {...p} /&gt;)
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-srv04" data-block-id="a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4" style="height: auto; width: 390px; left: 555px; top: 110px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<p>gives you for free:</p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>automatic caching by queryKey</li>
+	<li>background refetching</li>
+	<li>stale-while-revalidate</li>
+	<li>request deduplication</li>
+	<li>retry on failure</li>
+	<li>refetch on window focus</li>
+	<li>loading/error states</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-srv05" data-block-id="b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5" style="height: auto; width: 900px; left: 30px; top: 595px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;"><p><a href="https://tanstack.com/query" target="_blank">tanstack.com/query</a> - also has useMutation for write operations</p></div></div>
+
+<aside class="notes">* TanStack Query is the most popular server state library (v5.104, Oct 2026)
+* queryKey is like a cache key - same key across components = shared cache
+* staleTime controls how long before data is considered stale
+* it returns cached data immediately while refetching in the background
+* isPending = no data yet (v5 renamed the old isLoading to isPending; the new isLoading means pending AND fetching). there's also a status field: 'pending' | 'error' | 'success', which is exactly the "impossible states" idea
+* also has useMutation for POST/PUT/DELETE with optimistic updates
+* wraps your app in a QueryClientProvider similar to how redux had Provider</aside></section>
+<section data-cm-id="s79" data-id="f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1">
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6" data-column-label="Column 1"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">SWR - stale while revalidate</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-srv03" style="width: 520px; height: auto; left: 20px; top: 95px;" data-block-id="d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7" data-column-label="Column 2"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code data-line-numbers="">import useSWR from 'swr'
+
+const fetcher = (...args) =&gt;
+  fetch(...args).then(r =&gt; r.json())
+
+function Posts() {
+  const { data, error, isLoading } = useSWR(
+    '/api/posts',
+    fetcher
+  )
+
+  if (isLoading) return &lt;Spinner /&gt;
+  if (error) return &lt;Error msg={error} /&gt;
+
+  return data.map(p =&gt; &lt;Post key={p.id} {...p} /&gt;)
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-srv06" data-block-id="e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8" style="height: auto; width: 390px; left: 555px; top: 110px;" data-column-label="Column 3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<p>SWR by Vercel (Next.js team)</p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>simpler API - just key + fetcher</li>
+	<li>same stale-while-revalidate strategy</li>
+	<li>auto refetch on focus/reconnect</li>
+	<li>request deduplication</li>
+</ul>
+<p>&nbsp;</p>
+<p>named after the HTTP cache strategy<br></p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-srv07" data-block-id="f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9" style="height: 39px; width: 503px; left: 31px; top: 503px;" data-column-label="Column 4"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;"><p><a href="https://swr.vercel.app" target="_blank">swr.vercel.app</a> - lighter alternative, great for simpler use cases</p></div></div>
+
+<aside class="notes">* SWR is Vercel's take on the same problem - simpler, smaller
+* the key IS the URL by convention, fetcher is a separate function
+* same core idea: return cached data first, revalidate in background
+* if you're using Next.js this pairs naturally
+* React Query has more features (mutations, infinite queries, devtools) but SWR is often enough</aside></section>
+<section data-cm-id="5013799d"><div class="sl-block" data-block-type="iframe" data-name="iframe-waterfall" style="width: 900px; height: 600px; left: 30px; top: 90px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="a timeline of loading /sales/invoices/102: fetching in components makes a waterfall of three requests and three spinners; route loaders run all three at once in one request" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/slides/state-management/games/waterfall/index.html" style="width: 100%; height: 100%; border: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="waterfallhdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">why fetch at the route?</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* this is the argument for the next slide: why React Router (and Remix before it) wants data loaded at the route, not in components
+* one page, /sales/invoices/102, three nested routes, each needs its own data: the root needs the user, sales needs the invoice list, the invoice route needs invoice 102
+* fetch in components: <sales> can't render <invoice> until its own data is back, so <invoice> can't even start its fetch. each level waits for the one above: a request waterfall, and a spinner at every level ("render, then fetch")
+* route loaders: the router matches the URL against the route tree before anything renders, so it already knows all three loaders and starts them together. in framework mode they go out as one request (single fetch) and run in parallel on the server, right next to the database
+* same server, same work, about 2.1s vs 0.9s in this demo. real apps with 4-5 nested levels and slower phones make the gap bigger
+* React Router's own docs say it: render-then-fetch "produces network waterfalls and nested spinners"
+* you can still use TanStack Query with this: prefetch in the loader (queryClient.ensureQueryData) and read with useQuery in the component, so you get both the parallel start and the cache
+* the fix without a router: hoist the fetches up to the top and pass promises down (or use React's use()), which is basically writing your own loaders</invoice></invoice></sales></aside></section>
+<section data-cm-id="s80" data-id="a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2">
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0" data-column-label="Column 1"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">React Router 8 - framework mode</div>
+</div>
+
+<div class="spacer">&nbsp;</div></div></div></div><div class="sl-block" data-block-type="code" data-name="code-srv04" style="width: 520px; height: auto; left: 20px; top: 80px;" data-block-id="b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1" data-column-label="Column 2"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 14px; line-height: 17px; tab-size: 4;"><code data-line-numbers="">import { Form } from 'react-router'
+
+export async function loader() {
+  const posts = await db.getPosts()
+  return { posts }
+}
+
+export async function action({ request }) {
+  const formData = await request.formData()
+  await db.createPost({
+    title: formData.get('title')
+  })
+  return { ok: true }
+}
+
+export default function Posts({ loaderData }) {
+  return (
+    &lt;div&gt;
+      {loaderData.posts.map(p =&gt;
+        &lt;Post key={p.id} {...p} /&gt;
+      )}
+      &lt;Form method="post"&gt;
+        &lt;input name="title" /&gt;
+        &lt;button&gt;Add Post&lt;/button&gt;
+      &lt;/Form&gt;
+    &lt;/div&gt;
+  )
+}</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-srv08" data-block-id="c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2" style="height: auto; width: 390px; left: 555px; top: 96px;" data-column-label="Column 3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 0.8em;">
+<p>a different paradigm entirely:</p>
+<ul style="color:rgb(58, 62, 64)">
+	<li>data fetching at the <strong>route level</strong></li>
+	<li>loaders run <strong>before</strong> render</li>
+	<li>actions handle mutations</li>
+	<li>auto-revalidates after actions</li>
+	<li>loaders removed from client bundle</li>
+	<li>no useEffect fetching; pending UI via <code>useNavigation</code></li>
+	<li>inherited from Remix's architecture</li>
+</ul>
+<p><a href="https://reactrouter.com/start/framework/data-loading" target="_blank">reactrouter.com</a></p>
+</div></div>
+
+<aside class="notes">* this is a completely different approach - data fetching happens at the route level, not component level
+* loader runs on the server before the component renders, so no loading spinner needed
+* action handles form submissions and mutations, then loaders auto-revalidate
+* this is the Remix pattern, now React Router framework mode (v8, 8.5.0 in Oct 2026); the routing deck has a framework-mode section we didn't get to in class
+* the loader code is stripped from the client bundle - safe to use server-only code
+* we'll see this pattern more when we look at full-stack frameworks</aside></section>
+<section data-cm-id="030a6e09"><div class="sl-block" data-block-type="iframe" data-name="iframe-optimistic" style="width: 900px; height: 600px; left: 30px; top: 90px;"><div class="sl-block-content" style="z-index: 10;"><iframe title="a like button with a slow, sometimes failing server: wait for the server, or use useOptimistic and let React roll it back" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/slides/state-management/games/optimistic/index.html" style="width: 100%; height: 100%; border: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="optimistichdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">optimistic UI: useOptimistic</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* server state goes both ways: reads (queries, loaders) and writes (mutations)
+* the server is set to slow (2s); click the heart in each mode, then flip "server fails"
+* wait mode: spinner, then the count; a failure means the count never moved (try/finally so the spinner always stops)
+* useOptimistic (React 19): show the expected result right away; when the Action ends, React swaps in the real value, and if the save failed that's the old one, so the UI snaps back
+* the setter has to run inside an Action (a form action, or startTransition); outside one React warns
+* the code follows React's docs: wrap the state update after await in startTransition, and catch the error to show a message (an uncaught error in a form action goes to the nearest error boundary)
+* when to use it: likes, toggles, adding a todo, sending a chat message: small, likely-to-succeed writes where waiting feels broken
+* TanStack Query's useMutation has the same idea (onMutate + rollback) for code that isn't using form Actions
+* docs: react.dev/reference/react/useOptimistic</aside></section>
+<section data-cm-id="s81" data-hidden="true" data-id="b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3" data-visibility="hidden">
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">when to use what</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-srv10" data-block-id="f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5" style="height: auto; width: 900px; left: 30px; top: 100px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<table>
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>Tool</th>
+<th>Use for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Client State</strong></td>
+<td>Zustand, Redux, Jotai</td>
+<td>UI state, forms, auth status, local preferences</td>
+</tr>
+<tr>
+<td><strong>Server State</strong></td>
+<td>TanStack Query, SWR</td>
+<td>API data, caching, background sync, deduplication</td>
+</tr>
+<tr>
+<td><strong>Route Data</strong></td>
+<td>React Router loaders</td>
+<td>page-level data, SSR, form actions</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>common combo: <strong>Zustand</strong> (client) + <strong>TanStack Query</strong> (server)</p>
+<p>we'll use zustand for client state and fetch API data in our actions</p>
+</div></div>
+
+<aside class="notes">* hidden Oct 2026: replaced by the "where does this state live?" map (section 6). this table put forms and auth in a global store and fetching in store actions, which the map now steers elsewhere
+* the key insight: use the right tool for the right kind of state
+* zustand is great for client state - sidebar open, current theme, auth token
+* tanstack query or swr are great for server state - posts, users, comments from your API
+* react router loaders are great if you're already using react router in framework mode
+* many production apps combine zustand + react query - each handles what it's good at
+* for this class we'll keep it simpler with zustand and direct API fetching in our store actions, but know these tools exist for when your apps grow</aside></section>
+</section>
+<section data-cm-id="81a737f5" data-id="place8title01"><div class="sl-block" data-block-type="snippet" data-name="snippet-31e5c6" style="width: 800px; height: 341.955px; left: 80px; top: 179.023px;" data-block-id="place8title01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 10;">
+<div id="box-title">
+<div class="top">
+<div class="logo">&nbsp;</div>
+
+<div class="title">8 · Synced Everywhere</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+
+<div class="body">State on every device</div>
+
+<div class="logo-spacer">&nbsp;</div>
+</div>
+</div></div></section>
+<section data-cm-id="53aa0fd2"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="syncedhdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">synced everywhere: state on every device</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-synced" data-block-id="syncedtxt01" style="height: auto; width: 840px; left: 60px; top: 110px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<ul style="color:rgb(58, 62, 64)">
+<li><strong>you've done this:</strong> Lab 3's notes sync through Firebase, <code>onValue</code> pushes every change to every open tab, on every device</li>
+<li><strong>sync engines</strong> keep a local copy of the data in the browser: reads and writes hit it first, syncing happens in the background
+<ul>
+<li>Zero (1.0, March 2026), Electric, Jazz</li>
+</ul>
+</li>
+<li><strong>CRDTs</strong> merge edits made at the same time, even offline (Yjs, from the CRDT demo)</li>
+</ul>
+<p>&nbsp;</p>
+<p style="color: #2aa198;">the UI feels instant. the hard parts move: conflicts, permissions, what to sync</p>
+</div></div><aside class="notes">* last stop on the map, the most machinery and the most powerful: multiplayer, offline, instant
+* Lab 3: firebase/database's onValue listener re-renders every client when a note changes; that's synced state you already wrote
+* a sync engine flips the usual model: instead of asking the server and waiting, the app reads and writes a local database and the engine syncs it in the background
+* Zero (Rocicorp) reached 1.0 in March 2026 (npm @rocicorp/zero 1.0.0, Mar 24 2026); Electric (Postgres sync) and Jazz are other examples. this is often called local-first
+* CRDTs (Yjs, Automerge) are data structures that merge concurrent edits without a central referee; we saw Yjs merge in the immutability deck and the CRDT demo
+* the catch: you now have to decide who may see and change what, and what happens when two people edit the same thing
+* for your projects: Firebase-style listeners are plenty; just know this option exists</aside></section>
+<section data-cm-id="6705f372">
+<section data-cm-id="d1e68a37"><div class="sl-block" data-block-type="iframe" data-name="iframe-wherestate" style="width: 900px; height: 600px; left: 30px; top: 90px;" data-cm-block-id="c0687da4"><div class="sl-block-content" style="z-index: 10;"><iframe title="sort ten pieces of state into eight places: derive it, in the component, in the parent, in the url, in context, in a store, in a server cache, synced everywhere" sandbox="allow-scripts allow-same-origin" data-src="/content/classmoji-staging/content-cs98-test/slides/state-management/games/wherestate/index.html?v=8&amp;slideId=5368e46c-4260-405c-914f-e791b4cc6f66" style="width: 100%; height: 100%; border: none;"></iframe></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="wherestatehdr01" data-cm-block-id="ff869e99"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">your turn: where does it live?</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* click a card, then the row where it lives (drag works too); poll the room before placing each one
+* wrong once: a hint and one more try; wrong twice: it shows the answer
+* the debatable ones are marked "also ok": dark mode (context or a store), the signed-in user (context, a store, or the server cache, since it comes from /me or an auth SDK), the cart items (a store or context). talk about why the best answer wins: how often it changes, and how many components read it
+* the cart total is the classic trap: it feels like state, but it's derived from the items; store it and it will drift
+* tapping a placed chip brings back its reason, handy for discussion
+* reset reshuffles the cards
+* the QR code opens the game itself (no login needed), scaled to fit the phone; tell them to turn the phone sideways</aside></section>
+<section data-cm-id="c4c608a9"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="reactaddedhdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">react keeps adding state tools</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-reactadded" data-block-id="reactaddedtxt01" style="height: auto; width: 900px; left: 30px; top: 100px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<table style="width: 100%; font-size: 0.72em; border-collapse: collapse;">
+<thead><tr>
+<th style="text-align: left; padding: 8px; border-bottom: 2px solid #4757ff;">what</th>
+<th style="text-align: left; padding: 8px; border-bottom: 2px solid #4757ff;">when</th>
+<th style="text-align: left; padding: 8px; border-bottom: 2px solid #4757ff;">it's for</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding: 8px;">Actions, <code>useActionState</code>, <code>useOptimistic</code></td><td style="padding: 8px;">React 19, Dec 2024</td><td style="padding: 8px;">form submits, pending state, optimistic UI</td></tr>
+<tr><td style="padding: 8px;"><code>&lt;Activity&gt;</code></td><td style="padding: 8px;">19.2, Oct 2025</td><td style="padding: 8px;">hide part of the UI but keep its state (tabs)</td></tr>
+<tr><td style="padding: 8px;"><code>useEffectEvent</code></td><td style="padding: 8px;">19.2, Oct 2025</td><td style="padding: 8px;">read the latest state in an effect without re-running it</td></tr>
+<tr><td style="padding: 8px;">React Compiler 1.0</td><td style="padding: 8px;">Oct 2025</td><td style="padding: 8px;">automatic memoization: <code>useMemo</code>/<code>useCallback</code> become escape hatches</td></tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p style="color: #2aa198;">none of these change where state lives. they change how much code you write by hand</p>
+</div></div><aside class="notes">* React 19 (Dec 5 2024): Actions are async functions passed to a form's action or run in startTransition; useActionState tracks their result and pending state; useOptimistic shows the expected result right away and React reverts it automatically if the action fails (see the like-button interactive)
+* 19.2 (Oct 1 2025): &lt;Activity mode="hidden"&gt; hides children with display:none, keeps their state, cleans up their effects; switch back and the tab is exactly how you left it
+* useEffectEvent (19.2): pulls the 'event' part out of an effect so it can read the latest props/state without being a dependency
+* React Compiler 1.0 (Oct 7 2025): a build-time tool that memoizes components and hooks automatically. React's advice: rely on it for new code, use useMemo/useCallback only when you need precise control; you can pick a compiler template in npm create vite
+* 19.3 (Sep 9 2026) added &lt;ViewTransition&gt;, which we used in the routing deck
+* the point: React keeps absorbing patterns people used libraries for; the eight places still decide where the state goes</aside></section>
+<section data-cm-id="fd68d76b"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="askagenthdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">ask your agent: where does this live?</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-askagent" data-block-id="askagenttxt01" style="height: auto; width: 860px; left: 50px; top: 110px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<p style="background: #f4f4f4; border-radius: 12px; padding: 14px 18px; font-size: 0.85em;">💬 “before you add any state, tell me where it should live and why: derived, the component, its parent, the url, context, a store, a server cache, or synced. derive it if you can.”</p>
+<p>&nbsp;</p>
+<p><strong>in the diff, watch for:</strong></p>
+<ul style="color:rgb(58, 62, 64)">
+<li>state that could be derived (a stored total, a copied list)</li>
+<li>a <code>useEffect</code> that copies props into state</li>
+<li>fetch in <code>useEffect</code> where a query or a loader would do</li>
+<li>a global store field only one component reads</li>
+</ul>
+</div></div><aside class="notes">* you'll write a lot of this with a coding agent; the eight places are a good thing to put in your AGENTS.md or your prompt
+* asking where it lives forces a reason, and a reason is something you can check
+* three of the four watch-fors come straight from React's own docs: "You Might Not Need an Effect" (react.dev/learn/you-might-not-need-an-effect) covers derived state, copying props into state, and fetching in effects. the fourth (a store field one component reads) is today's rule of thumb
+* in code review (yours or the agent's), each of these is a quick win: delete state, delete an effect</aside></section>
+</section>
+<section data-cm-id="s85" data-id="fe59f3384c72bb884dae0088fd845ada">
+<section data-cm-id="s83" data-id="51d7d4bbb6c1c99d6e5e17a2922ce636">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-4fedee" data-block-id="600fed20ef9205bc423bd28b0b50a968" style="width: 660.623px; height: 518px; left: 149.688px; top: 112px; min-width: 1px; min-height: 1px;"><div class="sl-block-style" style="z-index: 11; filter: drop-shadow(rgba(0, 0, 0, 0.5) 2px 2px 5px);"><div class="sl-block-content" style="z-index: 11;"><img style="" data-natural-width="667" data-natural-height="523" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/d283d7734074774d0d66d46a5d3b8920.gif"></div></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="3d9761e164826eb4ec31551e6725a7c0"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">are there dev tools for this?</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* react devtools, hopefully you've all been using this
+</aside></section>
+<section data-cm-id="s84" data-id="dde19b3e8f16b897680b0029b8368f77">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-name="image-c6bd87" data-block-id="1a59b781a6634d1e4cfea12fd20eede0" style="width: 685.116px; height: 607.423px; left: 137.442px; top: 80.1575px; min-width: 1px; min-height: 1px;"><div class="sl-block-style" style="z-index: 10; filter: drop-shadow(rgba(0, 0, 0, 0.5) 2px 2px 5px);"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="776" data-natural-height="688" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/6e7993990a913b1738cbb5c13a18cb4b.gif"></div></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="f89ccc3a9fe8d3da14757da93214a398"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">are there dev tools for this?</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* redux devtools give you state timemachine
+* and you can just set the state, and import and export the state!
+</aside></section>
+<section data-cm-id="d399c290"><div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 0px; top: 0px;" data-name="snippet-26b630" data-block-id="devtoolsnewhdr01"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 11;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+<div class="title">devtools for zustand and tanstack query</div>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="code" data-name="code-devtoolsnew" data-block-id="devtoolsnewcode01" style="width: 560px; height: auto; left: 20px; top: 95px;"><div class="sl-block-content notranslate" data-highlight-theme="solarized-light" data-code-frame="osx-grey" style="z-index: 10;" data-code-autoheight="true" data-code-wrap="true"><pre class="javascript" style="font-size: 15px; line-height: 19px; tab-size: 4;"><code data-line-numbers="">// zustand: your store shows up in Redux DevTools
+import { devtools } from 'zustand/middleware'
+
+const useCartStore = create(devtools((set) =&gt; ({
+  items: [],
+  addToCart: (item) =&gt;
+    set((s) =&gt; ({ items: [...s.items, item] })),
+})))
+
+// TanStack Query: every query and its cache
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+&lt;QueryClientProvider client={queryClient}&gt;
+  &lt;App /&gt;
+  &lt;ReactQueryDevtools initialIsOpen={false} /&gt;
+&lt;/QueryClientProvider&gt;</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-devtoolsnew" data-block-id="devtoolsnewtxt01" style="height: auto; width: 350px; left: 600px; top: 110px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<ul style="color:rgb(58, 62, 64)">
+<li>zustand borrows Redux DevTools: actions, state, time travel</li>
+<li>the query panel shows what's cached, what's stale, what's fetching</li>
+<li>only in dev builds</li>
+</ul>
+</div></div><aside class="notes">* same idea as the Redux DevTools on the previous slide: see every change and the state after it
+* zustand: wrap the store creator in devtools() from 'zustand/middleware' and it appears in the Redux DevTools browser extension; the zustand docs say to also install @redux-devtools/extension
+* TanStack Query: npm install @tanstack/react-query-devtools, then render &lt;ReactQueryDevtools /&gt; inside the QueryClientProvider; it only ships in development builds (it renders nothing when NODE_ENV isn't 'development')
+* React DevTools (first slide) is still the place to check which components re-rendered</aside></section>
+</section>
+<section data-cm-id="s86" data-id="fa977095bed0c0cab8eaeb523d1d2afd">
+<div class="sl-block" data-block-type="text" data-name="text-b1fae7" data-block-id="2628dc76f114d2d7977f343785e158ee" style="height: auto; width: 492.716px; left: 413.141px; top: 228.472px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;"><ul style="color:rgb(58, 62, 64)">
+	<li>state management short - ease you in to frontend state management</li>
+	<li>lab4 - coming soon platform frontend</li>
+</ul></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-0f7ab0" data-block-id="d9ede363cb31fb79f82c7d5203645f9b" style="width: 337.826px; height: 518px; left: 23.7391px; top: 132.05px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 11;"><img style="" data-natural-width="1020" data-natural-height="1564" src="/content/classmoji-staging/content-cs98-test/slides/state-management/images/a4a45faa6eb183fcee0b511f5aa6f754.jpg"></div></div>
+<div class="sl-block" data-block-type="snippet" style="width: 960px; height: 70px; left: 5.68434e-14px; top: 0px;" data-name="snippet-26b630" data-block-id="e69a49744fdae8b59728b52c6d6d39a7"><div class="sl-block-content tim" data-has-custom-html="" style="z-index: 12;">
+<div id="header-title">
+<div class="left">
+<div class="logo">&nbsp;</div>
+
+<div class="title">next up</div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+</div>
+</div></div><aside class="notes">* we'll do a short that introduces redux
+* then a lab that builds up on what you've done so far - integrating your react knowledge with redux and making calls to an api</aside></section>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
-  <script type="application/json" id="cm-reveal-config">{"hash":true,"controls":true,"progress":true,"center":false,"transition":"slide"}</script>
   <script>
-    (function () {
-      var el = document.currentScript && document.currentScript.previousElementSibling;
-      var config = el && el.id === 'cm-reveal-config' ? JSON.parse(el.textContent) : {};
-      config.plugins = [RevealHighlight];
-      Reveal.initialize(config);
-    })();
+    Reveal.initialize({
+      hash: true,
+      controls: true,
+      progress: true,
+      center: true,
+      transition: 'slide',
+      plugins: [RevealHighlight]
+    });
   </script>
 </body>
 </html>
