@@ -48,7 +48,8 @@
       "claude-size-test-35mb",
       "claude-boundary-test-35mb",
       "staging-media-test-handout",
-      "cd-test-deck-0455-utc"
+      "cd-test-deck-0455-utc",
+      "state-management"
     ]
   }
 }
