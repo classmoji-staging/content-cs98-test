@@ -1,5 +1,10 @@
 {
   "repositories": {
+    "mytestrepo": {
+      "pages": [],
+      "slides": [],
+      "assignments": {}
+    },
     "basics": {
       "pages": [],
       "slides": [],
@@ -47,9 +52,9 @@
       "claude-size-test-30mb",
       "claude-size-test-35mb",
       "claude-boundary-test-35mb",
+      "state-management",
       "staging-media-test-handout",
-      "cd-test-deck-0455-utc",
-      "state-management"
+      "cd-test-deck-0455-utc"
     ]
   }
 }
