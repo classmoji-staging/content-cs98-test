@@ -1,0 +1,118 @@
+{
+  "blocks": [
+    {
+      "id": "14e99909-18c1-48ee-9f33-6b3d8d155144",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Intro paragraph before the spacer.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "609b2a4b-1c23-46a4-8fdb-81eb78ce5fe5",
+      "type": "callout",
+      "props": {
+        "textAlignment": "left",
+        "emoji": "💡"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "This callout comes after three blank lines, which become an empty spacer paragraph.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b720715a-1f6b-4e45-bfbf-8e94a414a08e",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "e371f612-e2fc-4e6e-8423-c3d6dc40a6e9",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 3,
+        "isToggleable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "❓ What is a closure?",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "762f0ba0-f1d4-46b4-a443-3d36845cbaf1",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "A function together with the scope it was created in.",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "419e6490-87ac-4db1-9fa8-94bdef5663b0",
+      "type": "callout",
+      "props": {
+        "textAlignment": "left",
+        "emoji": "⚠️"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "This callout comes right after a Notion toggle and a blank line, and should import as a callout.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "ea95bbda-6a74-4077-ae03-0e01defbeaa4",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Plain paragraph with 💡: in the middle, which must stay a normal paragraph.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    }
+  ]
+}
