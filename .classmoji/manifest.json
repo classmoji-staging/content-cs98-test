@@ -46,7 +46,8 @@
       "css-slides",
       "home",
       "widget-conversion-test",
-      "octokit-5-staging-check"
+      "octokit-5-staging-check",
+      "marked-18-callout-check"
     ],
     "slides": [
       "ai-quizzes",
