@@ -38,14 +38,15 @@
     "pages": [
       "cd-test-page-0448-utc",
       "resources",
-      "widget-conversion-test",
       "secret-grading-key-draft",
       "exam-logistics-test",
       "lab-1-part-1-build-a-landing-page-html",
       "lab-1-part-2-build-a-landing-page-css",
       "html-slides",
       "css-slides",
-      "home"
+      "home",
+      "widget-conversion-test",
+      "octokit-5-staging-check"
     ],
     "slides": [
       "ai-quizzes",
