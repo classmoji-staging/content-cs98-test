@@ -47,8 +47,7 @@
       "home",
       "widget-conversion-test",
       "octokit-5-staging-check",
-      "marked-18-callout-check",
-      "zz-browser-check-page-delete-me"
+      "marked-18-callout-check"
     ],
     "slides": [
       "ai-quizzes",
