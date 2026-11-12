@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "theme": "white",
+  "codeTheme": "monokai",
+  "config": {
+    "center": false
+  },
+  "customCss": "\n    .reveal h1, .reveal h2, .reveal h3 { color: #333; }\n    .reveal .slides section { text-align: left; }\n    .reveal pre { width: 100%; }\n    .reveal code { background: #f5f5f5; padding: 2px 6px; border-radius: 4px; }\n  ",
+  "slides": [
+    {
+      "id": "0cb89173",
+      "html": "<h1>zz zod4 staging check deck (delete me)</h1>"
+    },
+    {
+      "id": "087e4805",
+      "html": "<h2>Slide 2</h2>\n<p>Add your content here...</p>"
+    },
+    {
+      "id": "7ee38760",
+      "html": "<h2>Code Example</h2>\n<pre><code class=\"language-javascript\">// Your code here\nfunction example() {\n  return \"Hello, World!\";\n}</code></pre>"
+    },
+    {
+      "id": "8591f425",
+      "html": "<h2>Questions?</h2>"
+    }
+  ]
+}
