@@ -4,11 +4,17 @@
       "id": "p1",
       "type": "paragraph",
       "props": {
-        "textColor": "default",
         "backgroundColor": "default",
+        "textColor": "default",
         "textAlignment": "left"
       },
-      "content": [],
+      "content": [
+        {
+          "type": "text",
+          "text": "Typed in the browser editor after the zod 4 deploy. Café 🎉 works.",
+          "styles": {}
+        }
+      ],
       "children": []
     }
   ]
