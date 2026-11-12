@@ -17,5 +17,9 @@
       ],
       "children": []
     }
-  ]
+  ],
+  "coverImage": {
+    "url": "pages/zz-browser-check-page-delete-me/assets/1794500600768-zz-test-cover.png",
+    "position": 50
+  }
 }
