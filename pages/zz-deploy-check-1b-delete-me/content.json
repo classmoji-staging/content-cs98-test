@@ -1,0 +1,56 @@
+{
+  "blocks": [
+    {
+      "id": "2a8a03a2-23d3-4a59-b33a-9450ed41ef8c",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Deploy check",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "8fd40f09-c9a0-4cf4-ad93-a1b36919b48c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Created by the staging MCP check for the oxlint change.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "fdf3feed-8566-4b1c-b702-3ee3aff47619",
+      "type": "codeBlock",
+      "props": {
+        "language": "javascript",
+        "copyable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "const a = 1;",
+          "styles": {}
+        }
+      ],
+      "children": []
+    }
+  ]
+}
