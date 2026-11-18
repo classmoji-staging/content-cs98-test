@@ -1,0 +1,21 @@
+{
+  "blocks": [
+    {
+      "id": "e58b4ceb-4cf0-4544-84aa-53993e5f7249",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Temporary page for a deploy check.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    }
+  ]
+}
