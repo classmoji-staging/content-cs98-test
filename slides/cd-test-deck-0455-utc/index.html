@@ -34,15 +34,14 @@ function example() {
   </div>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+  <script type="application/json" id="cm-reveal-config">{"hash":true,"controls":true,"progress":true,"center":false,"transition":"slide"}</script>
   <script>
-    Reveal.initialize({
-      hash: true,
-      controls: true,
-      progress: true,
-      center: false,
-      transition: 'slide',
-      plugins: [RevealHighlight]
-    });
+    (function () {
+      var el = document.currentScript && document.currentScript.previousElementSibling;
+      var config = el && el.id === 'cm-reveal-config' ? JSON.parse(el.textContent) : {};
+      config.plugins = [RevealHighlight];
+      Reveal.initialize(config);
+    })();
   </script>
 </body>
 </html>
